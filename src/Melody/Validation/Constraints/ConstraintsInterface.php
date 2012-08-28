@@ -13,5 +13,5 @@ interface ConstraintsInterface
 {
     public function validate($input);
     public function setErrorMessageTemplate($template);
-    public function getErrorMessage();
+    public function getErrorMessageTemplate();
 }

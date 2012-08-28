@@ -9,20 +9,24 @@ namespace Melody\Validation\Constraints;
 /**
  * @author Marcelo Santos <marcelsud@gmail.com>
  */
-class EmailConstraint extends BaseConstraint
+class NotBlankConstraint extends BaseConstraint
 {
     public function __construct($messageTemplate = null)
     {
         if (!is_null($messageTemplate)) {
             $this->errorMessageTemplate = $messageTemplate;
         } else {
-            $this->errorMessageTemplate = "{{input}} is not a valid email";
+            $this->errorMessageTemplate = "{{input}} must not be empty";
         }
     }
 
     public function validate($input)
     {
-        return is_string($input) && filter_var($input, FILTER_VALIDATE_EMAIL);
+        if (is_string($input)) {
+            $input = trim($input);
+        }
+
+        return !empty($input);
     }
 
 }

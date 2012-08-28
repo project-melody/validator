@@ -11,7 +11,6 @@ namespace Melody\Validation\Constraints;
  */
 abstract class BaseConstraint implements ConstraintsInterface
 {
-    protected $errorMessage;
     protected $errorMessageTemplate;
 
     public function __construct()
@@ -24,8 +23,8 @@ abstract class BaseConstraint implements ConstraintsInterface
         $this->errorMessageTemplate = $template;
     }
 
-    public function getErrorMessage()
+    public function getErrorMessageTemplate()
     {
-        return $this->errorMessage;
+        return $this->errorMessageTemplate;
     }
 }
