@@ -1,25 +1,26 @@
 <?php
 
 /*
- * This file is distributed under MIT licence.
+ * This file is distributed under BSD licence.
  */
 
 namespace Melody\Validation\Constraints;
 
-use Melody\Validation\Constraints\ConstraintsInterface;
+use Melody\Validation\Constraints\BaseConstraint;
 
 /**
  * @author Marcelo Santos <marcelsud@gmail.com>
  */
-class EmailConstraint implements ConstraintsInterface
+class EmailConstraint extends BaseConstraint implements ConstraintsInterface
 {
-    public function validate($input, $message = null)
+    public function __construct()
     {
-
+        $this->errorMessageTemplate = "{{name}} must be a valid email";
     }
 
-    public function setMessageTemplate($template)
+    public function validate($input)
     {
-
+        return is_string($input) && filter_var($input, FILTER_VALIDATE_EMAIL);
     }
+
 }

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is distributed under MIT licence.
+ * This file is distributed under BSD licence.
  */
 
 namespace Melody\Validation;

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is distributed under MIT licence.
+ * This file is distributed under BSD licence.
  */
 
 namespace Melody\Validation;
@@ -9,12 +9,14 @@ namespace Melody\Validation;
 use Melody\Validation\Constraints\ConstraintsInterface;
 use Melody\Validation\Constraints\ConstraintsCollection;
 use Melody\Validation\GroupsCollection;
+
 /**
  * @author Marcelo Santos <marcelsud@gmail.com>
  */
 class Validator
 {
     protected $groups;
+    protected $errorMessages = array();
 
     public function __construct()
     {
@@ -33,9 +35,30 @@ class Validator
         return $this;
     }
 
-    public function run()
+    public function validate($input, $group = null)
     {
+        $valid = false;
+        if ($this->groups->exists($group)) {
+            foreach($this->groups->get($group) as $constraintCollection) {
+                foreach ($constraintCollection as $constraint) {
+                    if (!$constraint->validate($input)) {
+                        $valid = false;
+                        $this->errorMessages[] = $constraint->getErrorMessage();
+                    } else {
+                        $valid = true;
+                    }
+                }
+            }
+        } else {
+            throw new \Exception("Group {$group} does not exists");
+        }
 
+        return $valid;
+    }
+
+    public function getErrorMessages()
+    {
+        return $this->errorMessages;
     }
 
 }

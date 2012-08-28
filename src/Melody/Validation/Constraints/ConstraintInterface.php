@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is distributed under MIT licence.
+ * This file is distributed under BSD licence.
  */
 
 namespace Melody\Validation\Constraints;
@@ -12,5 +12,6 @@ namespace Melody\Validation\Constraints;
 interface ConstraintsInterface
 {
     public function validate();
-    public function setMessageTemplate();
+    public function setErrorMessageTemplate();
+    public function getErrorMessage();
 }
