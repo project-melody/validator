@@ -1,0 +1,20 @@
+{
+    "name": "marcelsud\/melody-validation",
+    "description": "Set of Validation Rules",
+    "version": "0.8.28",
+    "type": "library",
+    "time": "2012-08-28 01:58:45",
+    "homepage": "",
+    "license": "BSD Style",
+    "authors": [
+        {
+            "name": "Marcelo Santos",
+            "email": "marcelsud@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "Melody\\Validation": "src\/"
+        }
+    }
+}
