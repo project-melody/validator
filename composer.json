@@ -4,8 +4,21 @@
     "version": "0.8.28",
     "type": "library",
     "time": "2012-08-28 01:58:45",
-    "homepage": "",
     "license": "BSD Style",
+    "homepage": "https://github.com/marcelsud/melody-validation",
+    "authors": [
+        {
+            "name": "Fabien Potencier",
+            "email": "fabien@symfony.com"
+        },
+        {
+            "name": "Symfony Community",
+            "homepage": "http://symfony.com/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3"
+    },
     "authors": [
         {
             "name": "Marcelo Santos",
