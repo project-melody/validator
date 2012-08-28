@@ -11,9 +11,13 @@ namespace Melody\Validation\Constraints;
  */
 class EmailConstraint extends BaseConstraint
 {
-    public function __construct()
+    public function __construct($messageTemplate = null)
     {
-        $this->errorMessageTemplate = "{{name}} must be a valid email";
+        if (!is_null($messageTemplate)) {
+            $this->errorMessageTemplate = $messageTemplate;
+        } else {
+            $this->errorMessageTemplate = "{{name}} must be a valid email";
+        }
     }
 
     public function validate($input)

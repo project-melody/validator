@@ -9,8 +9,11 @@ namespace Melody\Validation\Constraints;
 /**
  * @author Marcelo Santos <marcelsud@gmail.com>
  */
-class BaseConstraint implements ConstraintsInterface
+abstract class BaseConstraint implements ConstraintsInterface
 {
+    protected $errorMessage;
+    protected $errorMessageTemplate;
+
     public function __construct()
     {
         $this->errorMessageTemplate = "{{name}} is invalid";
