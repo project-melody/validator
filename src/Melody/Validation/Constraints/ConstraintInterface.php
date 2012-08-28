@@ -11,7 +11,7 @@ namespace Melody\Validation\Constraints;
  */
 interface ConstraintsInterface
 {
-    public function validate();
-    public function setErrorMessageTemplate();
+    public function validate($input);
+    public function setErrorMessageTemplate($template);
     public function getErrorMessage();
 }

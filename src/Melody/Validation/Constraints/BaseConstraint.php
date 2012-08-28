@@ -6,12 +6,10 @@
 
 namespace Melody\Validation\Constraints;
 
-use Melody\Validation\Constraints\ConstraintsInterface;
-
 /**
  * @author Marcelo Santos <marcelsud@gmail.com>
  */
-class BaseConstraint
+class BaseConstraint implements ConstraintsInterface
 {
     public function __construct()
     {

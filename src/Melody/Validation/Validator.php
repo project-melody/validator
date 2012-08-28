@@ -8,6 +8,7 @@ namespace Melody\Validation;
 
 use Melody\Validation\Constraints\ConstraintsInterface;
 use Melody\Validation\Constraints\ConstraintsCollection;
+use Melody\Validation\Constraints\EmailConstraint;
 use Melody\Validation\GroupsCollection;
 
 /**

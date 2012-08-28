@@ -6,12 +6,10 @@
 
 namespace Melody\Validation\Constraints;
 
-use Melody\Validation\Constraints\BaseConstraint;
-
 /**
  * @author Marcelo Santos <marcelsud@gmail.com>
  */
-class EmailConstraint extends BaseConstraint implements ConstraintsInterface
+class EmailConstraint extends BaseConstraint
 {
     public function __construct()
     {
