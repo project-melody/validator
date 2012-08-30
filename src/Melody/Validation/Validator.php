@@ -1,14 +1,11 @@
 <?php
 
-/*
- * This file is distributed under BSD licence.
- */
-
 namespace Melody\Validation;
 
-use Melody\Validation\Constraints\ConstraintsInterface;
+use Melody\Validation\Constraints\Validatable;
 use Melody\Validation\Constraints\ConstraintsCollection;
 use Melody\Validation\Constraints\EmailConstraint;
+use Melody\Validation\Constraints\BaseConstraint;
 use Melody\Validation\GroupsCollection;
 
 /**
@@ -16,32 +13,61 @@ use Melody\Validation\GroupsCollection;
  */
 class Validator
 {
-    protected $groups;
-    protected $errorMessages = array();
+	/**
+	 * Collection of validation groups
+	 * @var GroupsCollection
+	 */
+    protected $validationGroups;
+
+    /**
+	 * Violations list
+	 * @var Array
+     */
+    protected $violations = array();
 
     public function __construct()
     {
-        $this->groups = new GroupsCollection();
-        $this->groups->add(new ConstraintsCollection(), "main");
+        $this->validationGroups = new GroupsCollection();
+        $this->validationGroups->add(new ConstraintsCollection(), "main");
     }
 
-    public function addConstraint($criteria, $group = null)
+    public function getValidationGroups()
     {
-        $constraints = array();
+    	return $this->validationGroups;
+    }
 
-        if (is_null($group)) {
-            $group = "main";
-        }
+    public function addConstraint(Validatable $constraint, $validationGroup = null, $constraintKey = null)
+    {
+    	if (is_array($validationGroup)) {
+    		foreach ($validationGroup as $group) {
+    			if (!$this->validationGroups->exists($group)) {
+    				$this->validationGroups->add(new ConstraintsCollection(), $group);
+    			}
 
-        foreach ($criteria['constraints'] as $constraint) {
-            $constraints[] = $constraint;
-        }
+    			$constraint->setValidationGroup($group);
+    			if (!is_null($constraintKey)) {
+    				$this->validationGroups->get($group)->add($constraint, $constraintKey);
+    			} else {
+    				$this->validationGroups->get($group)->add($constraint);
+    			}
 
-        if (count($constraints) > 0) {
-            $this->groups->get($group)->add($constraints);
-        } else {
-            throw new \Exception("It is necessary at least one constraint to validate");
-        }
+    		}
+    	} else {
+    		if (is_null($validationGroup)) {
+    			$validationGroup = BaseConstraint::DEFAULT_GROUP;
+    		}
+
+    		if (!$this->validationGroups->exists($validationGroup)) {
+   			    $this->validationGroups->add(new ConstraintsCollection(), $validationGroup);
+   			}
+
+            $constraint->setValidationGroup($validationGroup);
+    		if (!is_null($constraintKey)) {
+    				$this->validationGroups->get($validationGroup)->add($constraint, $constraintKey);
+    			} else {
+    				$this->validationGroups->get($validationGroup)->add($constraint);
+    			}
+    		}
 
         return $this;
     }
@@ -50,17 +76,14 @@ class Validator
     {
         $valid = true;
 
-        if ($group && !$this->groups->exists($group)) {
+        if ($group && !$this->validationGroups->exists($group)) {
             throw new \Exception("Group {$group} does not exists");
         }
 
-        foreach($this->groups->get($group) as $constraints) {
+        foreach($this->validationGroups->get($group) as $constraints) {
             foreach ($constraints as $constraint) {
                 if (!$constraint->validate($input)) {
-                    $valid = false;
-                    $errorMessage = $this->format($constraint->getErrorMessageTemplate(), array('input' => $input));
-                    $this->errorMessages[] = $errorMessage;
-
+                    $this->violations[] = $this->format($constraint->getErrorMessageTemplate(), array('input' => $input));
                     $valid = false;
                 }
             }
@@ -71,7 +94,7 @@ class Validator
 
     public function getViolations()
     {
-        return $this->errorMessages;
+        return $this->violations;
     }
 
     public function format($template, array $vars=array())
@@ -82,11 +105,6 @@ class Validator
                     return isset($vars[$match[1]]) ? $vars[$match[1]] : $match[0];
                 }, $template
         );
-    }
-
-    public function getErrorMessages()
-    {
-        return $this->errorMessages;
     }
 
 }

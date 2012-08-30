@@ -80,7 +80,7 @@ class GroupsCollection implements \IteratorAggregate, \Countable
     /**
      * Retrieve an item from the GroupsCollection as identified by its key
      * @param $key the identifying key of the item to remove
-     * @return item identified by the key
+     * @return ConstraintsCollection item identified by the key
      */
     public function get($key)
     {

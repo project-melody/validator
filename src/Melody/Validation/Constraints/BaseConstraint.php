@@ -1,21 +1,19 @@
 <?php
 
-/*
- * This file is distributed under BSD licence.
- */
-
 namespace Melody\Validation\Constraints;
 
 /**
  * @author Marcelo Santos <marcelsud@gmail.com>
  */
-abstract class BaseConstraint implements ConstraintsInterface
+abstract class BaseConstraint implements Validatable
 {
     protected $errorMessageTemplate;
+    protected $validationGroup;
+    const DEFAULT_GROUP = "main";
 
     public function __construct()
     {
-        $this->errorMessageTemplate = "{{name}} is invalid";
+        $this->setErrorMessageTemplate("{{name}} is invalid");
     }
 
     public function setErrorMessageTemplate($template)
@@ -26,5 +24,15 @@ abstract class BaseConstraint implements ConstraintsInterface
     public function getErrorMessageTemplate()
     {
         return $this->errorMessageTemplate;
+    }
+
+    public function getValidationGroup()
+    {
+		return $this->validationGroup;
+    }
+
+    public function setValidationGroup($validationGroup = self::DEFAULT_GROUP)
+    {
+    	$this->validationGroup = $validationGroup;
     }
 }

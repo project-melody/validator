@@ -11,13 +11,17 @@ namespace Melody\Validation\Constraints;
  */
 class EmailConstraint extends BaseConstraint
 {
-    public function __construct($messageTemplate = null)
+    public function __construct($validationGroup = self::DEFAULT_GROUP, $messageTemplate = null)
     {
+    	parent::__construct();
+
         if (!is_null($messageTemplate)) {
-            $this->errorMessageTemplate = $messageTemplate;
+            $this->setErrorMessageTemplate($messageTemplate);
         } else {
-            $this->errorMessageTemplate = "{{input}} is not a valid email";
+            $this->setErrorMessageTemplate("{{input}} is not a valid email");
         }
+
+		$this->setValidationGroup($validationGroup);
     }
 
     public function validate($input)

@@ -1,6 +1,9 @@
 .buildpath
 .project
 .settings/
+.metadata
 vendor/
 composer.phar
 composer.lock
+index.php
+codecoverage/

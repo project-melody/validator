@@ -7,6 +7,7 @@
 namespace Melody\Validation\Constraints;
 
 use Melody\Validation\Constraints\ConstraintsInterface;
+use Melody\Validation\Exceptions\InvalidKeyException;
 
 /**
  * @author Marcelo Santos <marcelsud@gmail.com>
@@ -74,7 +75,7 @@ class ConstraintsCollection implements \IteratorAggregate, \Countable
         if(isset($this->_constraints[$key])) {
             unset($this->_constraints[$key]);
         } else {
-            throw new \Exception("Invalid key $key specified.");
+            throw new InvalidKeyException("Invalid key $key specified.");
         }
     }
 
@@ -88,7 +89,7 @@ class ConstraintsCollection implements \IteratorAggregate, \Countable
         if(isset($this->_constraints[$key])) {
             return $this->_constraints[$key];
         } else {
-            throw new \Exception("Invalid key $key specified.");
+            throw new InvalidKeyException("Invalid key $key specified.");
         }
     }
 
