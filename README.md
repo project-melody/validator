@@ -16,7 +16,7 @@ $email = "test...@mail.com";
 $validator = new Validator();
 $validator->addConstraint(new EmailConstraint());
 
-if (!$validator->validate($email) {
+if (!$validator->validate($email)) {
     $violations = $validator->getViolations();
 }
 
