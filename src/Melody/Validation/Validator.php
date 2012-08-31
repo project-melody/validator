@@ -13,61 +13,61 @@ use Melody\Validation\GroupsCollection;
  */
 class Validator
 {
-	/**
-	 * Collection of validation groups
-	 * @var GroupsCollection
-	 */
+    /**
+     * Collection of validation groups
+     * @var GroupsCollection
+     */
     protected $validationGroups;
 
     /**
-	 * Violations list
-	 * @var Array
+     * Violations list
+     * @var Array
      */
     protected $violations = array();
 
     public function __construct()
     {
         $this->validationGroups = new GroupsCollection();
-        $this->validationGroups->add(new ConstraintsCollection(), "main");
+        $this->validationGroups->add(new ConstraintsCollection(), BaseConstraint::DEFAULT_GROUP);
     }
 
     public function getValidationGroups()
     {
-    	return $this->validationGroups;
+        return $this->validationGroups;
     }
 
     public function addConstraint(Validatable $constraint, $validationGroup = null, $constraintKey = null)
     {
-    	if (is_array($validationGroup)) {
-    		foreach ($validationGroup as $group) {
-    			if (!$this->validationGroups->exists($group)) {
-    				$this->validationGroups->add(new ConstraintsCollection(), $group);
-    			}
+        if (is_array($validationGroup)) {
+            foreach ($validationGroup as $group) {
+                if (!$this->validationGroups->exists($group)) {
+                    $this->validationGroups->add(new ConstraintsCollection(), $group);
+                }
 
-    			$constraint->setValidationGroup($group);
-    			if (!is_null($constraintKey)) {
-    				$this->validationGroups->get($group)->add($constraint, $constraintKey);
-    			} else {
-    				$this->validationGroups->get($group)->add($constraint);
-    			}
+                $constraint->setValidationGroup($group);
+                if (!is_null($constraintKey)) {
+                    $this->validationGroups->get($group)->add($constraint, $constraintKey);
+                } else {
+                    $this->validationGroups->get($group)->add($constraint);
+                }
 
-    		}
-    	} else {
-    		if (is_null($validationGroup)) {
-    			$validationGroup = BaseConstraint::DEFAULT_GROUP;
-    		}
+            }
+        } else {
+            if (is_null($validationGroup)) {
+                $validationGroup = BaseConstraint::DEFAULT_GROUP;
+            }
 
-    		if (!$this->validationGroups->exists($validationGroup)) {
-   			    $this->validationGroups->add(new ConstraintsCollection(), $validationGroup);
-   			}
+            if (!$this->validationGroups->exists($validationGroup)) {
+                $this->validationGroups->add(new ConstraintsCollection(), $validationGroup);
+            }
 
             $constraint->setValidationGroup($validationGroup);
-    		if (!is_null($constraintKey)) {
-    				$this->validationGroups->get($validationGroup)->add($constraint, $constraintKey);
-    			} else {
-    				$this->validationGroups->get($validationGroup)->add($constraint);
-    			}
-    		}
+            if (!is_null($constraintKey)) {
+                    $this->validationGroups->get($validationGroup)->add($constraint, $constraintKey);
+                } else {
+                    $this->validationGroups->get($validationGroup)->add($constraint);
+                }
+            }
 
         return $this;
     }

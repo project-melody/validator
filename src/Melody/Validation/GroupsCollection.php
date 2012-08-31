@@ -1,9 +1,5 @@
 <?php
 
-/*
- * This file is distributed under BSD licence.
- */
-
 namespace Melody\Validation;
 
 use Melody\Validation\Constraints\ConstraintsCollection;

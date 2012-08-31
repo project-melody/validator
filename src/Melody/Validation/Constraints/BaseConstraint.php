@@ -28,11 +28,11 @@ abstract class BaseConstraint implements Validatable
 
     public function getValidationGroup()
     {
-		return $this->validationGroup;
+        return $this->validationGroup;
     }
 
     public function setValidationGroup($validationGroup = self::DEFAULT_GROUP)
     {
-    	$this->validationGroup = $validationGroup;
+        $this->validationGroup = $validationGroup;
     }
 }
