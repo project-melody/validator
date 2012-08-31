@@ -1,9 +1,9 @@
 {
     "name": "marcelsud\/melody-validation",
     "description": "Set of Validation Rules",
-    "version": "0.8.29",
+    "version": "0.8.31",
     "type": "library",
-    "time": "2012-08-29 00:05:45",
+    "time": "2012-08-31 00:42:00",
     "license": "BSD Style",
     "homepage": "https://github.com/marcelsud/melody-validation",
     "require": {
