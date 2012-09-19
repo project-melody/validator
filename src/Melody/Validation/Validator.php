@@ -31,11 +31,21 @@ class Validator
         $this->validationGroups->add(new ConstraintsCollection(), BaseConstraint::DEFAULT_GROUP);
     }
 
+    /**
+     * @return \Melody\Validation\GroupsCollection
+     */
     public function getValidationGroups()
     {
         return $this->validationGroups;
     }
 
+    /**
+     * @param Validatable $constraint
+     * @param String $validationGroup
+     * @param String $constraintKey
+     *
+     * @return \Melody\Validation\Validator
+     */
     public function addConstraint(Validatable $constraint, $validationGroup = null, $constraintKey = null)
     {
         if (is_array($validationGroup)) {
@@ -72,6 +82,13 @@ class Validator
         return $this;
     }
 
+    /**
+     * @param $input
+     * @param String $group
+     * @throws \Exception
+     *
+     * @return boolean
+     */
     public function validate($input, $group = "main")
     {
         $valid = true;
@@ -92,11 +109,19 @@ class Validator
         return $valid;
     }
 
+    /**
+     * @return multitype:
+     */
     public function getViolations()
     {
         return $this->violations;
     }
 
+    /**
+     * @param String $template
+     * @param array $vars
+     * @return mixed|unknown
+     */
     public function format($template, array $vars=array())
     {
         return preg_replace_callback(
