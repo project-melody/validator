@@ -12,8 +12,4 @@ interface Validatable
     public function setErrorMessageTemplate($template);
 
     public function getErrorMessageTemplate();
-
-    public function getValidationGroup();
-
-    public function setValidationGroup();
 }

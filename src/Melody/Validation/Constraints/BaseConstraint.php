@@ -2,18 +2,18 @@
 
 namespace Melody\Validation\Constraints;
 
+use Melody\Validation\Validatable;
+
 /**
  * @author Marcelo Santos <marcelsud@gmail.com>
  */
 abstract class BaseConstraint implements Validatable
 {
     protected $errorMessageTemplate;
-    protected $validationGroup;
-    const DEFAULT_GROUP = "main";
 
     public function __construct()
     {
-        $this->setErrorMessageTemplate("{{name}} is invalid");
+        $this->setErrorMessageTemplate("{{input}} is invalid");
     }
 
     public function setErrorMessageTemplate($template)
@@ -26,13 +26,4 @@ abstract class BaseConstraint implements Validatable
         return $this->errorMessageTemplate;
     }
 
-    public function getValidationGroup()
-    {
-        return $this->validationGroup;
-    }
-
-    public function setValidationGroup($validationGroup = self::DEFAULT_GROUP)
-    {
-        $this->validationGroup = $validationGroup;
-    }
 }

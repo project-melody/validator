@@ -2,17 +2,15 @@
 
 namespace Melody\Validation;
 
-use Melody\Validation\Constraints\BaseConstraint;
-
-use Melody\Validation\Constraints\Validatable;
-use Melody\Validation\Constraints\EmailConstraint;
+use Melody\Validation\ConstraintsBuilder as c;
 use Melody\Validation\Validator;
 
 class ValidatorTest extends \PHPUnit_Framework_TestCase
 {
-    public function test_add_constraint()
+    public function test_validate_email()
     {
         $validator = new Validator();
-        $this->assertTrue($validator->addConstraint(new EmailConstraint()) instanceof Validator);
+        $this->assertTrue($validator->validate("marcelsud@gmail.com", c::email()));
+        $this->assertFalse($validator->validate("marcelsud @gmail.com", c::email()));
     }
 }
