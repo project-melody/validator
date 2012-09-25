@@ -28,7 +28,7 @@ $violations = $validator->getViolations(); //List of Violations
 Reuse the constraints as you wish.
 ```php
 // Remember $validEmail?
-$validUsername = $validEmail->and(c::maxLength(15)->minLength(5));
+$validUsername = $validEmail->add(c::maxLength(15)->minLength(5));
 
 $username = "valid@username.com";
 

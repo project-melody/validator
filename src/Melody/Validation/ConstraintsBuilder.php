@@ -15,22 +15,22 @@ class ConstraintsBuilder
 
     private static function create()
     {
-        $ref = new ReflectionClass(__CLASS__);
+        $ref =& new ReflectionClass(__CLASS__);
 
         return $ref->newInstanceArgs(func_get_args());
     }
 
     public static function __callStatic($name, $arguments=array())
     {
-        return self::create()->add($name, $arguments);
+        return self::create()->set($name, $arguments);
     }
 
     public function __call($name, $arguments=array())
     {
-        return $this->add($name, $arguments);
+        return $this->set($name, $arguments);
     }
 
-    public function add($name, $arguments)
+    public function set($name, $arguments)
     {
         $constraintFqn = "Melody\\Validation\\Constraints\\" . ucfirst($name);
         $constraintClass = new ReflectionClass($constraintFqn);
@@ -55,6 +55,27 @@ class ConstraintsBuilder
         $validator = new Validator();
 
         return $validator->validate($input, $this);
+    }
+
+    public function add(ConstraintsBuilder $constraintBuilder)
+    {
+
+    	$builder = self::create();
+    	$builder->constraints = clone $this->constraints;
+
+    	$constraints = $constraintBuilder->getConstraints();
+		if (count($constraints)) {
+			foreach ($constraints as $name => $constraint) {
+				$builder->constraints->set($name, $constraint);
+			}
+		}
+
+		return $builder;
+    }
+
+    public function __clone()
+    {
+        $this->constraints = null;
     }
 
 }

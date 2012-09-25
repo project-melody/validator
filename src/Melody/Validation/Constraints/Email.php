@@ -1,7 +1,7 @@
 <?php
 namespace Melody\Validation\Constraints;
 
-class Email extends BaseConstraint
+class Email extends Constraint
 {
     public function validate($input)
     {

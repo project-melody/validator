@@ -7,7 +7,7 @@ use Melody\Validation\Validatable;
 /**
  * @author Marcelo Santos <marcelsud@gmail.com>
  */
-abstract class BaseConstraint implements Validatable
+abstract class Constraint implements Validatable
 {
     protected $errorMessageTemplate;
 
