@@ -44,5 +44,5 @@ $validPassword = c::length(6, 12) //Minlength 6, Maxlength 12
     ->containsLetter(3) //at least 3 letters
     ->containsDigit(2); //at least 2 digits
 
-$this->assertTrue($validPassword->validate($password)); //true
+$validPassword->validate($password); //true
 ```
