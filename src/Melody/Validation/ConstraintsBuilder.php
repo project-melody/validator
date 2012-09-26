@@ -7,6 +7,7 @@ use Melody\Validation\Common\Collections\ConstraintsCollection;
 class ConstraintsBuilder
 {
     private $constraints;
+    private $violations = array();
 
     public function __construct()
     {
@@ -53,8 +54,15 @@ class ConstraintsBuilder
     public function validate($input)
     {
         $validator = new Validator();
+        $valid = $validator->validate($input, $this);
+        $this->violations = $validator->getViolations();
 
-        return $validator->validate($input, $this);
+        return $valid;
+    }
+
+    public function getViolations()
+    {
+        return $this->violations;
     }
 
     public function add(ConstraintsBuilder $constraintBuilder)

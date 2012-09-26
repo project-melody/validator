@@ -35,3 +35,14 @@ $username = "valid@username.com";
 $validUsername->validate($username); //true
 $violations = $validator->getViolations(); //List of Violations
 ```
+
+Valid Password Example:
+```php
+$password = "pass@2012";
+$validPassword = c::length(6, 12) //Minlength 6, Maxlength 12
+    ->containsSpecial(1) //at least 1 special character
+    ->containsLetter(3) //at least 3 letters
+    ->containsDigit(2); //at least 2 digits
+
+$this->assertTrue($validPassword->validate($password)); //true
+```
