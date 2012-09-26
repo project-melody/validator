@@ -10,12 +10,12 @@ class ConstraintsBuilder
 
     public function __construct()
     {
-    	$this->constraints = new ConstraintsCollection();
+        $this->constraints = new ConstraintsCollection();
     }
 
     private static function create()
     {
-        $ref =& new ReflectionClass(__CLASS__);
+        $ref = new ReflectionClass(__CLASS__);
 
         return $ref->newInstanceArgs(func_get_args());
     }
@@ -37,7 +37,7 @@ class ConstraintsBuilder
         $constraintInstance = $constraintClass->newInstanceArgs($arguments);
 
         if ($this->constraints->offsetExists($name)) {
-        	throw new \Exception("Constraint named {$name} already setted");
+            throw new \Exception("Constraint named {$name} already setted");
         }
 
         $this->constraints->set($name, $constraintInstance);
@@ -60,17 +60,17 @@ class ConstraintsBuilder
     public function add(ConstraintsBuilder $constraintBuilder)
     {
 
-    	$builder = self::create();
-    	$builder->constraints = clone $this->constraints;
+        $builder = self::create();
+        $builder->constraints = clone $this->constraints;
 
-    	$constraints = $constraintBuilder->getConstraints();
-		if (count($constraints)) {
-			foreach ($constraints as $name => $constraint) {
-				$builder->constraints->set($name, $constraint);
-			}
-		}
+        $constraints = $constraintBuilder->getConstraints();
+        if (count($constraints)) {
+            foreach ($constraints as $name => $constraint) {
+                $builder->constraints->set($name, $constraint);
+            }
+        }
 
-		return $builder;
+        return $builder;
     }
 
     public function __clone()
