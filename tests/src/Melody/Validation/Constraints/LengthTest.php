@@ -15,6 +15,8 @@ class LengthTest extends \PHPUnit_Framework_TestCase
     public function test_invalid_string_should_fail_validation()
     {
         $this->assertFalse(c::length(2, 5)->validate('abcdef0123'));
+        $this->assertFalse(c::length(2, 5)->validate(''));
+        $this->assertFalse(c::length(2, 5)->validate(null));
     }
 
 }

@@ -8,7 +8,7 @@ Melody Validation is a set of validation rules with a easy way to customize and 
 ```php
 <?php
 use Melody\Validation\Validator;
-use Melody\Validation\Constraints\ConstraintsBuilder as c;
+use Melody\Validation\ConstraintsBuilder as c;
 
 require_once __DIR__.'/../vendor/autoload.php';
 ```

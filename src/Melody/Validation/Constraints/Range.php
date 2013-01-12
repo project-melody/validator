@@ -28,7 +28,7 @@ class Range extends Constraint
     public function validate($input)
     {
         if (!is_int($input)) {
-            throw new \Exception("The input field must be a string");
+            throw new \Exception("The input field must be a integer");
         }
 
         return filter_var(

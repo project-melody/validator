@@ -32,6 +32,10 @@ class Length extends Constraint
 
     public function validate($input)
     {
+        if (is_null($input)) {
+            return false;
+        }
+
         if (!is_string($input)) {
             throw new \Exception("The input field must be a string");
         }
