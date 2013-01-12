@@ -20,6 +20,6 @@ class ContainsLetter extends Constraint
 
     public function getErrorMessageTemplate()
     {
-        return "{{input}} must contain at least {$this->min} letter(s)";
+        return "The input '{{input}}' must contain at least {$this->min} letter(s)";
     }
 }

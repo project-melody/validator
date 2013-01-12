@@ -10,6 +10,6 @@ class Email extends Constraint
 
     public function getErrorMessageTemplate()
     {
-        return "{{input}} must be a valid email";
+        return "The input '{{input}}' must be a valid email";
     }
 }

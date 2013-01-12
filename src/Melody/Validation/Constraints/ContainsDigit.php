@@ -20,6 +20,6 @@ class ContainsDigit extends Constraint
 
     public function getErrorMessageTemplate()
     {
-        return "{{input}} must contain at least {$this->min} digit(s)";
+        return "The input '{{input}}' must contain at least {$this->min} digit(s)";
     }
 }

@@ -10,6 +10,6 @@ class Alnum extends Constraint
 
     public function getErrorMessageTemplate()
     {
-        return "{{input}} must be alpha-numeric";
+        return "The input '{{input}}' must be alpha-numeric";
     }
 }

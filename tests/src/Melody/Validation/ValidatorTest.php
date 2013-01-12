@@ -36,6 +36,8 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 
     public function test_validate_with_not_statement()
     {
+        $validator = new Validator();
+
         $username = "marcelsud";
         $validUsername = c::length(6, 12)->alnum()->noWhitespace();
         $this->assertTrue($validUsername->validate($username));
@@ -44,8 +46,10 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         $validPassword = c::length(6, 12)
             ->containsSpecial(1)
             ->containsLetter(3)
-            ->containsDigit(2);
+            ->containsDigit(2)
+            ->noWhitespace();
 
+        $this->assertTrue($validator->validate($password, $validPassword));
         $this->assertTrue($validPassword->validate($password));
     }
 

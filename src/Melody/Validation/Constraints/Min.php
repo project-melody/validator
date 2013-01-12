@@ -19,6 +19,6 @@ class Min extends Constraint
 
     public function getErrorMessageTemplate()
     {
-    	return "{{input}} must be lower than {$this->min}";
+        return "The input '{{input}}' must be lower than {$this->min}";
     }
 }

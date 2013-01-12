@@ -20,6 +20,6 @@ class ContainsSpecial extends Constraint
 
     public function getErrorMessageTemplate()
     {
-        return "{{input}} must contain at least {$this->min} special char(s)";
+        return "The input '{{input}}' must contain at least {$this->min} special char(s)";
     }
 }

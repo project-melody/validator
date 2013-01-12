@@ -50,13 +50,13 @@ class Length extends Constraint
     public function getErrorMessageTemplate()
     {
         if (is_numeric($this->exactLength)) {
-            return "{{input}} must have {$this->exactLength} and characteres";
+            return "The input '{{input}}' must have {$this->exactLength} and characteres";
         }
 
         if (is_numeric($this->maxLength)) {
-            return "{{input}} must have at least {$this->minLength} and at maximun {$this->maxLength} characteres";
+            return "The input '{{input}}' must have at least {$this->minLength} and at maximun {$this->maxLength} characteres";
         } else {
-            return "{{input}} must have at least {$this->minLength} characteres";
+            return "The input '{{input}}' must have at least {$this->minLength} characteres";
         }
     }
 }

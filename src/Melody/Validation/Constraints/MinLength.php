@@ -16,6 +16,6 @@ class MinLength extends Constraint
 
     public function getErrorMessageTemplate()
     {
-    	return "{{input}} must have at least {$this->minLength} characteres";
+        return "The input '{{input}}' must have at least {$this->minLength} characteres";
     }
 }

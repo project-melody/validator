@@ -16,6 +16,6 @@ class MaxLength extends Constraint
 
     public function getErrorMessageTemplate()
     {
-    	return "{{input}} must have at maximum {$this->maxLength} characteres";
+        return "The input '{{input}}' must have at maximum {$this->maxLength} characteres";
     }
 }
