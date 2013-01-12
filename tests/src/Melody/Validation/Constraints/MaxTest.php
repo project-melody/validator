@@ -14,7 +14,7 @@ class MaxTest extends \PHPUnit_Framework_TestCase
 
     public function test_invalid_max_number_should_fail_validation()
     {
-        $this->assertFalse(c::containsLetter(5)->validate(7));
+        $this->assertFalse(c::max(5)->validate(7));
     }
 
 }
