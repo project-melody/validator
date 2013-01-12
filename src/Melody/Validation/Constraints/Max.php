@@ -16,6 +16,6 @@ class Max extends Constraint
 
     public function getErrorMessageTemplate()
     {
-    	return "{{input}} must be greater than {$this->max}";
+        return "{{input}} must be greater than {$this->max}";
     }
 }
