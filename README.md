@@ -3,16 +3,7 @@ Melody Validation
 
 [![Build Status](https://secure.travis-ci.org/marcelsud/melody-validation.png)](http://travis-ci.org/marcelsud/melody-validation)
 
-Melody Validation is a set of validation rules with a easy way to customize and test your validations.
-
-```php
-<?php
-use Melody\Validation\Validator;
-use Melody\Validation\ConstraintsBuilder as c;
-
-require_once __DIR__.'/../vendor/autoload.php';
-```
-Melody Validation works with PHP 5.3.3 or later.
+Melody Validation is a set of validation rules with a easy way to customize and test your validations that works with PHP 5.3.3 or later.
 
 ## Installation
 
@@ -30,6 +21,9 @@ run the `php composer.phar install` command to install it:
 
 Validating email:
 ```php
+use Melody\Validation\Validator;
+use Melody\Validation\ConstraintsBuilder as c;
+
 $email = "test@mail.com";
 
 $validator = new Validator();
