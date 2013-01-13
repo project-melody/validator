@@ -3,37 +3,44 @@ Melody Validation
 
 [![Build Status](https://secure.travis-ci.org/marcelsud/melody-validation.png)](http://travis-ci.org/marcelsud/melody-validation)
 
-Melody Validation is a set of validation rules with a easy way to customize and test your validations.
+Melody Validation is a set of validation rules with a easy way to customize and test your validations that works with PHP 5.3.3 or later.
 
+## Installation
+
+The recommended way to install Melody Validation is [through
+composer](http://getcomposer.org). Just create a `composer.json` file and
+run the `php composer.phar install` command to install it:
+
+    {
+        "require": {
+            "marcelsud/melody-validation": "dev-master"
+        }
+    }
+
+## Usage
+
+Validating email:
 ```php
-<?php
 use Melody\Validation\Validator;
 use Melody\Validation\ConstraintsBuilder as c;
 
-require_once __DIR__.'/../vendor/autoload.php';
-```
-
-Validate using both Validator or Constraint validate method.
-```php
 $email = "test@mail.com";
+
 $validator = new Validator();
+$validator->validate($email, c::email()); //true
 
-$validEmail = c::email();
-$validEmail->validate($email); //true
-$validator->validate($email, $validEmail); //true
-
-$violations = $validator->getViolations(); //List of Violations
+$violations = $validator->getViolations(); //List all violation messages
 ```
 
 Reuse the constraints as you wish.
 ```php
-// Remember $validEmail?
+$username = "valid@username.com";
+$validEmail = c::email();
+
+//Reusing $validEmail constraint
 $validUsername = $validEmail->add(c::maxLength(15)->minLength(5));
 
-$username = "valid@username.com";
-
-$validUsername->validate($username); //true
-$violations = $validator->getViolations(); //List of Violations
+$validator->validate($username, $validUsername);//true
 ```
 
 Valid Password Example:
@@ -44,5 +51,5 @@ $validPassword = c::length(6, 12) //Minlength 6, Maxlength 12
     ->containsLetter(3) //at least 3 letters
     ->containsDigit(2); //at least 2 digits
 
-$validPassword->validate($password); //true
+$validator->validate($password, $validPassword); //true
 ```
