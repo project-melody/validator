@@ -19,15 +19,16 @@ run the `php composer.phar install` command to install it:
 
 ## Usage
 
+Importing Validator namespace:
+```php
+use Melody\Validation\Validator as v;
+
 Validating email:
 ```php
-use Melody\Validation\Validator;
-use Melody\Validation\ConstraintsBuilder as c;
-
 $email = "test@mail.com";
 
 $validator = new Validator();
-$validator->validate($email, c::email()); //true
+$validator->validate($email, v::email()); //true
 
 $violations = $validator->getViolations(); //List all violation messages
 ```
@@ -35,10 +36,10 @@ $violations = $validator->getViolations(); //List all violation messages
 Reuse the constraints as you wish.
 ```php
 $username = "valid@username.com";
-$validEmail = c::email();
+$validEmail = v::email();
 
 //Reusing $validEmail constraint
-$validUsername = $validEmail->add(c::maxLength(15)->minLength(5));
+$validUsername = $validEmail->add(v::maxLength(15)->minLength(5));
 
 $validator->validate($username, $validUsername);//true
 ```
@@ -46,7 +47,7 @@ $validator->validate($username, $validUsername);//true
 Valid Password Example:
 ```php
 $password = "pass@2012";
-$validPassword = c::length(6, 12) //Minlength 6, Maxlength 12
+$validPassword = v::length(6, 12) //Minlength 6, Maxlength 12
     ->containsSpecial(1) //at least 1 special character
     ->containsLetter(3) //at least 3 letters
     ->containsDigit(2); //at least 2 digits
