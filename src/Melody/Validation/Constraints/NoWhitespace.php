@@ -1,7 +1,9 @@
 <?php
 namespace Melody\Validation\Constraints;
 
-class NoWhitespace extends Constraint
+use Melody\Validation\Validatable;
+
+class NoWhitespace extends Constraint implements Validatable
 {
     protected $id = 'noWhitespace';
 

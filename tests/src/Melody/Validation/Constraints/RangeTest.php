@@ -25,4 +25,22 @@ class RangeTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(v::range(5, 10)->validate(12));
     }
 
+    public function test_invalid_argument_exception_min()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $this->assertInstanceOf('InvalidArgumentException', v::range("invalid argument", 10)->validate(3));
+    }
+
+    public function test_invalid_argument_exception_max()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $this->assertInstanceOf('InvalidArgumentException', v::range(5, "invalid argument")->validate(3));
+    }
+
+    public function test_invalid_argument_exception_not_int()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $this->assertInstanceOf('InvalidArgumentException', v::range(5, 10)->validate("invalid argument"));
+    }
+
 }

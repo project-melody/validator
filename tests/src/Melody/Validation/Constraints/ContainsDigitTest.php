@@ -17,4 +17,10 @@ class ContainsDigitTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(v::containsDigit(5)->validate('abcdef0123'));
     }
 
+    public function test_invalid_argument_exception()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $this->assertInstanceOf('InvalidArgumentException', v::containsDigit("invalid argument"));
+    }
+
 }

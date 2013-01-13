@@ -75,4 +75,10 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($errors['email'], "'marcelsud @gmail.com' deve conter um email válido");
     }
+
+    public function test_diplicated_constraint_exception()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $this->assertInstanceOf('InvalidArgumentException', v::email()->email());
+    }
 }

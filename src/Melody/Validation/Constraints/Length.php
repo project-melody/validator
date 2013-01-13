@@ -1,7 +1,9 @@
 <?php
 namespace Melody\Validation\Constraints;
 
-class Length extends Constraint
+use Melody\Validation\Validatable;
+
+class Length extends Constraint implements Validatable
 {
     protected $id = 'length';
     private $minLength;
@@ -15,11 +17,11 @@ class Length extends Constraint
     public function __construct($minLength, $maxLength)
     {
         if (!is_numeric($minLength)) {
-            throw new \Exception("It is necessary to define the length");
+            throw new \InvalidArgumentException("It is necessary to define the length");
         }
 
         if (!is_null($maxLength) && !is_numeric($maxLength)) {
-            throw new \Exception("The max length must be a number");
+            throw new \InvalidArgumentException("The max length must be a number");
         }
 
         if (!is_null($maxLength)) {
@@ -35,7 +37,7 @@ class Length extends Constraint
         }
 
         if (!is_string($input)) {
-            throw new \Exception("The input field must be a string");
+            throw new \InvalidArgumentException("The input field must be a string");
         }
 
         return strlen($input) >= $this->minLength && strlen($input) <= $this->maxLength;

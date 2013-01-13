@@ -1,7 +1,9 @@
 <?php
 namespace Melody\Validation\Constraints;
 
-class Range extends Constraint
+use Melody\Validation\Validatable;
+
+class Range extends Constraint implements Validatable
 {
     protected $id = 'range';
     private $min;
@@ -15,11 +17,11 @@ class Range extends Constraint
     public function __construct($min, $max)
     {
         if (!is_int($min)) {
-            throw new \Exception("It is necessary to define the min as integer");
+            throw new \InvalidArgumentException("It is necessary to define the min as integer");
         }
 
         if (!is_int($max)) {
-            throw new \Exception("It is necessary to define the max as integer");
+            throw new \InvalidArgumentException("It is necessary to define the max as integer");
         }
 
         $this->min = $min;
@@ -29,7 +31,7 @@ class Range extends Constraint
     public function validate($input)
     {
         if (!is_int($input)) {
-            throw new \Exception("The input field must be a integer");
+            throw new \InvalidArgumentException("The input field must be a integer");
         }
 
         return filter_var(

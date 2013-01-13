@@ -39,7 +39,7 @@ class Validator
         $constraintInstance = $constraintClass->newInstanceArgs($arguments);
 
         if ($this->constraints->offsetExists($name)) {
-            throw new \Exception("Constraint named {$name} already setted");
+            throw new \InvalidArgumentException("Constraint named {$name} already setted");
         }
 
         $this->constraints->set($name, $constraintInstance);
@@ -82,11 +82,6 @@ class Validator
         }
 
         return $builder;
-    }
-
-    public function __clone()
-    {
-        $this->constraints = null;
     }
 
     public function validate($input, $constraints = null)

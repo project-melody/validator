@@ -7,7 +7,7 @@ use Melody\Validation\Validatable;
 /**
  * @author Marcelo Santos <marcelsud@gmail.com>
  */
-abstract class Constraint implements Validatable
+abstract class Constraint
 {
     protected $errorMessageTemplate;
 
@@ -19,11 +19,6 @@ abstract class Constraint implements Validatable
     public function setErrorMessageTemplate($template)
     {
         $this->errorMessageTemplate = $template;
-    }
-
-    public function getErrorMessageTemplate()
-    {
-        return $this->errorMessageTemplate;
     }
 
     public function getId()

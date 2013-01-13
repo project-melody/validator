@@ -8,4 +8,4 @@ php:
   - "5.4"
   - "5.3"
 
-script: phpunit --configuration tests/phpunit.xml.dist .
+script: phpunit --colors --coverage-text --configuration tests/phpunit.xml.dist .

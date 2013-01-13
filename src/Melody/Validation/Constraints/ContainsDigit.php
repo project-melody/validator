@@ -1,15 +1,17 @@
 <?php
 namespace Melody\Validation\Constraints;
 
-class ContainsDigit extends Constraint
+use Melody\Validation\Validatable;
+
+class ContainsDigit extends Constraint implements Validatable
 {
     protected $id = 'containsDigit';
     private $min;
 
-    public function __construct($min = 1)
+    public function __construct($min)
     {
         if (!is_numeric($min)) {
-            throw new \Exception("Min must be a number");
+            throw new \InvalidArgumentException("Min must be a number");
         }
 
         $this->min = $min;

@@ -1,7 +1,9 @@
 <?php
 namespace Melody\Validation\Constraints;
 
-class Email extends Constraint
+use Melody\Validation\Validatable;
+
+class Email extends Constraint implements Validatable
 {
     protected $id = 'email';
 
