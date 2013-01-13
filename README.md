@@ -22,7 +22,7 @@ run the `php composer.phar install` command to install it:
 Importing Validator namespace:
 ```php
 use Melody\Validation\Validator as v;
-```php
+```
 
 Validating email:
 ```php
