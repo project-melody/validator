@@ -3,6 +3,7 @@ namespace Melody\Validation\Constraints;
 
 class Length extends Constraint
 {
+    protected $id = 'length';
     private $minLength;
     private $maxLength;
 
@@ -25,11 +26,6 @@ class Length extends Constraint
             $this->minLength = $minLength;
             $this->maxLength = $maxLength;
         }
-    }
-
-    public function getId()
-    {
-        return 'length';
     }
 
     public function validate($input)

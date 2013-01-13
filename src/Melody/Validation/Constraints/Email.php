@@ -3,10 +3,7 @@ namespace Melody\Validation\Constraints;
 
 class Email extends Constraint
 {
-    public function getId()
-    {
-        return 'email';
-    }
+    protected $id = 'email';
 
     public function validate($input)
     {

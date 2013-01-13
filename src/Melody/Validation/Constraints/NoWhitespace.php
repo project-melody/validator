@@ -3,10 +3,7 @@ namespace Melody\Validation\Constraints;
 
 class NoWhitespace extends Constraint
 {
-    public function getId()
-    {
-        return 'noWhitespace';
-    }
+    protected $id = 'noWhitespace';
 
     public function validate($input)
     {

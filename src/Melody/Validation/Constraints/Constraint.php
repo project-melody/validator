@@ -26,4 +26,9 @@ abstract class Constraint implements Validatable
         return $this->errorMessageTemplate;
     }
 
+    public function getId()
+    {
+        return $this->id;
+    }
+
 }

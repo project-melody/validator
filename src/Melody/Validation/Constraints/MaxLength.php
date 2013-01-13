@@ -3,15 +3,12 @@ namespace Melody\Validation\Constraints;
 
 class MaxLength extends Constraint
 {
+    protected $id = 'maxLength';
     private $maxLength;
+
     public function __construct($maxLength)
     {
         $this->maxLength = $maxLength;
-    }
-
-    public function getId()
-    {
-        return 'maxLength';
     }
 
     public function validate($input)

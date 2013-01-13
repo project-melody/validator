@@ -3,15 +3,12 @@ namespace Melody\Validation\Constraints;
 
 class MinLength extends Constraint
 {
+    protected $id = 'minLength';
     private $minLength;
+
     public function __construct($minLength)
     {
         $this->minLength = $minLength;
-    }
-
-    public function getId()
-    {
-        return 'minLength';
     }
 
     public function validate($input)

@@ -3,7 +3,9 @@ namespace Melody\Validation\Constraints;
 
 class ContainsSpecial extends Constraint
 {
+    protected $id = 'containsSpecial';
     private $min;
+
     public function __construct($min = 1)
     {
         if (!is_numeric($min)) {
@@ -11,11 +13,6 @@ class ContainsSpecial extends Constraint
         }
 
         $this->min = $min;
-    }
-
-    public function getId()
-    {
-        return 'containsSpecial';
     }
 
     public function validate($input)

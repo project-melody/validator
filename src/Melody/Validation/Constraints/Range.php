@@ -3,6 +3,7 @@ namespace Melody\Validation\Constraints;
 
 class Range extends Constraint
 {
+    protected $id = 'range';
     private $min;
     private $max;
 
@@ -23,11 +24,6 @@ class Range extends Constraint
 
         $this->min = $min;
         $this->max = $max;
-    }
-
-    public function getId()
-    {
-        return 'range';
     }
 
     public function validate($input)
