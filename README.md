@@ -16,24 +16,22 @@ require_once __DIR__.'/../vendor/autoload.php';
 Validate using both Validator or Constraint validate method.
 ```php
 $email = "test@mail.com";
+
 $validator = new Validator();
+$validator->validate($email, c::email()); //true
 
-$validEmail = c::email();
-$validEmail->validate($email); //true
-$validator->validate($email, $validEmail); //true
-
-$violations = $validator->getViolations(); //List of Violations
+$violations = $validator->getViolations(); //List all violation messages
 ```
 
 Reuse the constraints as you wish.
 ```php
-// Remember $validEmail?
+$username = "valid@username.com";
+$validEmail = c::email();
+
+//Reusing $validEmail constraint
 $validUsername = $validEmail->add(c::maxLength(15)->minLength(5));
 
-$username = "valid@username.com";
-
-$validUsername->validate($username); //true
-$violations = $validator->getViolations(); //List of Violations
+$validator->validate($username, $validUsername);//true
 ```
 
 Valid Password Example:
@@ -44,5 +42,5 @@ $validPassword = c::length(6, 12) //Minlength 6, Maxlength 12
     ->containsLetter(3) //at least 3 letters
     ->containsDigit(2); //at least 2 digits
 
-$validPassword->validate($password); //true
+$validator->validate($password, $validPassword); //true
 ```
