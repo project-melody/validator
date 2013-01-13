@@ -92,20 +92,18 @@ class Validator
     public function validate($input, $constraints = null)
     {
         if ($constraints instanceof Validator) {
-            foreach ($constraints->getConstraints() as $constraint) {
-                if (!$constraint->validate($input)) {
-                    $this->reportError($constraint->getId(), $input, $constraint->getErrorMessageTemplate());
-                }
-            }
-
-            return $this->isValid();
+            $validatorConstraints = $constraints->getConstraints();
         } else {
-            $validator = new Validator();
-            $valid = $validator->validate($input, $this);
-            $this->violations = $validator->getViolations();
-
-            return $valid;
+            $validatorConstraints = $this->getConstraints();
         }
+
+        foreach ($validatorConstraints as $constraint) {
+            if (!$constraint->validate($input)) {
+                $this->reportError($constraint->getId(), $input, $constraint->getErrorMessageTemplate());
+            }
+        }
+
+        return $this->isValid();
     }
 
     public function reportError($id, $input, $template)
