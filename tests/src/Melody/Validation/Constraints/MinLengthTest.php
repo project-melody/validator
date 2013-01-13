@@ -2,7 +2,7 @@
 
 namespace Melody\Validation\Constraints;
 
-use Melody\Validation\ConstraintsBuilder as c;
+use Melody\Validation\Validator as v;
 
 class MinLengthTest extends \PHPUnit_Framework_TestCase
 {
@@ -12,7 +12,7 @@ class MinLengthTest extends \PHPUnit_Framework_TestCase
      */
     public function test_valid_string_should_pass($validString)
     {
-        $this->assertTrue(c::minLength(3)->validate($validString));
+        $this->assertTrue(v::minLength(3)->validate($validString));
     }
 
     /**
@@ -20,7 +20,7 @@ class MinLengthTest extends \PHPUnit_Framework_TestCase
      */
     public function test_invalid_string_should_fail_validation($invalidString)
     {
-        $this->assertFalse(c::minLength(10)->validate($invalidString));
+        $this->assertFalse(v::minLength(10)->validate($invalidString));
     }
 
     public function providerForValidStrings()

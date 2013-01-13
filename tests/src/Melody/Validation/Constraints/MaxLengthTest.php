@@ -2,7 +2,7 @@
 
 namespace Melody\Validation\Constraints;
 
-use Melody\Validation\ConstraintsBuilder as c;
+use Melody\Validation\Validator as v;
 
 class MaxLengthTest extends \PHPUnit_Framework_TestCase
 {
@@ -12,7 +12,7 @@ class MaxLengthTest extends \PHPUnit_Framework_TestCase
      */
     public function test_valid_string_should_pass($validString)
     {
-        $this->assertTrue(c::maxLength(10)->validate($validString));
+        $this->assertTrue(v::maxLength(10)->validate($validString));
     }
 
     /**
@@ -20,7 +20,7 @@ class MaxLengthTest extends \PHPUnit_Framework_TestCase
      */
     public function test_invalid_string_should_fail_validation($invalidString)
     {
-        $this->assertFalse(c::maxLength(3)->validate($invalidString));
+        $this->assertFalse(v::maxLength(3)->validate($invalidString));
     }
 
     public function providerForValidStrings()

@@ -3,8 +3,7 @@
 namespace Melody\Validation;
 
 use Melody\Validation\Common\Collections\ConstraintsCollection;
-use Melody\Validation\ConstraintsBuilder as c;
-use Melody\Validation\Validator;
+use Melody\Validation\Validator as v;
 
 class ValidatorTest extends \PHPUnit_Framework_TestCase
 {
@@ -13,7 +12,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new Validator();
         $email = "valid@email.com";
 
-        $validEmail = c::email();
+        $validEmail = v::email();
 
         $this->assertTrue($validEmail->validate($email));
         $this->assertTrue($validator->validate($email, $validEmail));
@@ -21,8 +20,8 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
 
     public function test_validate_with_constraint_reuse()
     {
-        $validEmail = c::email();
-        $validUsername = $validEmail->add(c::minLength(10)->maxLength(20));
+        $validEmail = v::email();
+        $validUsername = $validEmail->add(v::minLength(10)->maxLength(20));
 
         $username = "valid@username.com";
         $invalidMinLength = "invalid";
@@ -40,11 +39,11 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         $validator = new Validator();
 
         $username = "marcelsud";
-        $validUsername = c::length(6, 12)->alnum()->noWhitespace();
+        $validUsername = v::length(6, 12)->alnum()->noWhitespace();
         $this->assertTrue($validUsername->validate($username));
 
         $password = "pass@2012";
-        $validPassword = c::length(6, 12)
+        $validPassword = v::length(6, 12)
             ->containsSpecial(1)
             ->containsLetter(3)
             ->containsDigit(2)
@@ -57,9 +56,8 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     public function test_custom_messages_configuration()
     {
         $validator = new Validator();
-        $validEmail = c::email();
 
-        $validator->validate("marcelsud @gmail.com", $validEmail);
+        $validator->validate("marcelsud @gmail.com", v::email());
         $errors = $validator->getViolations(array(
                 'email' => "'{{input}}' deve conter um email válido"
         ));

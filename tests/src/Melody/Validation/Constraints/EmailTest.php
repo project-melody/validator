@@ -2,7 +2,7 @@
 
 namespace Melody\Validation\Constraints;
 
-use Melody\Validation\ConstraintsBuilder as c;
+use Melody\Validation\Validator as v;
 
 class EmailTest extends \PHPUnit_Framework_TestCase
 {
@@ -12,7 +12,7 @@ class EmailTest extends \PHPUnit_Framework_TestCase
      */
     public function test_valid_email_should_pass($validEmail)
     {
-        $this->assertTrue(c::email()->validate($validEmail));
+        $this->assertTrue(v::email()->validate($validEmail));
     }
 
     /**
@@ -20,7 +20,7 @@ class EmailTest extends \PHPUnit_Framework_TestCase
      */
     public function test_invalid_emails_should_fail_validation($invalidEmail)
     {
-        $this->assertFalse(c::email()->validate($invalidEmail));
+        $this->assertFalse(v::email()->validate($invalidEmail));
     }
 
     public function providerForValidEmail()
