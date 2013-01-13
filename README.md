@@ -12,8 +12,23 @@ use Melody\Validation\ConstraintsBuilder as c;
 
 require_once __DIR__.'/../vendor/autoload.php';
 ```
+Melody Validation works with PHP 5.3.3 or later.
 
-Validate using both Validator or Constraint validate method.
+## Installation
+
+The recommended way to install Melody Validation is [through
+composer](http://getcomposer.org). Just create a `composer.json` file and
+run the `php composer.phar install` command to install it:
+
+    {
+        "require": {
+            "marcelsud/melody-validation": "dev-master"
+        }
+    }
+
+## Usage
+
+Validating email:
 ```php
 $email = "test@mail.com";
 
