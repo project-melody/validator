@@ -9,6 +9,11 @@ class Max extends Constraint
         $this->max = $max;
     }
 
+    public function getId()
+    {
+        return 'max';
+    }
+
     public function validate($input)
     {
         return is_numeric($input) && $input <= $this->max;

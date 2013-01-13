@@ -2,6 +2,7 @@
 
 namespace Melody\Validation;
 
+use Melody\Validation\Common\Collections\ConstraintsCollection;
 use Melody\Validation\ConstraintsBuilder as c;
 use Melody\Validation\Validator;
 
@@ -53,4 +54,16 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($validPassword->validate($password));
     }
 
+    public function test_custom_messages_configuration()
+    {
+        $validator = new Validator();
+        $validEmail = c::email();
+
+        $validator->validate("marcelsud @gmail.com", $validEmail);
+        $errors = $validator->getViolations(array(
+                'email' => "'{{input}}' deve conter um email válido"
+        ));
+
+        $this->assertEquals($errors['email'], "'marcelsud @gmail.com' deve conter um email válido");
+    }
 }

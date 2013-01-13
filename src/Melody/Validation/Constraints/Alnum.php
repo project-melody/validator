@@ -3,6 +3,11 @@ namespace Melody\Validation\Constraints;
 
 class Alnum extends Constraint
 {
+    public function getId()
+    {
+        return 'alnum';
+    }
+
     public function validate($input)
     {
         return preg_match('/^[a-zA-Z0-9]+$/', $input);
@@ -12,4 +17,6 @@ class Alnum extends Constraint
     {
         return "The input '{{input}}' must be alpha-numeric";
     }
+
+
 }

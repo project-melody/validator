@@ -5,16 +5,15 @@ class Length extends Constraint
 {
     private $minLength;
     private $maxLength;
-    private $exactLength;
 
     /**
-     * @param Int $length
+     * @param Int $minLength
      * @param Int $maxLength
      * @throws \Exception
      */
-    public function __construct($length, $maxLength = null)
+    public function __construct($minLength, $maxLength)
     {
-        if (!is_numeric($length)) {
+        if (!is_numeric($minLength)) {
             throw new \Exception("It is necessary to define the length");
         }
 
@@ -23,11 +22,14 @@ class Length extends Constraint
         }
 
         if (!is_null($maxLength)) {
-            $this->minLength = $length;
+            $this->minLength = $minLength;
             $this->maxLength = $maxLength;
-        } else {
-            $this->exactLength = $length;
         }
+    }
+
+    public function getId()
+    {
+        return 'length';
     }
 
     public function validate($input)
@@ -40,27 +42,11 @@ class Length extends Constraint
             throw new \Exception("The input field must be a string");
         }
 
-        if (is_numeric($this->exactLength)) {
-            return strlen($input) == $this->exactLength;
-        }
-
-        if (is_numeric($this->maxLength)) {
-            return strlen($input) >= $this->minLength && strlen($input) <= $this->maxLength;
-        } else {
-            return strlen($input) >= $this->minLength;
-        }
+        return strlen($input) >= $this->minLength && strlen($input) <= $this->maxLength;
     }
 
     public function getErrorMessageTemplate()
     {
-        if (is_numeric($this->exactLength)) {
-            return "The input '{{input}}' must have {$this->exactLength} and characteres";
-        }
-
-        if (is_numeric($this->maxLength)) {
-            return "The input '{{input}}' must have at least {$this->minLength} and at maximun {$this->maxLength} characteres";
-        } else {
-            return "The input '{{input}}' must have at least {$this->minLength} characteres";
-        }
+        return "The input '{{input}}' must have at least {$this->minLength} and at maximun {$this->maxLength} characteres";
     }
 }

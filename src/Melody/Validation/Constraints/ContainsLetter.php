@@ -13,6 +13,11 @@ class ContainsLetter extends Constraint
         $this->min = $min;
     }
 
+    public function getId()
+    {
+        return 'containsLetter';
+    }
+
     public function validate($input)
     {
         return preg_match_all('/[a-zA-Z]{1}/', $input, $matches) >= $this->min;

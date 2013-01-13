@@ -3,6 +3,11 @@ namespace Melody\Validation\Constraints;
 
 class Email extends Constraint
 {
+    public function getId()
+    {
+        return 'email';
+    }
+
     public function validate($input)
     {
         return is_string($input) && filter_var($input, FILTER_VALIDATE_EMAIL);

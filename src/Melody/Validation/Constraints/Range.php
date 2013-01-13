@@ -25,6 +25,11 @@ class Range extends Constraint
         $this->max = $max;
     }
 
+    public function getId()
+    {
+        return 'range';
+    }
+
     public function validate($input)
     {
         if (!is_int($input)) {

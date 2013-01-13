@@ -13,6 +13,11 @@ class ContainsDigit extends Constraint
         $this->min = $min;
     }
 
+    public function getId()
+    {
+        return 'containsDigit';
+    }
+
     public function validate($input)
     {
         return preg_match_all('/\d{1}/', $input, $matches) >= $this->min;

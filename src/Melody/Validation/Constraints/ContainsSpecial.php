@@ -13,6 +13,11 @@ class ContainsSpecial extends Constraint
         $this->min = $min;
     }
 
+    public function getId()
+    {
+        return 'containsSpecial';
+    }
+
     public function validate($input)
     {
         return preg_match_all('/[^a-zA-Z\d]{1}/', $input, $matches) >= $this->min;

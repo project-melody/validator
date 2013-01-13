@@ -9,6 +9,11 @@ class MaxLength extends Constraint
         $this->maxLength = $maxLength;
     }
 
+    public function getId()
+    {
+        return 'maxLength';
+    }
+
     public function validate($input)
     {
         return is_string($input) && strlen($input) <= $this->maxLength;

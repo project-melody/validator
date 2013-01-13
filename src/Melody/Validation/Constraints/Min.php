@@ -9,6 +9,11 @@ class Min extends Constraint
         $this->min = $min;
     }
 
+    public function getId()
+    {
+        return 'min';
+    }
+
     public function validate($input)
     {
         if (is_numeric($input) && $input >= $this->min)

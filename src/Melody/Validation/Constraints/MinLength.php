@@ -9,6 +9,11 @@ class MinLength extends Constraint
         $this->minLength = $minLength;
     }
 
+    public function getId()
+    {
+        return 'minLength';
+    }
+
     public function validate($input)
     {
         return is_string($input) && strlen($input) >= $this->minLength;
