@@ -12,7 +12,7 @@ class Length extends Constraint implements Validatable
     /**
      * @param Int $minLength
      * @param Int $maxLength
-     * @throws \Exception
+     * @throws \InvalidArgumentException
      */
     public function __construct($minLength, $maxLength)
     {
