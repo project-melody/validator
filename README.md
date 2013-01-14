@@ -63,3 +63,59 @@ $validEmail = v::email();
 $validUsername = $validEmail->add(v::maxLength(15)->minLength(5));
 $validUsername->validate($username);//true
 ```
+
+Rules
+-----
+### Alnum
+Only alphanumeric strings accepted:
+```php
+$alnumValidator = v::alnum();
+$alnumValidator->validate("valid"); //true
+$alnumValidator->validate("#invalid"); //false
+```
+
+### ContainsDigit (integer $minimum)
+Minimum of digits (0-9) occurences in the input string:
+```php
+$containsDigitValidator = v::containsDigit(3); // Minimum 3 digits
+$containsDigitValidator->validate(123); //true
+$containsDigitValidator->validate("12a"); //false
+```
+
+### ContainsLetter (integer $minimum)
+Minimum of letters (a-z or A-Z) occurences in the input string:
+
+v::containsLetter(integer $minimum);
+v::validate(string|integer);
+
+```php
+$containsLetterValidator = v::containsLetter(1); // Minimum 1 letter
+$containsLetterValidator->validate("123a"); //true
+$containsLetterValidator->validate("1234"); //false
+```
+
+### ContainsSpecial (integer $minimum)
+Minimum of special characters occurences in the input string:
+```php
+$containsSpecialValidator = v::containsSpecial(1); // Minimum 1 special character
+$containsSpecialValidator->validate("123@"); //true
+$containsSpecialValidator->validate("1234"); //false
+```
+
+### Min (integer $min)
+Requires a given minimum number:
+```php
+$minValidator = v::min(10);
+$minValidator->validate(10); //true
+$minValidator->validate(9); //false
+```
+
+### Max (integer $input)
+Requires a given maximum number:
+```php
+$maxValidator = v::max(10);
+$maxValidator->validate(10); //true
+$maxValidator->validate(11); //false
+```
+
+
