@@ -84,10 +84,6 @@ $containsDigitValidator->validate("12a"); //false
 
 ### ContainsLetter (integer $minimum)
 Minimum of letters (a-z or A-Z) occurences in the input string:
-
-v::containsLetter(integer $minimum);
-v::validate(string|integer);
-
 ```php
 $containsLetterValidator = v::containsLetter(1); // Minimum 1 letter
 $containsLetterValidator->validate("123a"); //true
@@ -100,6 +96,22 @@ Minimum of special characters occurences in the input string:
 $containsSpecialValidator = v::containsSpecial(1); // Minimum 1 special character
 $containsSpecialValidator->validate("123@"); //true
 $containsSpecialValidator->validate("1234"); //false
+```
+
+### Email
+Only valid emails accepted:
+```php
+$emailValidator = v::email();
+$emailValidator->validate("valid@email.com"); //true
+$emailValidator->validate("invalid#@email.com"); //false
+```
+
+### Length (integer $minLength, integer $maxLength)
+Ensures that the length of the string is between the min and max:
+```php
+$lengthValidator = v::length(5, 10);
+$lengthValidator->validate("Valid"); //true
+$lengthValidator->validate("Invalid string"); //false
 ```
 
 ### Min (integer $min)
@@ -118,4 +130,26 @@ $maxValidator->validate(10); //true
 $maxValidator->validate(11); //false
 ```
 
+### MaxLength (integer $max)
+Validates if the string has the maximum length specified
+```php
+$maxValidator = v::max(10);
+$maxValidator->validate(10); //true
+$maxValidator->validate(11); //false
+```
 
+### NoWhitespace ()
+Validates if a string contains no whitespace:
+```php
+$noWhitespaceValidator = v::noWhitespace();
+$noWhitespaceValidator->validate("validstring"); //true
+$noWhitespaceValidator->validate("invalid string"); //false
+```
+
+### Range (integer $min, integer $max)
+Validates if a number is between the minimum and maxim specified:
+```php
+$rangeValidator = v::range(5, 10);
+$rangeValidator->validate(7); //true
+$rangeValidator->validate(4); //false
+```
