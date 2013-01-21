@@ -3,7 +3,7 @@ Melody Validation
 
 [![Build Status](https://secure.travis-ci.org/marcelsud/melody-validation.png)](http://travis-ci.org/marcelsud/melody-validation)
 
-Melody Validation is a set of validation rules with a easy way to customize validation groups.
+Melody Validation is a set of validation rules with an easy way to customize validation groups.
 It works with PHP 5.3.3 or later.
 
 - You can use chained validation like: v::email()->noWhitespace()->length(5,20)->validate("valid@email.com");
