@@ -9,6 +9,7 @@ It works with PHP 5.3.3 or later.
 - You can use chained validation like: v::email()->noWhitespace()->length(5,20)->validate("valid@email.com");
 - You can set custom messages
 - You can reuse the rules as you wish in a smart way
+- You can load validation groups from YML and PHP files
 - [PSR-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md) autoloading is compatible.
 
 Installation
