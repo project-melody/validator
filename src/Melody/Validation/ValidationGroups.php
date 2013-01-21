@@ -6,6 +6,7 @@ use Melody\Validation\Common\Collections\ConstraintsCollection;
 class ValidationGroups
 {
     private $groups = array();
+    private $violations = array();
 
     public function add($id, ConstraintsCollection $group)
     {
@@ -29,5 +30,26 @@ class ValidationGroups
     public function has($id)
     {
         return isset($this->groups[$id]);
+    }
+
+    public function validate(array $data, $group, $customMessages = array())
+    {
+        $constraints = $this->get($group);
+        $valid = true;
+        $this->violations = array();
+
+        foreach ($data as $id => $input) {
+            if (!$constraints[$id]->validate($input)) {
+                $valid = false;
+                $this->violations = array_merge($this->violations, $constraints[$id]->getViolations($customMessages));
+            }
+        }
+
+        return $valid;
+    }
+
+    public function getViolations()
+    {
+        return $this->violations;
     }
 }
