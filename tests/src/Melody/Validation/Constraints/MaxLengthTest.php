@@ -41,4 +41,10 @@ class MaxLengthTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function test_not_string_argument_exception()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $this->assertInstanceOf('InvalidArgumentException', v::maxLength(5)->validate(null));
+    }
+
 }

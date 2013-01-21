@@ -14,28 +14,18 @@ class Length extends Constraint implements Validatable
      * @param Int $maxLength
      * @throws \InvalidArgumentException
      */
-    public function __construct($minLength, $maxLength)
+    public function __construct($min, $max)
     {
-        if (!is_numeric($minLength)) {
-            throw new \InvalidArgumentException("It is necessary to define the length");
+        if (!is_numeric($min) || !is_numeric($max)) {
+            throw new \InvalidArgumentException("The min and max arguments must be numeric");
         }
 
-        if (!is_null($maxLength) && !is_numeric($maxLength)) {
-            throw new \InvalidArgumentException("The max length must be a number");
-        }
-
-        if (!is_null($maxLength)) {
-            $this->minLength = $minLength;
-            $this->maxLength = $maxLength;
-        }
+        $this->minLength = $min;
+        $this->maxLength = $max;
     }
 
     public function validate($input)
     {
-        if (is_null($input)) {
-            return false;
-        }
-
         if (!is_string($input)) {
             throw new \InvalidArgumentException("The input field must be a string");
         }

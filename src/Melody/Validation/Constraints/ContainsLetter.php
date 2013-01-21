@@ -19,6 +19,10 @@ class ContainsLetter extends Constraint implements Validatable
 
     public function validate($input)
     {
+        if (!is_string($input)) {
+            throw new \InvalidArgumentException("The input field must be a string");
+        }
+
         return preg_match_all('/[a-zA-Z]{1}/', $input, $matches) >= $this->min;
     }
 

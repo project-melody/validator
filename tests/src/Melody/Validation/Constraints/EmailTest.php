@@ -50,4 +50,10 @@ class EmailTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function test_not_string_argument_exception()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $this->assertInstanceOf('InvalidArgumentException', v::email()->validate(null));
+    }
+
 }

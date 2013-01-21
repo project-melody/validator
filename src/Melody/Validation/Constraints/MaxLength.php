@@ -15,7 +15,11 @@ class MaxLength extends Constraint implements Validatable
 
     public function validate($input)
     {
-        return is_string($input) && strlen($input) <= $this->maxLength;
+        if (!is_string($input)) {
+            throw new \InvalidArgumentException("The input field must be a string");
+        }
+
+        return strlen($input) <= $this->maxLength;
     }
 
     public function getErrorMessageTemplate()

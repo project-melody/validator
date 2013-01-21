@@ -17,4 +17,10 @@ class MinTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(v::min(5)->validate(4));
     }
 
+    public function test_not_string_argument_exception()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $this->assertInstanceOf('InvalidArgumentException', v::min(5)->validate(null));
+    }
+
 }

@@ -20,10 +20,7 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
 
     public function test_invalid_string_exception_messages()
     {
-        try {
-            $this->assertFalse(v::alnum()->validate(' abcdef0123'));
-        } catch (AlnumException $e) {
-
-        }
+        $this->setExpectedException('InvalidArgumentException');
+        $this->assertInstanceOf('InvalidArgumentException', v::alnum()->validate(null));
     }
 }

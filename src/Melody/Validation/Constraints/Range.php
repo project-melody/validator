@@ -16,12 +16,12 @@ class Range extends Constraint implements Validatable
      */
     public function __construct($min, $max)
     {
-        if (!is_int($min)) {
-            throw new \InvalidArgumentException("It is necessary to define the min as integer");
+        if (!is_numeric($min)) {
+            throw new \InvalidArgumentException("Min must be a number");
         }
 
-        if (!is_int($max)) {
-            throw new \InvalidArgumentException("It is necessary to define the max as integer");
+        if (!is_numeric($max)) {
+            throw new \InvalidArgumentException("Max must be a number");
         }
 
         $this->min = $min;
@@ -30,8 +30,8 @@ class Range extends Constraint implements Validatable
 
     public function validate($input)
     {
-        if (!is_int($input)) {
-            throw new \InvalidArgumentException("The input field must be a integer");
+        if (!is_numeric($input)) {
+            throw new \InvalidArgumentException("The input field must be a number");
         }
 
         return filter_var(

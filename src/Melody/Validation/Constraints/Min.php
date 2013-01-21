@@ -15,10 +15,11 @@ class Min extends Constraint implements Validatable
 
     public function validate($input)
     {
-        if (is_numeric($input) && $input >= $this->min)
-            return true;
-        else
-            return false;
+        if (!is_numeric($input)) {
+            throw new \InvalidArgumentException("The max length must be a number");
+        }
+
+        return $input >= $this->min;
     }
 
     public function getErrorMessageTemplate()

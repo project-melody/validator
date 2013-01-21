@@ -16,7 +16,6 @@ class LengthTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertFalse(v::length(2, 5)->validate('abcdef0123'));
         $this->assertFalse(v::length(2, 5)->validate(''));
-        $this->assertFalse(v::length(2, 5)->validate(null));
     }
 
     public function test_invalid_argument_exception_min()

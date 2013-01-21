@@ -22,4 +22,11 @@ class ContainsLetterTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('InvalidArgumentException');
         $this->assertInstanceOf('InvalidArgumentException', v::containsSpecial("invalid argument"));
     }
+
+    public function test_not_string_argument_exception()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $this->assertInstanceOf('InvalidArgumentException', v::containsSpecial(5)->validate(null));
+    }
+
 }

@@ -17,4 +17,10 @@ class MaxTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(v::max(5)->validate(7));
     }
 
+    public function test_not_string_argument_exception()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+        $this->assertInstanceOf('InvalidArgumentException', v::max(5)->validate(null));
+    }
+
 }

@@ -9,7 +9,11 @@ class Email extends Constraint implements Validatable
 
     public function validate($input)
     {
-        return is_string($input) && filter_var($input, FILTER_VALIDATE_EMAIL);
+        if (!is_string($input)) {
+            throw new \InvalidArgumentException("The input field must be a string");
+        }
+
+        return filter_var($input, FILTER_VALIDATE_EMAIL);
     }
 
     public function getErrorMessageTemplate()

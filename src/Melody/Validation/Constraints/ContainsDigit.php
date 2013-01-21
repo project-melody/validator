@@ -19,6 +19,10 @@ class ContainsDigit extends Constraint implements Validatable
 
     public function validate($input)
     {
+        if (!is_string($input)) {
+            throw new \InvalidArgumentException("The input field must be a string");
+        }
+
         return preg_match_all('/\d{1}/', $input, $matches) >= $this->min;
     }
 

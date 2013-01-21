@@ -15,7 +15,11 @@ class Max extends Constraint implements Validatable
 
     public function validate($input)
     {
-        return is_numeric($input) && $input <= $this->max;
+        if (!is_numeric($input)) {
+            throw new \InvalidArgumentException("The max length must be a number");
+        }
+
+        return $input <= $this->max;
     }
 
     public function getErrorMessageTemplate()
