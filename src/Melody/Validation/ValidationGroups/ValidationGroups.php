@@ -1,5 +1,5 @@
 <?php
-namespace Melody\Validation;
+namespace Melody\Validation\ValidationGroups;
 
 use Melody\Validation\Common\Collections\ConstraintsCollection;
 
