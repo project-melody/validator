@@ -8,7 +8,7 @@ use Melody\Validation\Exceptions\InvalidFileException;
 /**
  * @author Marcelo Santos <marcelsud@gmail.com>
  */
-abstract class AbstractValidationGroupsFileParser extends BaseValidationGroupsParser implements ValidationGroupsFileParserInterface
+abstract class AbstractValidationGroupsFileParser extends AbstractValidationGroupsParser
 {
     protected $file;
 
@@ -22,7 +22,7 @@ abstract class AbstractValidationGroupsFileParser extends BaseValidationGroupsPa
      * @param unknown_type $file
      * @throws \InvalidArgumentException
      */
-    public function checkFile($file)
+    protected function checkFile($file)
     {
         if (!file_exists($file) || !is_readable($file)) {
             throw new InvalidFileException("File $file not found or not readable");

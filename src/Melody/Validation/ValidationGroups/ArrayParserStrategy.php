@@ -4,7 +4,7 @@ namespace Melody\Validation\ValidationGroups;
 
 use Melody\Validation\ValidationGroups\ValidationGroupsArrayParserInterface;
 
-class ArrayParserStrategy extends BaseValidationGroupsParser implements ValidationGroupsArrayParserInterface
+class ArrayParserStrategy extends AbstractValidationGroupsParser
 {
     protected $configuration;
 

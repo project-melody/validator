@@ -7,7 +7,5 @@ namespace Melody\Validation\ValidationGroups;
  */
 interface ValidationGroupsParserInterface
 {
-    function parse();
-    function parseConstraints(array $constraints);
-    function parseString($string);
+    public function parse();
 }

@@ -17,4 +17,18 @@ class PHPParserStrategy extends AbstractValidationGroupsFileParser
 
         return $this->parseCofiguration($configuration);
     }
+
+    /**
+     * @param array $configuration
+     */
+    protected function parseCofiguration(array $configuration)
+    {
+        $validationGroups = new ValidationGroups();
+
+        foreach (array_keys($configuration) as $group) {
+            $validationGroups->add($group, $this->parseConstraints($configuration[$group]));
+        }
+
+        return $validationGroups;
+    }
 }

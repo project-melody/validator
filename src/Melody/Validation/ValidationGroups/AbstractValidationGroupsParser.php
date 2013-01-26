@@ -8,7 +8,7 @@ use Melody\Validation\Validator;
 /**
  * @author Marcelo Santos <marcelsud@gmail.com>
  */
-abstract class BaseValidationGroupsParser
+abstract class AbstractValidationGroupsParser implements ValidationGroupsParserInterface
 {
     abstract public function parse();
 
@@ -17,7 +17,7 @@ abstract class BaseValidationGroupsParser
      *
      * @return \Melody\Validation\Common\Collections\ConstraintsCollection
      */
-    public function parseConstraints(array $constraints)
+    protected function parseConstraints(array $constraints)
     {
         $constraintsCollection = new ConstraintsCollection();
 
@@ -33,7 +33,7 @@ abstract class BaseValidationGroupsParser
      *
      * @return \Melody\Validation\ValidationGroups\Validator
      */
-    public function parseString($string) {
+    protected function parseString($string) {
         $validator = new Validator();
 
         $rules = explode("|", $string);
@@ -46,19 +46,5 @@ abstract class BaseValidationGroupsParser
         }
 
         return $validator;
-    }
-
-    /**
-     * @param array $configuration
-     */
-    public function parseCofiguration(array $configuration)
-    {
-        $validationGroups = new ValidationGroups();
-
-        foreach (array_keys($configuration) as $group) {
-            $validationGroups->add($group, $this->parseConstraints($configuration[$group]));
-        }
-
-        return $validationGroups;
     }
 }
