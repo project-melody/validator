@@ -154,3 +154,110 @@ $rangeValidator = v::range(5, 10);
 $rangeValidator->validate(7); //true
 $rangeValidator->validate(4); //false
 ```
+
+Group Validation
+----------------
+This is the input we will use as reference to test the validation group:
+```php
+use Melody\Validation\Validator as v;
+use Melody\Validation\ValidationGroups\ValidationGroupsFactory;
+
+$input['name'] = "Marcelo Santos";
+$input['email'] = "marcelsud@gmail.com";
+$input['username'] = "marcelsud";
+$input['password'] = "pass@2013";
+```
+
+### Load from array 
+```php
+use Melody\Validation\ValidationGroups\ArrayParserStrategy;
+
+$config['registering'] = array(
+        'name' => v::maxLength(50),
+        'email' => v::email()->maxLength(50),
+        'username' => v::length(6, 12)->alnum()->noWhitespace(),
+        'password' => v::length(6, 12)->containsSpecial(1)->containsLetter(3)->containsDigit(2)->noWhitespace()
+);
+
+$validationGroups = ValidationGroupsFactory::build(new ArrayParserStrategy($config));
+$validationGroups->validate($input, "registering"); // true
+```
+
+### Load from YAML file
+
+```yaml
+# /path/to/validation.yml
+registering:
+    name: "maxLength:50"
+    email: "email|maxLength:50"
+    username: "length:6:12|alnum|noWhitespace"
+    password : "length:6:12|containsSpecial:1|containsLetter:3|containsDigit:2|noWhitespace"
+```
+
+Validation:
+```php
+use Melody\Validation\ValidationGroups\YamlParserStrategy;
+
+$validationGroups = ValidationGroupsFactory::build(new YamlParserStrategy("/path/to/validation.yml"));
+$validationGroups->validate($input, "registering"); // true
+```
+
+### Load from PHP file
+
+```php
+// /path/to/validation.php
+use Melody\Validation\Validator as v;
+
+$config['registering'] = array(
+    'name' => v::maxLength(50),
+    'email' => v::email()->maxLength(50),
+    'username' => v::length(6, 12)->alnum()->noWhitespace(),
+    'password' => v::length(6, 12)->containsSpecial(1)->containsLetter(3)->containsDigit(2)->noWhitespace()
+);
+
+return $config;
+```
+
+Validation:
+```php
+use Melody\Validation\ValidationGroups\PHPParserStrategy;
+
+$validationGroups = ValidationGroupsFactory::build(new PHPParserStrategy("/path/to/validation.php"));
+$validationGroups->validate($input, "registering"); // true
+```
+
+### Forge your own Validation Groups
+```php
+use Melody\Validation\Common\Collections\ConstraintsCollection;
+use Melody\Validation\ValidationGroups\ValidationGroups;
+
+$constraintsCollection = new ConstraintsCollection();
+$constraintsCollection->set('name', v::maxLength(50));
+$constraintsCollection->set('email', v::email()->maxLength(50));
+
+$validationGroups = new ValidationGroups();
+$validationGroups->add("updating", $constraintsCollection);
+
+$validationGroups->validate($input, "updating"); // true
+
+$validationGroups->has("updating"); // true
+$validationGroups->remove("updating");
+$validationGroups->has("registering"); // false
+```
+
+### Add custom violation messages
+```php
+$config['registering']['email'] = v::email()->maxLength(50);
+
+$validationGroups = ValidationGroupsFactory::build(new ArrayParserStrategy($config));
+$input['email'] = "marcelsud @gmail.com";
+
+$validationGroups->validate($input, "registering", array(
+        'email' => "'{{input}}' must be a valid email!"
+));
+
+$errors = $validationGroups->getViolations(); // Lists all the violation messages
+var_dump($errors['email']); // string(45) "'marcelsud @gmail.com' must be a valid email!"
+```
+
+
