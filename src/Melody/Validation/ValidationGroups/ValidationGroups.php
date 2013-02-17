@@ -39,7 +39,7 @@ class ValidationGroups
         $this->violations = array();
 
         foreach ($data as $id => $input) {
-            if ($id instanceof Melody\Validation\Constraints\Constraint) {
+            if ($constraints[$id] instanceof Melody\Validation\Constraints\Constraint) {
                 if (!$constraints[$id]->validate($input)) {
                     $valid = false;
                     $this->violations = array_merge($this->violations, $constraints[$id]->getViolations($customMessages));
