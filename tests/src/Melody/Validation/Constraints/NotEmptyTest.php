@@ -4,7 +4,7 @@ namespace Melody\Validation\Constraints;
 
 use Melody\Validation\Validator as v;
 
-class NoWhitespaceTest extends \PHPUnit_Framework_TestCase
+class NotEmptyTest extends \PHPUnit_Framework_TestCase
 {
 
     public function test_valid_string_should_pass()

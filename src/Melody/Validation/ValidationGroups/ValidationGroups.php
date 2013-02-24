@@ -39,11 +39,9 @@ class ValidationGroups
         $this->violations = array();
 
         foreach ($data as $id => $input) {
-            if ($constraints[$id] instanceof \Melody\Validation\Validator) {
-                if (!$constraints[$id]->validate($input)) {
-                    $valid = false;
-                    $this->violations = array_merge($this->violations, $constraints[$id]->getViolations($customMessages));
-                }
+            if ($constraints[$id] instanceof \Melody\Validation\Validator && !$constraints[$id]->validate($input)) {
+                $valid = false;
+                $this->violations = array_merge($this->violations, $constraints[$id]->getViolations($customMessages));
             }
         }
 
