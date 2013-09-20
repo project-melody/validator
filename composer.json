@@ -1,14 +1,12 @@
 {
     "name": "marcelsud\/melody-validation",
     "description": "Set of Validation Rules",
-    "version": "1.1.26",
     "type": "library",
-    "time": "2013-01-26 16:21:00",
     "license": "BSD Style",
     "homepage": "https://github.com/marcelsud/melody-validation",
     "require": {
         "php": ">=5.3.3",
-        "symfony/yaml": "v2.1.7"
+        "symfony/yaml": "v2.3.4"
     },
     "authors": [
         {
