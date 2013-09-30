@@ -4,11 +4,11 @@ namespace Melody\Validation\ValidationGroups;
 class ValidationGroupsFactory
 {
     /**
-     * @param \Melody\Validation\ValidationGroups\ValidationGroupsParserInterface $parser
+     * @param \Melody\Validation\ValidationGroups\AbstractValidationGroupsParser $parser
      *
      * @return \Melody\Validation\ValidationGroups
      */
-    public static function build(ValidationGroupsParserInterface $parser)
+    public static function build(AbstractValidationGroupsParser $parser)
     {
         return $parser->parse();
     }

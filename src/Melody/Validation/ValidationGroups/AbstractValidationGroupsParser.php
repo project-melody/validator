@@ -8,7 +8,7 @@ use Melody\Validation\Validator;
 /**
  * @author Marcelo Santos <marcelsud@gmail.com>
  */
-abstract class AbstractValidationGroupsParser implements ValidationGroupsParserInterface
+abstract class AbstractValidationGroupsParser
 {
     abstract public function parse();
 
