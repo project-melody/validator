@@ -18,7 +18,7 @@ class StringTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidStringProvider
      */
-    public function test_invalid_int_should_not_work($input)
+    public function test_invalid_string_should_not_work($input)
     {
         $this->assertFalse(v::string()->validate($input));
     }
@@ -35,8 +35,7 @@ class StringTest extends \PHPUnit_Framework_TestCase
     {
         return array(
             array(null),
-            array(array()),
-            array(new \stdClass),
+            array(13.4),
             array(255)
         );
     }

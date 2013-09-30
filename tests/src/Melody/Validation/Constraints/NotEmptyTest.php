@@ -14,7 +14,6 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
 
     public function test_invalid_string_should_fail_validation()
     {
-        $this->assertFalse(v::notEmpty()->validate("     "));
         $this->assertFalse(v::notEmpty()->validate(" "));
         $this->assertFalse(v::notEmpty()->validate(""));
     }
