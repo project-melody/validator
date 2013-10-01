@@ -13,7 +13,7 @@ class NotEmpty extends Constraint implements Validatable
             $input = trim($input);
         }
 
-        return ($input !== "" || $input !== NULL);
+        return !empty($input);
     }
 
     public function getErrorMessageTemplate()
