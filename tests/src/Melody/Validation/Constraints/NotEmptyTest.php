@@ -41,8 +41,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
             array('    '),
             array("\n"),
             array(false),
-            array(null),
-            array(array())
+            array(null)
         );
     }
 }
