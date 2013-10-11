@@ -261,3 +261,7 @@ var_dump($errors['email']); // string(45) "'marcelsud @gmail.com' must be a vali
 ```
 
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/marcelsud/melody-validation/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
