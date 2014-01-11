@@ -2,8 +2,6 @@
 
 namespace Melody\Validation\Constraints;
 
-use Melody\Validation\Validatable;
-
 /**
  * @author Marcelo Santos <marcelsud@gmail.com>
  */

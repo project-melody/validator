@@ -1,6 +1,8 @@
 <?php
 namespace Melody\Validation\Constraints;
 
+use Melody\Validation\Validatable;
+
 class String extends Constraint implements Validatable
 {
     protected $id = 'string';
