@@ -107,20 +107,20 @@ $emailValidator->validate("valid@email.com"); //true
 $emailValidator->validate("invalid#@email.com"); //false
 ```
 
+### Int
+Asserts if the input is an integer or not:
+```php
+$intValidator = v::int();
+$intValidator->validate(1234); //true
+$intValidator->validate("@"); //false
+```
+
 ### Length (integer $minLength, integer $maxLength)
 Ensures that the length of the string is between the min and max:
 ```php
 $lengthValidator = v::length(5, 10);
 $lengthValidator->validate("Valid"); //true
 $lengthValidator->validate("Invalid string"); //false
-```
-
-### Min (integer $min)
-Requires a given minimum number:
-```php
-$minValidator = v::min(10);
-$minValidator->validate(10); //true
-$minValidator->validate(9); //false
 ```
 
 ### Max (integer $input)
@@ -131,12 +131,38 @@ $maxValidator->validate(10); //true
 $maxValidator->validate(11); //false
 ```
 
+### Min (integer $min)
+Requires a given minimum number:
+```php
+$minValidator = v::min(10);
+$minValidator->validate(10); //true
+$minValidator->validate(9); //false
+```
+
+### MinLength (integer $min)
+Validates if the string has the minimum length specified
+```php
+$minLengthValidator = v::minLength(9);
+$minLengthValidator->validate("123456789"); //true
+$minLengthValidator->validate("12345678"); //false
+```
+
 ### MaxLength (integer $max)
 Validates if the string has the maximum length specified
 ```php
-$maxValidator = v::max(10);
-$maxValidator->validate(10); //true
-$maxValidator->validate(11); //false
+$maxLengthValidator = v::maxLength(8);
+$maxLengthValidator->validate("12345678"); //true
+$maxLengthValidator->validate("123456789"); //false
+```
+
+### NotEmpty ()
+Validates if the input is not empty:
+```php
+$notEmptyValidator = v::notEmpty();
+$notEmptyValidator->validate("    "); //false
+$notEmptyValidator->validate(null); //false
+$notEmptyValidator->validate(new \stdClass); //true
+$notEmptyValidator->validate("a   "); //true
 ```
 
 ### NoWhitespace ()
@@ -147,12 +173,28 @@ $noWhitespaceValidator->validate("validstring"); //true
 $noWhitespaceValidator->validate("invalid string"); //false
 ```
 
+### Number ()
+Validates if the input is numeric:
+```php
+$numberValidator = v::number();
+$numberValidator->validate(1234); //true
+$numberValidator->validate("not numeric"); //false
+```
+
 ### Range (integer $min, integer $max)
 Validates if a number is between the minimum and maxim specified:
 ```php
 $rangeValidator = v::range(5, 10);
 $rangeValidator->validate(7); //true
 $rangeValidator->validate(4); //false
+```
+
+### String ()
+Validates if the input is a string:
+```php
+$stringValidator = v::string();
+$stringValidator->validate("a generic string"); //true
+$stringValidator->validate(1234); //false
 ```
 
 Group Validation

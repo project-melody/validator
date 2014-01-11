@@ -1,7 +1,7 @@
 <?php
 namespace Melody\Validation\Constraints;
 
-class Int extends Constraint
+class Int extends Constraint implements Validatable
 {
     protected $id = 'int';
 

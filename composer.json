@@ -6,7 +6,8 @@
     "homepage": "https://github.com/marcelsud/melody-validation",
     "require": {
         "php": ">=5.3.3",
-        "symfony/yaml": "v2.3.4"
+        "symfony/yaml": "v2.3.4",
+        "phpunit/phpunit": "3.7.28"
     },
     "authors": [
         {

@@ -1,7 +1,7 @@
 <?php
 namespace Melody\Validation\Constraints;
 
-class Alnum extends Constraint
+class Alnum extends Constraint implements Validatable
 {
     protected $id = 'alnum';
 
