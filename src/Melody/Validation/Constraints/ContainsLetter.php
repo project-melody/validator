@@ -1,9 +1,7 @@
 <?php
 namespace Melody\Validation\Constraints;
 
-use Melody\Validation\Validatable;
-
-class ContainsLetter extends Constraint implements Validatable
+class ContainsLetter extends Constraint
 {
     protected $id = 'containsLetter';
     private $min;

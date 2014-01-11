@@ -1,9 +1,7 @@
 <?php
 namespace Melody\Validation\Constraints;
 
-use Melody\Validation\Validatable;
-
-class Length extends Constraint implements Validatable
+class Length extends Constraint
 {
     protected $id = 'length';
     private $minLength;

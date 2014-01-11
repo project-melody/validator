@@ -1,9 +1,7 @@
 <?php
 namespace Melody\Validation\Constraints;
 
-use Melody\Validation\Validatable;
-
-class MaxLength extends Constraint implements Validatable
+class MaxLength extends Constraint
 {
     protected $id = 'maxLength';
     private $maxLength;

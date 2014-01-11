@@ -1,9 +1,7 @@
 <?php
 namespace Melody\Validation\Constraints;
 
-use Melody\Validation\Validatable;
-
-class Range extends Constraint implements Validatable
+class Range extends Constraint
 {
     protected $id = 'range';
     private $min;

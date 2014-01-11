@@ -139,20 +139,20 @@ $minValidator->validate(10); //true
 $minValidator->validate(9); //false
 ```
 
-### MinLength (integer $min)
-Validates if the string has the minimum length specified
-```php
-$minLengthValidator = v::minLength(9);
-$minLengthValidator->validate("123456789"); //true
-$minLengthValidator->validate("12345678"); //false
-```
-
 ### MaxLength (integer $max)
 Validates if the string has the maximum length specified
 ```php
 $maxLengthValidator = v::maxLength(8);
 $maxLengthValidator->validate("12345678"); //true
 $maxLengthValidator->validate("123456789"); //false
+```
+
+### MinLength (integer $min)
+Validates if the string has the minimum length specified
+```php
+$minLengthValidator = v::minLength(9);
+$minLengthValidator->validate("123456789"); //true
+$minLengthValidator->validate("12345678"); //false
 ```
 
 ### NotEmpty ()

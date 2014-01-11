@@ -2,10 +2,12 @@
 
 namespace Melody\Validation\Constraints;
 
+use Melody\Validation\Validatable;
+
 /**
  * @author Marcelo Santos <marcelsud@gmail.com>
  */
-abstract class Constraint
+abstract class Constraint implements Validatable
 {
     protected $errorMessageTemplate;
 

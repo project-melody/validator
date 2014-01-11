@@ -1,9 +1,7 @@
 <?php
 namespace Melody\Validation\Constraints;
 
-use Melody\Validation\Validatable;
-
-class NotEmpty extends Constraint implements Validatable
+class NotEmpty extends Constraint
 {
     protected $id = 'notEmpty';
 
