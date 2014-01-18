@@ -1,7 +1,7 @@
 Melody Validation
 =================
 
-[![Build Status](https://secure.travis-ci.org/marcelsud/melody-validation.png)](http://travis-ci.org/marcelsud/melody-validation)
+[![Build Status](https://secure.travis-ci.org/project-melody/validator.png)](http://travis-ci.org/project-melody/validator)
 
 Melody Validation is a set of validation rules with an easy way to customize validation groups.
 It works with PHP 5.3.3 or later.
