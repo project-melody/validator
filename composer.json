@@ -1,9 +1,9 @@
 {
-    "name": "marcelsud\/melody-validation",
+    "name": "project-melody\/validator",
     "description": "Set of Validation Rules",
     "type": "library",
     "license": "BSD Style",
-    "homepage": "https://github.com/marcelsud/melody-validation",
+    "homepage": "https://github.com/project-melody/validator",
     "require": {
         "php": ">=5.3.3",
         "symfony/yaml": "v2.3.4",
