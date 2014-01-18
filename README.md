@@ -1,9 +1,9 @@
-Melody Validation
+Melody Validator
 =================
 
 [![Build Status](https://secure.travis-ci.org/project-melody/validator.png)](http://travis-ci.org/project-melody/validator)
 
-Melody Validation is a set of validation rules with an easy way to customize validation groups.
+Melody Validator is a set of validation rules with an easy way to customize validation groups.
 It works with PHP 5.3.3 or later.
 
 - You can use chained validation like: v::email()->noWhitespace()->length(5,20)->validate("valid@email.com");
@@ -15,7 +15,7 @@ It works with PHP 5.3.3 or later.
 Installation
 ------------
 
-The recommended way to install Melody Validation is [through
+The recommended way to install Melody Validator is [through
 composer](http://getcomposer.org). Just create a `composer.json` file and
 run the `php composer.phar install` command to install it:
 
