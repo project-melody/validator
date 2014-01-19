@@ -53,4 +53,3 @@ class ValidationGroups
         return $this->violations;
     }
 }
-;

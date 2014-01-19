@@ -11,8 +11,8 @@ class Range extends Constraint
     private $max;
 
     /**
-     * @param Int $min
-     * @param Int $max
+     * @param  Int                                                     $min
+     * @param  Int                                                     $max
      * @throws \Melody\Validation\Exceptions\InvalidParameterException
      */
     public function __construct($min, $max)
@@ -36,11 +36,11 @@ class Range extends Constraint
         }
 
         return filter_var(
-                $input,
-                FILTER_VALIDATE_INT,
-                array(
-                        'options' => array('min_range' => $this->min, 'max_range' => $this->max)
-                )
+            $input,
+            FILTER_VALIDATE_INT,
+            array(
+                'options' => array('min_range' => $this->min, 'max_range' => $this->max)
+            )
         );
     }
 

@@ -26,7 +26,7 @@ class IntTest extends \PHPUnit_Framework_TestCase
     public function validIntProvider()
     {
         return array(
-            array(1), 
+            array(1),
             array(15),
             array(10 / 2),
             array(10 % 2),
@@ -37,8 +37,8 @@ class IntTest extends \PHPUnit_Framework_TestCase
     public function invalidIntProvider()
     {
         return array(
-            array(1.2), 
-            array("@"), 
+            array(1.2),
+            array("@"),
             array(10 / 3)
         );
     }

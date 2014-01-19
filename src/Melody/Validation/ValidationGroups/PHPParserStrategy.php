@@ -2,10 +2,6 @@
 
 namespace Melody\Validation\ValidationGroups;
 
-use Melody\Validation\ValidationGroups\AbstractValidationGroupsParser;
-use Melody\Validation\Exceptions\InvalidFileTypeException;
-use Symfony\Component\Yaml\Yaml;
-
 class PHPParserStrategy extends AbstractValidationGroupsFileParser
 {
     /**

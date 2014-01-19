@@ -22,12 +22,12 @@ class Validator
         return $ref->newInstanceArgs(func_get_args());
     }
 
-    public static function __callStatic($name, $arguments=array())
+    public static function __callStatic($name, $arguments = array())
     {
         return self::create()->set($name, $arguments);
     }
 
-    public function __call($name, $arguments=array())
+    public function __call($name, $arguments = array())
     {
         return $this->set($name, $arguments);
     }
@@ -108,17 +108,18 @@ class Validator
     }
 
     /**
-     * @param String $template
-     * @param array $vars
+     * @param  String        $template
+     * @param  array         $vars
      * @return mixed|unknown
      */
-    public function format($template, array $vars=array())
+    public function format($template, array $vars = array())
     {
         return preg_replace_callback(
-                '/{{(\w+)}}/',
-                function($match) use($vars) {
-            return isset($vars[$match[1]]) ? $vars[$match[1]] : $match[0];
-        }, $template
+            '/{{(\w+)}}/',
+            function ($match) use ($vars) {
+                return isset($vars[$match[1]]) ? $vars[$match[1]] : $match[0];
+            },
+            $template
         );
     }
 
@@ -129,5 +130,4 @@ class Validator
     {
         return is_array($this->violations) && count($this->violations) == 0;
     }
-
 }

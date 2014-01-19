@@ -33,7 +33,8 @@ abstract class AbstractValidationGroupsParser
      *
      * @return \Melody\Validation\ValidationGroups\Validator
      */
-    protected function parseString($string) {
+    protected function parseString($string)
+    {
         $validator = new Validator();
 
         $rules = explode("|", $string);

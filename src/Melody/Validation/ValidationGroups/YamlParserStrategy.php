@@ -2,7 +2,6 @@
 
 namespace Melody\Validation\ValidationGroups;
 
-use Melody\Validation\ValidationGroups\AbstractValidationGroupsParser;
 use Melody\Validation\Exceptions\InvalidFileTypeException;
 use Symfony\Component\Yaml\Yaml;
 
@@ -19,7 +18,7 @@ class YamlParserStrategy extends AbstractValidationGroupsFileParser
         $groups = array_keys($configuration);
 
         foreach ($groups as $group) {
-            foreach($configuration[$group] as $property => $string) {
+            foreach ($configuration[$group] as $property => $string) {
                 $constraints[$group][$property] = $this->parseString($string);
             }
         }
