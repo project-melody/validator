@@ -1,6 +1,9 @@
 <?php
 namespace Melody\Validation\Constraints;
 
+use Melody\Validation\Exceptions\InvalidParameterException;
+use Melody\Validation\Exceptions\InvalidInputException;
+
 class Range extends Constraint
 {
     protected $id = 'range';
@@ -10,16 +13,16 @@ class Range extends Constraint
     /**
      * @param Int $min
      * @param Int $max
-     * @throws \Exception
+     * @throws \Melody\Validation\Exceptions\InvalidParameterException
      */
     public function __construct($min, $max)
     {
         if (!is_numeric($min)) {
-            throw new \InvalidArgumentException("Min must be a number");
+            throw new InvalidParameterException("The argument min must be a number");
         }
 
         if (!is_numeric($max)) {
-            throw new \InvalidArgumentException("Max must be a number");
+            throw new InvalidParameterException("The argument max be a number");
         }
 
         $this->min = $min;
@@ -29,7 +32,7 @@ class Range extends Constraint
     public function validate($input)
     {
         if (!is_numeric($input)) {
-            throw new \InvalidArgumentException("The input field must be a number");
+            throw new InvalidInputException("The input field must be a number");
         }
 
         return filter_var(
@@ -43,6 +46,6 @@ class Range extends Constraint
 
     public function getErrorMessageTemplate()
     {
-        return "The number '{{input}}' must be between {$this->min} and {$this->max}";
+        return "The number must be between {$this->min} and {$this->max}";
     }
 }

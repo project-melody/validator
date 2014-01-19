@@ -12,6 +12,6 @@ class Int extends Constraint
 
     public function getErrorMessageTemplate()
     {
-        return "The input '{{input}}' must be an integer";
+        return "The input must be an integer";
     }
 }

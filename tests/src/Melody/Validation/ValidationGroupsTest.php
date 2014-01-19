@@ -26,7 +26,7 @@ class ValidationGroupsTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Melody\Validation\ValidationGroups\ValidationGroups', $validationGroups);
 
         $input['name'] = "Marcelo Santos";
-        $input['email'] = "marcelsud@gmail.com";
+        $input['email'] = "email@gmail.com";
         $input['username'] = "marcelsud";
         $input['password'] = "pass@2013";
 
@@ -39,14 +39,14 @@ class ValidationGroupsTest extends \PHPUnit_Framework_TestCase
         $config['updating']['email'] = v::email()->maxLength(10);
 
         $validationGroups = ValidationGroupsFactory::build(new ArrayParserStrategy($config));
-        $input['email'] = "marcelsud @gmail.com";
+        $input['email'] = "email @gmail.com";
 
         $validationGroups->validate($input, "registering", array(
                 'email' => "'{{input}}' deve conter um email válido"
         ));
 
         $errors = $validationGroups->getViolations();
-        $this->assertEquals($errors['email'], "'marcelsud @gmail.com' deve conter um email válido");
+        $this->assertEquals($errors['email'], "'email @gmail.com' deve conter um email válido");
 
         $this->assertFalse($validationGroups->validate($input, "updating"));
     }

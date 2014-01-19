@@ -58,23 +58,23 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new Validator();
 
-        $validator->validate("marcelsud @gmail.com", v::email());
+        $validator->validate("email @gmail.com", v::email());
         $errors = $validator->getViolations(array(
                 'email' => "'{{input}}' deve conter um email válido"
         ));
 
-        $this->assertEquals($errors['email'], "'marcelsud @gmail.com' deve conter um email válido");
+        $this->assertEquals($errors['email'], "'email @gmail.com' deve conter um email válido");
     }
 
     public function test_custom_messages_from_chained_validator_configuration()
     {
         $validEmail = v::email();
-        $validEmail->validate("marcelsud @gmail.com");
+        $validEmail->validate("email @gmail.com");
         $errors = $validEmail->getViolations(array(
                 'email' => "'{{input}}' deve conter um email válido"
         ));
 
-        $this->assertEquals($errors['email'], "'marcelsud @gmail.com' deve conter um email válido");
+        $this->assertEquals($errors['email'], "'email @gmail.com' deve conter um email válido");
     }
 
     public function test_diplicated_constraint_exception()

@@ -21,7 +21,7 @@ run the `php composer.phar install` command to install it:
 
     {
         "require": {
-            "marcelsud/melody-validation": "dev-master"
+            "email/melody-validation": "dev-master"
         }
     }
 
@@ -205,7 +205,7 @@ use Melody\Validation\Validator as v;
 use Melody\Validation\ValidationGroups\ValidationGroupsFactory;
 
 $input['name'] = "Marcelo Santos";
-$input['email'] = "marcelsud@gmail.com";
+$input['email'] = "email@gmail.com";
 $input['username'] = "marcelsud";
 $input['password'] = "pass@2013";
 ```
@@ -292,14 +292,14 @@ $validationGroups->has("registering"); // false
 $config['registering']['email'] = v::email()->maxLength(50);
 
 $validationGroups = ValidationGroupsFactory::build(new ArrayParserStrategy($config));
-$input['email'] = "marcelsud @gmail.com";
+$input['email'] = "email @gmail.com";
 
 $validationGroups->validate($input, "registering", array(
         'email' => "'{{input}}' must be a valid email!"
 ));
 
 $errors = $validationGroups->getViolations(); // Lists all the violation messages
-var_dump($errors['email']); // string(45) "'marcelsud @gmail.com' must be a valid email!"
+var_dump($errors['email']); // string(45) "'email @gmail.com' must be a valid email!"
 ```
 
 

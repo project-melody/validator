@@ -1,6 +1,9 @@
 <?php
 namespace Melody\Validation\Constraints;
 
+use Melody\Validation\Exceptions\InvalidParameterException;
+use Melody\Validation\Exceptions\InvalidInputException;
+
 class Max extends Constraint
 {
     protected $id = 'max';
@@ -8,13 +11,17 @@ class Max extends Constraint
 
     public function __construct($max)
     {
+        if (!is_numeric($max)) {
+            throw new InvalidParameterException("The max argument must be numeric");
+        }
+
         $this->max = $max;
     }
 
     public function validate($input)
     {
         if (!is_numeric($input)) {
-            throw new \InvalidArgumentException("The max length must be a number");
+            throw new InvalidInputException("The max length must be a number");
         }
 
         return $input <= $this->max;
@@ -22,6 +29,6 @@ class Max extends Constraint
 
     public function getErrorMessageTemplate()
     {
-        return "The input '{{input}}' must be greater than {$this->max}";
+        return "The input must be greater than {$this->max}";
     }
 }

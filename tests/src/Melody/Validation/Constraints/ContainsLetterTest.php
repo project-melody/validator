@@ -6,7 +6,6 @@ use Melody\Validation\Validator as v;
 
 class ContainsSpecialTest extends \PHPUnit_Framework_TestCase
 {
-
     public function test_valid_string_should_pass()
     {
         $this->assertTrue(v::containsLetter(1)->validate('abcdef0123'));
@@ -17,16 +16,19 @@ class ContainsSpecialTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(v::containsLetter(1)->validate('0123'));
     }
 
-    public function test_invalid_argument_exception()
+    /**
+     * @expectedException Melody\Validation\Exceptions\InvalidParameterException
+     */
+    public function test_invalid_parameter_should_raise_an_exception()
     {
-        $this->setExpectedException('InvalidArgumentException');
-        $this->assertInstanceOf('InvalidArgumentException', v::containsLetter("invalid argument"));
+        v::containsLetter(new \stdClass());
     }
 
-    public function test_not_string_argument_exception()
+    /**
+     * @expectedException Melody\Validation\Exceptions\InvalidInputException
+     */
+    public function test_invalid_input_should_raise_an_exception()
     {
-        $this->setExpectedException('InvalidArgumentException');
-        $this->assertInstanceOf('InvalidArgumentException', v::containsLetter(5)->validate(null));
+        v::containsLetter(5)->validate(new \stdClass());
     }
-
 }

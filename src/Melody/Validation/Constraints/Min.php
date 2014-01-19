@@ -1,6 +1,9 @@
 <?php
 namespace Melody\Validation\Constraints;
 
+use Melody\Validation\Exceptions\InvalidParameterException;
+use Melody\Validation\Exceptions\InvalidInputException;
+
 class Min extends Constraint
 {
     protected $id = 'min';
@@ -8,13 +11,17 @@ class Min extends Constraint
 
     public function __construct($min)
     {
+        if (!is_numeric($min)) {
+            throw new InvalidParameterException("The min argument must be numeric");
+        }
+
         $this->min = $min;
     }
 
     public function validate($input)
     {
         if (!is_numeric($input)) {
-            throw new \InvalidArgumentException("The max length must be a number");
+            throw new InvalidInputException("The max length must be a number");
         }
 
         return $input >= $this->min;
@@ -22,6 +29,6 @@ class Min extends Constraint
 
     public function getErrorMessageTemplate()
     {
-        return "The input '{{input}}' must be lower than {$this->min}";
+        return "The input must be lower than {$this->min}";
     }
 }

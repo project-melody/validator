@@ -50,10 +50,11 @@ class EmailTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function test_not_string_argument_exception()
+    /**
+     * @expectedException Melody\Validation\Exceptions\InvalidInputException
+     */
+    public function test_invalid_input_should_raise_an_exception()
     {
-        $this->setExpectedException('InvalidArgumentException');
-        $this->assertInstanceOf('InvalidArgumentException', v::email()->validate(null));
+        v::email()->validate(new \stdClass());
     }
-
 }
