@@ -1,6 +1,8 @@
 <?php
 namespace Melody\Validation\Constraints;
 
+use Melody\Validation\Exceptions\InvalidInputException;
+
 class Alnum extends Constraint
 {
     protected $id = 'alnum';
@@ -8,7 +10,7 @@ class Alnum extends Constraint
     public function validate($input)
     {
         if (!is_string($input)) {
-            throw new \InvalidArgumentException("The input field must be a string");
+            throw new InvalidInputException("The input must be a string");
         }
 
         return preg_match('/^[a-zA-Z0-9]+$/', $input);
@@ -16,7 +18,7 @@ class Alnum extends Constraint
 
     public function getErrorMessageTemplate()
     {
-        return "The input '{{input}}' must be alpha-numeric";
+        return "The input must be alpha-numeric";
     }
 
 }

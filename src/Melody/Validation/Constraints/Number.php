@@ -12,6 +12,6 @@ class Number extends Constraint
 
     public function getErrorMessageTemplate()
     {
-        return "The input '{{input}}' must be a number";
+        return "The input must be a number";
     }
 }

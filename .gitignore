@@ -1,9 +1,12 @@
+.DS_Store
 .buildpath
 .project
 .settings/
+.idea/
 .metadata
 vendor/
 composer.phar
 composer.lock
 index.php
 codecoverage/
+phpunit

@@ -1,6 +1,9 @@
 <?php
 namespace Melody\Validation\Constraints;
 
+use Melody\Validation\Exceptions\InvalidParameterException;
+use Melody\Validation\Exceptions\InvalidInputException;
+
 class ContainsSpecial extends Constraint
 {
     protected $id = 'containsSpecial';
@@ -9,7 +12,7 @@ class ContainsSpecial extends Constraint
     public function __construct($min = 1)
     {
         if (!is_numeric($min)) {
-            throw new \InvalidArgumentException("Min must be a number");
+            throw new InvalidParameterException("Min must be a number");
         }
 
         $this->min = $min;
@@ -18,7 +21,7 @@ class ContainsSpecial extends Constraint
     public function validate($input)
     {
         if (!is_string($input)) {
-            throw new \InvalidArgumentException("The input field must be a string");
+            throw new InvalidInputException("The input field must be a string");
         }
 
         return preg_match_all('/[^a-zA-Z\d]{1}/', $input, $matches) >= $this->min;
@@ -26,6 +29,6 @@ class ContainsSpecial extends Constraint
 
     public function getErrorMessageTemplate()
     {
-        return "The input '{{input}}' must contain at least {$this->min} special char(s)";
+        return "The input must contain at least {$this->min} special char(s)";
     }
 }

@@ -3,7 +3,6 @@
 namespace Melody\Validation\Constraints;
 
 use Melody\Validation\Validator as v;
-use Melody\Validation\Exceptions\AlnumException;
 
 class AlnumTest extends \PHPUnit_Framework_TestCase
 {
@@ -18,9 +17,11 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(v::alnum()->validate(' abcdef0123'));
     }
 
-    public function test_invalid_string_exception_messages()
+    /**
+     * @expectedException Melody\Validation\Exceptions\InvalidInputException
+     */
+    public function test_invalid_input_should_raise_an_exception()
     {
-        $this->setExpectedException('InvalidArgumentException');
-        $this->assertInstanceOf('InvalidArgumentException', v::alnum()->validate(null));
+        v::alnum()->validate(new \stdClass());
     }
 }

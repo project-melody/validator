@@ -41,10 +41,20 @@ class MaxLengthTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function test_not_string_argument_exception()
+    /**
+     * @expectedException Melody\Validation\Exceptions\InvalidParameterException
+     */
+    public function test_invalid_parameter_should_raise_an_exception()
     {
-        $this->setExpectedException('InvalidArgumentException');
-        $this->assertInstanceOf('InvalidArgumentException', v::maxLength(5)->validate(null));
+        v::maxLength(new \stdClass());
+    }
+
+    /**
+     * @expectedException Melody\Validation\Exceptions\InvalidInputException
+     */
+    public function test_invalid_input_should_raise_an_exception()
+    {
+        v::maxLength(5)->validate(new \stdClass());
     }
 
 }

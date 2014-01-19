@@ -25,22 +25,27 @@ class RangeTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(v::range(5, 10)->validate(12));
     }
 
-    public function test_invalid_argument_exception_min()
+    /**
+     * @expectedException Melody\Validation\Exceptions\InvalidParameterException
+     */
+    public function test_invalid_min_parameter_should_raise_an_exception()
     {
-        $this->setExpectedException('InvalidArgumentException');
-        $this->assertInstanceOf('InvalidArgumentException', v::range("invalid argument", 10)->validate(3));
+        v::range("invalid argument", 10);
     }
 
-    public function test_invalid_argument_exception_max()
+    /**
+     * @expectedException Melody\Validation\Exceptions\InvalidParameterException
+     */
+    public function test_invalid_max_parameter_should_raise_an_exception()
     {
-        $this->setExpectedException('InvalidArgumentException');
-        $this->assertInstanceOf('InvalidArgumentException', v::range(5, "invalid argument")->validate(3));
+        v::range(5, "invalid argument");
     }
 
-    public function test_invalid_argument_exception_not_int()
+    /**
+     * @expectedException Melody\Validation\Exceptions\InvalidInputException
+     */
+    public function test_invalid_input_should_raise_an_exception()
     {
-        $this->setExpectedException('InvalidArgumentException');
-        $this->assertInstanceOf('InvalidArgumentException', v::range(5, 10)->validate("invalid argument"));
+        v::range(5, 10)->validate("invalid argument");
     }
-
 }

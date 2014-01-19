@@ -12,6 +12,6 @@ class String extends Constraint
 
     public function getErrorMessageTemplate()
     {
-        return "The input '{{input}}' must be an string";
+        return "The input must be an string";
     }
 }

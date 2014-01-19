@@ -18,21 +18,27 @@ class LengthTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(v::length(2, 5)->validate(''));
     }
 
-    public function test_invalid_argument_exception_min()
+    /**
+     * @expectedException Melody\Validation\Exceptions\InvalidParameterException
+     */
+    public function test_invalid_min_parameter_should_raise_an_exception()
     {
-        $this->setExpectedException('InvalidArgumentException');
-        $this->assertInstanceOf('InvalidArgumentException', v::length("invalid argument", 5)->validate('abcdef0123'));
+        v::length("invalid argument", 5);
     }
 
-    public function test_invalid_argument_exception_max()
+    /**
+     * @expectedException Melody\Validation\Exceptions\InvalidParameterException
+     */
+    public function test_invalid_max_parameter_should_raise_an_exception()
     {
-        $this->setExpectedException('InvalidArgumentException');
-        $this->assertInstanceOf('InvalidArgumentException', v::length(2, "invalid argument")->validate('abcdef0123'));
+        v::length(2, "invalid argument");
     }
 
-    public function test_invalid_argument_exception_not_string()
+    /**
+     * @expectedException Melody\Validation\Exceptions\InvalidInputException
+     */
+    public function test_invalid_input_should_raise_an_exception()
     {
-        $this->setExpectedException('InvalidArgumentException');
-        $this->assertInstanceOf('InvalidArgumentException', v::length(2, 5)->validate(1));
+        v::length(2, 5)->validate(1);
     }
 }

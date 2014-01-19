@@ -12,6 +12,6 @@ class NoWhitespace extends Constraint
 
     public function getErrorMessageTemplate()
     {
-        return "The input '{{input}}' must not have whitespaces";
+        return "The input must not have whitespaces";
     }
 }

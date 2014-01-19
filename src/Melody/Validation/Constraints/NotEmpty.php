@@ -16,6 +16,6 @@ class NotEmpty extends Constraint
 
     public function getErrorMessageTemplate()
     {
-        return "The input '{{input}}' must not be empty";
+        return "The input must not be empty";
     }
 }

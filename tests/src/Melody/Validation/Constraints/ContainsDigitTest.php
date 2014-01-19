@@ -17,16 +17,19 @@ class ContainsDigitTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(v::containsDigit(5)->validate('abcdef0123'));
     }
 
-    public function test_invalid_argument_exception()
+    /**
+     * @expectedException Melody\Validation\Exceptions\InvalidParameterException
+     */
+    public function test_invalid_parameter_should_raise_an_exception()
     {
-        $this->setExpectedException('InvalidArgumentException');
-        $this->assertInstanceOf('InvalidArgumentException', v::containsDigit("invalid argument"));
+        v::containsDigit(new \stdClass());
     }
 
-    public function test_not_string_argument_exception()
+    /**
+     * @expectedException Melody\Validation\Exceptions\InvalidInputException
+     */
+    public function test_invalid_input_should_raise_an_exception()
     {
-        $this->setExpectedException('InvalidArgumentException');
-        $this->assertInstanceOf('InvalidArgumentException', v::containsDigit(5)->validate(null));
+        v::containsDigit(5)->validate(new \stdClass());
     }
-
 }

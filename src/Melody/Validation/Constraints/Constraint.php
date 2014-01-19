@@ -13,7 +13,7 @@ abstract class Constraint implements Validatable
 
     public function __construct()
     {
-        $this->setErrorMessageTemplate("{{input}} is invalid");
+        $this->setErrorMessageTemplate("The input is invalid");
     }
 
     /**
