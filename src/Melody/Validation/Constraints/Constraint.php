@@ -35,6 +35,4 @@ abstract class Constraint implements Validatable
     {
         return $this->id;
     }
-
 }
-

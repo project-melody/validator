@@ -26,7 +26,7 @@ class NumberTest extends \PHPUnit_Framework_TestCase
     public function validNumberProvider()
     {
         return array(
-            array(1), 
+            array(1),
             array("2"),
             array(10 / 2),
             array(10 % 2),
@@ -37,7 +37,7 @@ class NumberTest extends \PHPUnit_Framework_TestCase
     public function invalidNumberProvider()
     {
         return array(
-            array(null), 
+            array(null),
             array("@")
         );
     }

@@ -2,7 +2,6 @@
 
 namespace Melody\Validation\ValidationGroups;
 
-use Melody\Validation\Common\Collections\ConstraintsCollection;
 use Melody\Validation\Exceptions\InvalidFileException;
 
 /**
@@ -12,14 +11,15 @@ abstract class AbstractValidationGroupsFileParser extends AbstractValidationGrou
 {
     protected $file;
 
-    public function __construct($file) {
+    public function __construct($file)
+    {
         if ($this->checkFile($file)) {
             $this->file = pathinfo($file);
         }
     }
 
     /**
-     * @param unknown_type $file
+     * @param  unknown_type              $file
      * @throws \InvalidArgumentException
      */
     protected function checkFile($file)

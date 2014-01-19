@@ -11,8 +11,8 @@ class Length extends Constraint
     private $maxLength;
 
     /**
-     * @param Int $min
-     * @param Int $max
+     * @param  Int                                                     $min
+     * @param  Int                                                     $max
      * @throws \Melody\Validation\Exceptions\InvalidParameterException
      */
     public function __construct($min, $max)
@@ -26,7 +26,7 @@ class Length extends Constraint
     }
 
     /**
-     * @param  string $input
+     * @param  string                                              $input
      * @return bool
      * @throws \Melody\Validation\Exceptions\InvalidInputException
      */

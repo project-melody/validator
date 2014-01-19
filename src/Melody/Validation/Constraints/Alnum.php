@@ -20,5 +20,4 @@ class Alnum extends Constraint
     {
         return "The input must be alpha-numeric";
     }
-
 }

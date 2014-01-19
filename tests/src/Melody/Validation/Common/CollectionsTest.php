@@ -2,224 +2,224 @@
 
 namespace Melody\Validation\Common;
 
-class CollectionTest extends \PHPUnit_Framework_TestCase
+class CollectionsTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Melody\Validation\Common\Collections\Collection
      */
-    private $_coll;
+    private $coll;
 
     protected function setUp()
     {
-        $this->_coll = new \Melody\Validation\Common\Collections\ArrayCollection;
+        $this->coll = new \Melody\Validation\Common\Collections\ArrayCollection;
     }
 
     public function testIssetAndUnset()
     {
-        $this->assertFalse(isset($this->_coll[0]));
-        $this->_coll->add('testing');
-        $this->assertTrue(isset($this->_coll[0]));
-        unset($this->_coll[0]);
-        $this->assertFalse(isset($this->_coll[0]));
+        $this->assertFalse(isset($this->coll[0]));
+        $this->coll->add('testing');
+        $this->assertTrue(isset($this->coll[0]));
+        unset($this->coll[0]);
+        $this->assertFalse(isset($this->coll[0]));
     }
 
     public function testToString()
     {
-        $this->_coll->add('testing');
-        $this->assertTrue(is_string((string) $this->_coll));
+        $this->coll->add('testing');
+        $this->assertTrue(is_string((string) $this->coll));
     }
 
     public function testRemovingNonExistentEntryReturnsNull()
     {
-        $this->assertEquals(null, $this->_coll->remove('testing_does_not_exist'));
+        $this->assertEquals(null, $this->coll->remove('testing_does_not_exist'));
     }
 
     public function testExists()
     {
-        $this->_coll->add("one");
-        $this->_coll->add("two");
-        $exists = $this->_coll->exists(function($k, $e) { return $e == "one"; });
+        $this->coll->add("one");
+        $this->coll->add("two");
+        $exists = $this->coll->exists(function ($k, $e) { return $e == "one"; });
         $this->assertTrue($exists);
-        $exists = $this->_coll->exists(function($k, $e) { return $e == "other"; });
+        $exists = $this->coll->exists(function ($k, $e) { return $e == "other"; });
         $this->assertFalse($exists);
     }
 
     public function testMap()
     {
-        $this->_coll->add(1);
-        $this->_coll->add(2);
-        $res = $this->_coll->map(function($e) { return $e * 2; });
+        $this->coll->add(1);
+        $this->coll->add(2);
+        $res = $this->coll->map(function ($e) { return $e * 2; });
         $this->assertEquals(array(2, 4), $res->toArray());
     }
 
     public function testFilter()
     {
-        $this->_coll->add(1);
-        $this->_coll->add("foo");
-        $this->_coll->add(3);
-        $res = $this->_coll->filter(function($e) { return is_numeric($e); });
+        $this->coll->add(1);
+        $this->coll->add("foo");
+        $this->coll->add(3);
+        $res = $this->coll->filter(function ($e) { return is_numeric($e); });
         $this->assertEquals(array(0 => 1, 2 => 3), $res->toArray());
     }
 
     public function testFirstAndLast()
     {
-        $this->_coll->add('one');
-        $this->_coll->add('two');
+        $this->coll->add('one');
+        $this->coll->add('two');
 
-        $this->assertEquals($this->_coll->first(), 'one');
-        $this->assertEquals($this->_coll->last(), 'two');
+        $this->assertEquals($this->coll->first(), 'one');
+        $this->assertEquals($this->coll->last(), 'two');
     }
 
     public function testArrayAccess()
     {
-        $this->_coll[] = 'one';
-        $this->_coll[] = 'two';
+        $this->coll[] = 'one';
+        $this->coll[] = 'two';
 
-        $this->assertEquals($this->_coll[0], 'one');
-        $this->assertEquals($this->_coll[1], 'two');
+        $this->assertEquals($this->coll[0], 'one');
+        $this->assertEquals($this->coll[1], 'two');
 
-        unset($this->_coll[0]);
-        $this->assertEquals($this->_coll->count(), 1);
+        unset($this->coll[0]);
+        $this->assertEquals($this->coll->count(), 1);
     }
 
     public function testContainsKey()
     {
-        $this->_coll[5] = 'five';
-        $this->assertTrue($this->_coll->containsKey(5));
+        $this->coll[5] = 'five';
+        $this->assertTrue($this->coll->containsKey(5));
     }
 
     public function testContains()
     {
-        $this->_coll[0] = 'test';
-        $this->assertTrue($this->_coll->contains('test'));
+        $this->coll[0] = 'test';
+        $this->assertTrue($this->coll->contains('test'));
     }
 
     public function testSearch()
     {
-        $this->_coll[0] = 'test';
-        $this->assertEquals(0, $this->_coll->indexOf('test'));
+        $this->coll[0] = 'test';
+        $this->assertEquals(0, $this->coll->indexOf('test'));
     }
 
     public function testGet()
     {
-        $this->_coll[0] = 'test';
-        $this->assertEquals('test', $this->_coll->get(0));
+        $this->coll[0] = 'test';
+        $this->assertEquals('test', $this->coll->get(0));
     }
 
     public function testGetKeys()
     {
-        $this->_coll[] = 'one';
-        $this->_coll[] = 'two';
-        $this->assertEquals(array(0, 1), $this->_coll->getKeys());
+        $this->coll[] = 'one';
+        $this->coll[] = 'two';
+        $this->assertEquals(array(0, 1), $this->coll->getKeys());
     }
 
     public function testGetValues()
     {
-        $this->_coll[] = 'one';
-        $this->_coll[] = 'two';
-        $this->assertEquals(array('one', 'two'), $this->_coll->getValues());
+        $this->coll[] = 'one';
+        $this->coll[] = 'two';
+        $this->assertEquals(array('one', 'two'), $this->coll->getValues());
     }
 
     public function testCount()
     {
-        $this->_coll[] = 'one';
-        $this->_coll[] = 'two';
-        $this->assertEquals($this->_coll->count(), 2);
-        $this->assertEquals(count($this->_coll), 2);
+        $this->coll[] = 'one';
+        $this->coll[] = 'two';
+        $this->assertEquals($this->coll->count(), 2);
+        $this->assertEquals(count($this->coll), 2);
     }
 
     public function testForAll()
     {
-        $this->_coll[] = 'one';
-        $this->_coll[] = 'two';
-        $this->assertEquals($this->_coll->forAll(function($k, $e) { return is_string($e); }), true);
-        $this->assertEquals($this->_coll->forAll(function($k, $e) { return is_array($e); }), false);
+        $this->coll[] = 'one';
+        $this->coll[] = 'two';
+        $this->assertEquals($this->coll->forAll(function ($k, $e) { return is_string($e); }), true);
+        $this->assertEquals($this->coll->forAll(function ($k, $e) { return is_array($e); }), false);
     }
 
     public function testPartition()
     {
-        $this->_coll[] = true;
-        $this->_coll[] = false;
-        $partition = $this->_coll->partition(function($k, $e) { return $e == true; });
+        $this->coll[] = true;
+        $this->coll[] = false;
+        $partition = $this->coll->partition(function ($k, $e) { return $e == true; });
         $this->assertEquals($partition[0][0], true);
         $this->assertEquals($partition[1][0], false);
     }
 
     public function testClear()
     {
-        $this->_coll[] = 'one';
-        $this->_coll[] = 'two';
-        $this->_coll->clear();
-        $this->assertEquals($this->_coll->isEmpty(), true);
+        $this->coll[] = 'one';
+        $this->coll[] = 'two';
+        $this->coll->clear();
+        $this->assertEquals($this->coll->isEmpty(), true);
     }
 
     public function testRemove()
     {
-        $this->_coll[] = 'one';
-        $this->_coll[] = 'two';
-        $el = $this->_coll->remove(0);
+        $this->coll[] = 'one';
+        $this->coll[] = 'two';
+        $el = $this->coll->remove(0);
 
         $this->assertEquals('one', $el);
-        $this->assertEquals($this->_coll->contains('one'), false);
-        $this->assertNull($this->_coll->remove(0));
+        $this->assertEquals($this->coll->contains('one'), false);
+        $this->assertNull($this->coll->remove(0));
     }
 
     public function testRemoveElement()
     {
-        $this->_coll[] = 'one';
-        $this->_coll[] = 'two';
+        $this->coll[] = 'one';
+        $this->coll[] = 'two';
 
-        $this->assertTrue($this->_coll->removeElement('two'));
-        $this->assertFalse($this->_coll->contains('two'));
-        $this->assertFalse($this->_coll->removeElement('two'));
+        $this->assertTrue($this->coll->removeElement('two'));
+        $this->assertFalse($this->coll->contains('two'));
+        $this->assertFalse($this->coll->removeElement('two'));
     }
 
     public function testSlice()
     {
-        $this->_coll[] = 'one';
-        $this->_coll[] = 'two';
-        $this->_coll[] = 'three';
+        $this->coll[] = 'one';
+        $this->coll[] = 'two';
+        $this->coll[] = 'three';
 
-        $slice = $this->_coll->slice(0, 1);
+        $slice = $this->coll->slice(0, 1);
         $this->assertInternalType('array', $slice);
         $this->assertEquals(array('one'), $slice);
 
-        $slice = $this->_coll->slice(1);
+        $slice = $this->coll->slice(1);
         $this->assertEquals(array(1 => 'two', 2 => 'three'), $slice);
 
-        $slice = $this->_coll->slice(1, 1);
+        $slice = $this->coll->slice(1, 1);
         $this->assertEquals(array(1 => 'two'), $slice);
     }
 
     public function testKey()
     {
-        $this->_coll[1] = 'one';
-        $this->_coll[2] = 'two';
-        $this->_coll[3] = 'three';
+        $this->coll[1] = 'one';
+        $this->coll[2] = 'two';
+        $this->coll[3] = 'three';
 
-        $this->assertEquals($this->_coll->key(), 1);
+        $this->assertEquals($this->coll->key(), 1);
     }
 
     public function testNext()
     {
-        $this->_coll[1] = 'one';
-        $this->_coll[2] = 'two';
-        $this->_coll[3] = 'three';
+        $this->coll[1] = 'one';
+        $this->coll[2] = 'two';
+        $this->coll[3] = 'three';
 
-        $this->_coll->next();
+        $this->coll->next();
 
-        $this->assertEquals($this->_coll->key(), 2);
+        $this->assertEquals($this->coll->key(), 2);
     }
 
     public function testCurrent()
     {
-        $this->_coll[1] = 'one';
-        $this->_coll[2] = 'two';
-        $this->_coll[3] = 'three';
+        $this->coll[1] = 'one';
+        $this->coll[2] = 'two';
+        $this->coll[3] = 'three';
 
-        $this->_coll->next();
-        $this->_coll->next();
+        $this->coll->next();
+        $this->coll->next();
 
-        $this->assertEquals($this->_coll->current(), 'three');
+        $this->assertEquals($this->coll->current(), 'three');
     }
 }

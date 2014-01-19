@@ -9,4 +9,5 @@ composer.phar
 composer.lock
 index.php
 codecoverage/
-phpunit
+phpunit.phar
+php-cs-fixer.phar

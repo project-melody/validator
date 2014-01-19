@@ -2,8 +2,6 @@
 
 namespace Melody\Validation;
 
-use Melody\Validation\Common\Collections\ConstraintsCollection;
-use Melody\Validation\ValidationGroupsFactory;
 use Melody\Validation\Validator as v;
 
 class ValidatorTest extends \PHPUnit_Framework_TestCase
