@@ -4,14 +4,14 @@ namespace Melody\Validation\Constraints;
 
 use Melody\Validation\Validator as v;
 
-class KeyExistsTest extends \PHPUnit_Framework_TestCase
+class NotEmptyKeyTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider validArrayProvider
      */
-    public function test_valid_key_exists_should_work($key, $array)
+    public function test_valid_not_empty_key_should_work($key, $array)
     {
-        $this->assertTrue(v::keyExists($key)->validate($array));
+        $this->assertTrue(v::notEmptyKey($key)->validate($array));
     }
 
     /**
@@ -19,7 +19,7 @@ class KeyExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function test_invalid_array_should_not_work($key, $input)
     {
-        $this->assertFalse(v::keyExists($key)->validate($input));
+        $this->assertFalse(v::notEmptyKey($key)->validate($input));
     }
 
     public function validArrayProvider()
@@ -35,9 +35,12 @@ class KeyExistsTest extends \PHPUnit_Framework_TestCase
 
     public function invalidArrayProvider()
     {
+        $arrImpl = new \ArrayObject();
+        $arrImpl->offsetSet("name", "");
+
         return array(
-            array("name", array()),
-            array("name", new \ArrayObject())
+            array("name", array("name" => "")),
+            array("name", $arrImpl)
         );
     }
 
@@ -46,7 +49,7 @@ class KeyExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function test_invalid_parameter_should_raise_an_exception()
     {
-        v::keyExists(new \stdClass());
+        v::notEmptyKey(new \stdClass());
     }
 
     /**
@@ -54,6 +57,14 @@ class KeyExistsTest extends \PHPUnit_Framework_TestCase
      */
     public function test_invalid_input_should_raise_an_exception()
     {
-        v::keyExists("name")->validate(new \stdClass());
+        v::notEmptyKey("name")->validate(new \stdClass());
+    }
+
+    /**
+     * @expectedException Melody\Validation\Exceptions\InvalidInputException
+     */
+    public function test_non_existent_key_should_raise_an_exception()
+    {
+        v::notEmptyKey("name")->validate(array());
     }
 }
