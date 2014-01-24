@@ -68,6 +68,19 @@ class Validator
         return $this->violations;
     }
 
+    public function getViolation($id, $customMessage = null)
+    {
+        if (!array_key_exists($id, $this->violations)) {
+            throw new \InvalidArgumentException("Id not found in validator");
+        }
+
+        if (!is_null($customMessage)) {
+            return $this->format($customMessage, array('input' => $this->inputs[$id]));
+        }
+
+        return $this->violations[$id];
+    }
+
     public function add(Validator $validatorBuilder)
     {
 
