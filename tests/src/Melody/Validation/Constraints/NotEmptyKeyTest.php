@@ -9,7 +9,7 @@ class NotEmptyKeyTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider validArrayProvider
      */
-    public function test_valid_not_empty_key_should_work($key, $array)
+    public function test_valid_key_should_work($key, $array)
     {
         $this->assertTrue(v::notEmptyKey($key)->validate($array));
     }
