@@ -1,5 +1,5 @@
 {
-    "name": "project-melody\/validator",
+    "name": "project-melody/validator",
     "description": "Set of Validation Rules",
     "type": "library",
     "license": "BSD Style",
@@ -17,7 +17,7 @@
     ],
     "autoload": {
         "psr-0": {
-            "Melody\\Validation": "src\/"
+            "Melody\\Validation": "src/"
         }
     }
 }
