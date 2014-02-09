@@ -1,7 +1,8 @@
 Melody Validator
 =================
 
-[![Build Status](https://secure.travis-ci.org/project-melody/validator.png)](http://travis-ci.org/project-melody/validator)
+[![Build Status](https://secure.travis-ci.org/project-melody/validator.png)](http://travis-ci.org/project-melody/validator) [![Stories in Ready](https://badge.waffle.io/project-melody/validator.png?label=ready)](https://waffle.io/project-melody/validator)
+
 
 Melody Validator is a set of validation rules with an easy way to customize validation groups.
 It works with PHP 5.3.3 or later.
@@ -21,7 +22,7 @@ run the `php composer.phar install` command to install it:
 
     {
         "require": {
-            "email/melody-validation": "dev-master"
+            "project-melody/validator": "v1.0.0-beta"
         }
     }
 
