@@ -21,7 +21,7 @@ run the `php composer.phar install` command to install it:
 
     {
         "require": {
-            "email/melody-validation": "dev-master"
+            "project-melody/validator": "v1.0.0-beta"
         }
     }
 
