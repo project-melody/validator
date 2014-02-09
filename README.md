@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/project-melody/validator.png?label=ready)](https://waffle.io/project-melody/validator)
 Melody Validator
 =================
 
