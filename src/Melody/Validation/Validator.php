@@ -34,15 +34,24 @@ class Validator
 
     public function set($name, $arguments)
     {
-        $constraintFqn = "Melody\\Validation\\Constraints\\" . ucfirst($name);
-        $constraintClass = new ReflectionClass($constraintFqn);
-        $constraintInstance = $constraintClass->newInstanceArgs($arguments);
+        if (!$this->constraints->offsetExists($name)) {
+            $constraintFqn = "Melody\\Validation\\Constraints\\" . ucfirst($name);
+            $constraintClass = new ReflectionClass($constraintFqn);
+            $constraintInstance = $constraintClass->newInstanceArgs($arguments);
 
-        if ($this->constraints->offsetExists($name)) {
-            throw new \InvalidArgumentException("Constraint named {$name} already setted");
+            $this->registerConstraint($constraintInstance);
         }
 
-        $this->constraints->set($name, $constraintInstance);
+        return $this;
+    }
+
+    public function registerConstraint(Validatable $constraint)
+    {
+        if ($this->constraints->offsetExists($constraint->getId())) {
+            throw new \InvalidArgumentException("Constraint named {$constraint->getId()} already setted");
+        }
+
+        $this->constraints->set($constraint->getId(), $constraint);
 
         return $this;
     }

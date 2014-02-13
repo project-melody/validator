@@ -3,6 +3,30 @@
 namespace Melody\Validation;
 
 use Melody\Validation\Validator as v;
+use Melody\Validation\Constraints\Constraint;
+
+class PasswordConstraint extends Constraint
+{
+    protected $id = 'password';
+
+    public function validate($input)
+    {
+        if (!is_string($input)) {
+            throw new InvalidInputException("The input must be a string");
+        }
+
+        return v::length(6, 12) // Length between 6 and 12 characters
+            ->containsSpecial(1) // at least 1 special character
+            ->containsLetter(3) // at least 3 letters
+            ->containsDigit(2) // at least 2 digits
+            ->validate($input);
+    }
+
+    public function getErrorMessageTemplate()
+    {
+        return "The password is invalid";
+    }
+}
 
 class ValidatorTest extends \PHPUnit_Framework_TestCase
 {
@@ -75,9 +99,13 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($errors['email'], "'email @gmail.com' deve conter um email válido");
     }
 
-    public function test_diplicated_constraint_exception()
+    public function test_add_custom_constraint_should_work()
     {
-        $this->setExpectedException('InvalidArgumentException');
-        $this->assertInstanceOf('InvalidArgumentException', v::email()->email());
+        $validator = new Validator();
+        $validator->registerConstraint(new PasswordConstraint());
+
+        $this->assertTrue($validator->password()->validate("pass@2012"));
+        $this->assertFalse($validator->password()->validate("12345678"));
     }
+
 }
