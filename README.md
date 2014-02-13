@@ -1,7 +1,8 @@
 Melody Validator
 =================
 
-[![Build Status](https://secure.travis-ci.org/project-melody/validator.png)](http://travis-ci.org/project-melody/validator)
+[![Build Status](https://secure.travis-ci.org/project-melody/validator.png)](http://travis-ci.org/project-melody/validator) [![Stories in Ready](https://badge.waffle.io/project-melody/validator.png?label=ready)](https://waffle.io/project-melody/validator)
+
 
 Melody Validator is a set of validation rules with an easy way to customize validation groups.
 It works with PHP 5.3.3 or later.
@@ -75,6 +76,15 @@ $alnumValidator->validate("valid"); //true
 $alnumValidator->validate("#invalid"); //false
 ```
 
+### Boolean
+Only boolean accepted:
+```php
+$booleanValidator = v::boolean();
+$booleanValidator->validate(true); //true
+$booleanValidator->validate(false); //true
+$booleanValidator->validate("not a boolean"); //false
+```
+
 ### ContainsDigit (integer $minimum)
 Minimum of digits (0-9) occurences in the input string:
 ```php
@@ -108,11 +118,29 @@ $emailValidator->validate("invalid#@email.com"); //false
 ```
 
 ### Int
-Asserts if the input is an integer or not:
+Asserts if the input is an integer:
 ```php
 $intValidator = v::int();
 $intValidator->validate(1234); //true
 $intValidator->validate("@"); //false
+```
+
+### IsArray
+Asserts if the input is an array:
+```php
+$isArrayValidator = v::isArray();
+$isArrayValidator->validate(array()); //true
+$isArrayValidator->validate(new \ArrayObject()); //true
+$isArrayValidator->validate("not a array"); //false
+```
+
+### KeyExists
+Asserts if the key exists in the array:
+```php
+$keyExistsValidator = v::keyExists("name");
+$keyExistsValidator->validate(array("name" => "John Doe")); //true
+$keyExistsValidator->validate(array("age" => 25)); //false
+$keyExistsValidator->validate(array()); //false
 ```
 
 ### Length (integer $minLength, integer $maxLength)

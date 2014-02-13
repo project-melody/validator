@@ -34,15 +34,24 @@ class Validator
 
     public function set($name, $arguments)
     {
-        $constraintFqn = "Melody\\Validation\\Constraints\\" . ucfirst($name);
-        $constraintClass = new ReflectionClass($constraintFqn);
-        $constraintInstance = $constraintClass->newInstanceArgs($arguments);
+        if (!$this->constraints->offsetExists($name)) {
+            $constraintFqn = "Melody\\Validation\\Constraints\\" . ucfirst($name);
+            $constraintClass = new ReflectionClass($constraintFqn);
+            $constraintInstance = $constraintClass->newInstanceArgs($arguments);
 
-        if ($this->constraints->offsetExists($name)) {
-            throw new \InvalidArgumentException("Constraint named {$name} already setted");
+            $this->registerConstraint($constraintInstance);
         }
 
-        $this->constraints->set($name, $constraintInstance);
+        return $this;
+    }
+
+    public function registerConstraint(Validatable $constraint)
+    {
+        if ($this->constraints->offsetExists($constraint->getId())) {
+            throw new \InvalidArgumentException("Constraint named {$constraint->getId()} already setted");
+        }
+
+        $this->constraints->set($constraint->getId(), $constraint);
 
         return $this;
     }
@@ -66,6 +75,19 @@ class Validator
         }
 
         return $this->violations;
+    }
+
+    public function getViolation($id, $customMessage = null)
+    {
+        if (!array_key_exists($id, $this->violations)) {
+            throw new \InvalidArgumentException("Id not found in validator");
+        }
+
+        if (!is_null($customMessage)) {
+            return $this->format($customMessage, array('input' => $this->inputs[$id]));
+        }
+
+        return $this->violations[$id];
     }
 
     public function add(Validator $validatorBuilder)
