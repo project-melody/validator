@@ -5,8 +5,15 @@ use Melody\Validation\Common\Collections\ConstraintsCollection;
 
 class ValidationGroups
 {
-    private $groups = array();
-    private $violations = array();
+    /**
+     * @var array
+     */
+    protected $groups = array();
+
+    /**
+     * @var array
+     */
+    protected $violations = array();
 
     public function add($id, ConstraintsCollection $group)
     {
