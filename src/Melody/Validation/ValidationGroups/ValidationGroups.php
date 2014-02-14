@@ -2,11 +2,19 @@
 namespace Melody\Validation\ValidationGroups;
 
 use Melody\Validation\Common\Collections\ConstraintsCollection;
+use Melody\Validation\Exceptions\InvalidInputException;
 
 class ValidationGroups
 {
-    private $groups = array();
-    private $violations = array();
+    /**
+     * @var array
+     */
+    protected $groups = array();
+
+    /**
+     * @var array
+     */
+    protected $violations = array();
 
     public function add($id, ConstraintsCollection $group)
     {
@@ -32,8 +40,12 @@ class ValidationGroups
         return isset($this->groups[$id]);
     }
 
-    public function validate(array $data, $group, $customMessages = array())
+    public function validate($data, $group, $customMessages = array())
     {
+        if (!is_array($data)) {
+            throw new InvalidInputException('$data argument should be array');
+        }
+        
         $constraints = $this->get($group);
         $valid = true;
         $this->violations = array();
