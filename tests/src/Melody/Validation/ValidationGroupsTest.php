@@ -100,4 +100,15 @@ class ValidationGroupsTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Melody\Validation\Exceptions\InvalidFileTypeException', ValidationGroupsFactory::build(new YamlParserStrategy(__DIR__ . '/../../Resources/config/validation.ini')));
     }
 
+     /**
+     * @expectedException \Melody\Validation\Exceptions\InvalidInputException
+     */
+    public function test_should_throw_invalid_input_exception_when_first_argument_not_is_array()
+    {
+        $validationGroups = ValidationGroupsFactory::build(new ArrayParserStrategy(array()));
+        $this->assertInstanceOf('Melody\Validation\ValidationGroups\ValidationGroups', $validationGroups);
+
+        $validationGroups->validate("string", "registering");
+    }
+
 }
