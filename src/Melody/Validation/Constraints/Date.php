@@ -47,5 +47,4 @@ class Date extends Constraint
 
         return $input === date($this->format, $date->getTimestamp());
     }
-
 }

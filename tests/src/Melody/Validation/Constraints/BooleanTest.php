@@ -10,7 +10,7 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider validBooleanProvider
      */
-    public function test_valid_boolean_should_work($input)
+    public function testValidBooleanShouldWork($input)
     {
         $this->assertTrue(v::boolean()->validate($input));
     }
@@ -18,7 +18,7 @@ class BooleanTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidBooleanProvider
      */
-    public function test_invalid_boolean_should_not_work($input)
+    public function testInvalidBooleanShouldNotWork($input)
     {
         $this->assertFalse(v::boolean()->validate($input));
     }

@@ -7,12 +7,12 @@ use Melody\Validation\Validator as v;
 class MaxTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function test_valid_max_number_should_pass()
+    public function testValidMaxNumberShouldPass()
     {
         $this->assertTrue(v::max(5)->validate(4));
     }
 
-    public function test_invalid_max_number_should_fail_validation()
+    public function testInvalidMaxNumberShouldFailValidation()
     {
         $this->assertFalse(v::max(5)->validate(7));
     }
@@ -20,7 +20,7 @@ class MaxTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException Melody\Validation\Exceptions\InvalidParameterException
      */
-    public function test_invalid_parameter_should_raise_an_exception()
+    public function testInvalidParameterShouldRaiseAnException()
     {
         v::max(new \stdClass());
     }
@@ -28,7 +28,7 @@ class MaxTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException Melody\Validation\Exceptions\InvalidInputException
      */
-    public function test_invalid_input_should_raise_an_exception()
+    public function testInvalidInputShouldRaiseAnException()
     {
         v::max(5)->validate(new \stdClass());
     }

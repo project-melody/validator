@@ -10,7 +10,7 @@ class NumberTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider validNumberProvider
      */
-    public function test_valid_number_should_work($input)
+    public function testValidNumberShouldWork($input)
     {
         $this->assertTrue(v::number()->validate($input));
     }
@@ -18,7 +18,7 @@ class NumberTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidNumberProvider
      */
-    public function test_invalid_number_should_not_work($input)
+    public function testInvalidNumberShouldNotWork($input)
     {
         $this->assertFalse(v::number()->validate($input));
     }

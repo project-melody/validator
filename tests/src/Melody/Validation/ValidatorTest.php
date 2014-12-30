@@ -16,10 +16,10 @@ class PasswordConstraint extends Constraint
         }
 
         return v::length(6, 12) // Length between 6 and 12 characters
-            ->containsSpecial(1) // at least 1 special character
-            ->containsLetter(3) // at least 3 letters
-            ->containsDigit(2) // at least 2 digits
-            ->validate($input);
+        ->containsSpecial(1) // at least 1 special character
+        ->containsLetter(3) // at least 3 letters
+        ->containsDigit(2) // at least 2 digits
+        ->validate($input);
     }
 
     public function getErrorMessageTemplate()
@@ -30,7 +30,7 @@ class PasswordConstraint extends Constraint
 
 class ValidatorTest extends \PHPUnit_Framework_TestCase
 {
-    public function test_validate_email()
+    public function testValidateEmail()
     {
         $validator = new Validator();
         $email = "valid@email.com";
@@ -41,7 +41,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($validator->validate($email, $validEmail));
     }
 
-    public function test_validate_with_constraint_reuse()
+    public function testValidateWithConstraintReuse()
     {
         $validEmail = v::email();
         $validUsername = $validEmail->add(v::minLength(10)->maxLength(20));
@@ -57,7 +57,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($validUsername->validate($invalidUsername));
     }
 
-    public function test_validate_with_not_statement()
+    public function testValidateWithNotStatement()
     {
         $validator = new Validator();
 
@@ -76,7 +76,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($validPassword->validate($password));
     }
 
-    public function test_custom_messages_from_validator_configuration()
+    public function testCustomMessagesFromValidatorConfiguration()
     {
         $validator = new Validator();
 
@@ -88,7 +88,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($errors['email'], "'email @gmail.com' deve conter um email válido");
     }
 
-    public function test_custom_messages_from_chained_validator_configuration()
+    public function testCustomMessagesFromChainedValidatorConfiguration()
     {
         $validEmail = v::email();
         $validEmail->validate("email @gmail.com");
@@ -99,7 +99,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($errors['email'], "'email @gmail.com' deve conter um email válido");
     }
 
-    public function test_add_custom_constraint_should_work()
+    public function testAddCustomConstraintShouldWork()
     {
         $validator = new Validator();
         $validator->registerConstraint(new PasswordConstraint());
@@ -107,5 +107,4 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($validator->password()->validate("pass@2012"));
         $this->assertFalse($validator->password()->validate("12345678"));
     }
-
 }

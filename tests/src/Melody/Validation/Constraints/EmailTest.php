@@ -10,7 +10,7 @@ class EmailTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider providerForValidEmail
      */
-    public function test_valid_email_should_pass($validEmail)
+    public function testValidEmailShouldPass($validEmail)
     {
         $this->assertTrue(v::email()->validate($validEmail));
     }
@@ -18,7 +18,7 @@ class EmailTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider providerForInvalidEmail
      */
-    public function test_invalid_emails_should_fail_validation($invalidEmail)
+    public function testInvalidEmailsShouldFailValidation($invalidEmail)
     {
         $this->assertFalse(v::email()->validate($invalidEmail));
     }
@@ -53,7 +53,7 @@ class EmailTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException Melody\Validation\Exceptions\InvalidInputException
      */
-    public function test_invalid_input_should_raise_an_exception()
+    public function testInvalidInputShouldRaiseAnException()
     {
         v::email()->validate(new \stdClass());
     }

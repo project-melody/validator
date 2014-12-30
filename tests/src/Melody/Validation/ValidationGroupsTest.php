@@ -13,7 +13,7 @@ use Melody\Validation\Validator as v;
 class ValidationGroupsTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function test_validation_groups_from_array()
+    public function testValidationGroupsFromArray()
     {
         $config['registering'] = array(
                 'name' => v::maxLength(50),
@@ -33,7 +33,7 @@ class ValidationGroupsTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($validationGroups->validate($input, "registering"));
     }
 
-    public function test_validation_groups_custom_messages()
+    public function testValidationGroupsCustomMessages()
     {
         $config['registering']['email'] = v::email()->maxLength(50);
         $config['updating']['email'] = v::email()->maxLength(10);
@@ -51,31 +51,39 @@ class ValidationGroupsTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($validationGroups->validate($input, "updating"));
     }
 
-    public function test_validation_groups_from_php()
+    public function testValidationGroupsFromPhp()
     {
-        $validationGroups = ValidationGroupsFactory::build(new PHPParserStrategy(__DIR__ . '/../../Resources/config/validation.php'));
+        $validationGroups = ValidationGroupsFactory::build(new PHPParserStrategy(
+            __DIR__ . '/../../Resources/config/validation.php'
+        ));
         $this->assertInstanceOf('Melody\Validation\ValidationGroups\ValidationGroups', $validationGroups);
     }
 
-    public function test_validation_groups_from_yml()
+    public function testValidationGroupsFromYml()
     {
-        $validationGroups = ValidationGroupsFactory::build(new YamlParserStrategy(__DIR__ . '/../../Resources/config/validation.yml'));
+        $validationGroups = ValidationGroupsFactory::build(new YamlParserStrategy(
+            __DIR__ . '/../../Resources/config/validation.yml'
+        ));
         $this->assertInstanceOf('Melody\Validation\ValidationGroups\ValidationGroups', $validationGroups);
     }
 
-    public function test_validation_groups_import_file_not_found()
+    public function testValidationGroupsImportFileNotFound()
     {
         $this->setExpectedException('Melody\Validation\Exceptions\InvalidFileException');
-        $this->assertInstanceOf('Melody\Validation\Exceptions\InvalidFileException', ValidationGroupsFactory::build(new YamlParserStrategy("file/not/found")));
+        $this->assertInstanceOf('Melody\Validation\Exceptions\InvalidFileException', ValidationGroupsFactory::build(
+            new YamlParserStrategy("file/not/found")
+        ));
     }
 
-    public function test_validation_groups_import_file_not_readable()
+    public function testValidationGroupsImportFileNotReadable()
     {
         $this->setExpectedException('Melody\Validation\Exceptions\InvalidFileException');
-        $this->assertInstanceOf('Melody\Validation\Exceptions\InvalidFileException', ValidationGroupsFactory::build(new YamlParserStrategy(__DIR__ . '/../../Resources/config/empty_not_readable')));
+        $this->assertInstanceOf('Melody\Validation\Exceptions\InvalidFileException', ValidationGroupsFactory::build(
+            new YamlParserStrategy(__DIR__ . '/../../Resources/config/emptyNotReadable')
+        ));
     }
 
-    public function test_validation_groups_methods()
+    public function testValidationGroupsMethods()
     {
         $constraintsCollection = new ConstraintsCollection();
         $constraintsCollection->set('name', v::maxLength(50));
@@ -85,7 +93,10 @@ class ValidationGroupsTest extends \PHPUnit_Framework_TestCase
         $validationGroups->add("registering", $constraintsCollection);
 
         $this->assertTrue($validationGroups->has("registering"));
-        $this->assertInstanceOf('Melody\Validation\Common\Collections\ConstraintsCollection', $validationGroups->get("registering"));
+        $this->assertInstanceOf(
+            'Melody\Validation\Common\Collections\ConstraintsCollection',
+            $validationGroups->get("registering")
+        );
 
         $validationGroups->remove("registering");
         $this->assertFalse($validationGroups->has("registering"));
@@ -94,21 +105,22 @@ class ValidationGroupsTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('InvalidArgumentException', $validationGroups->get("registering"));
     }
 
-    public function test_validation_groups_import_not_accepted_file_format()
+    public function testValidationGroupsImportNotAcceptedFileFormat()
     {
         $this->setExpectedException('Melody\Validation\Exceptions\InvalidFileTypeException');
-        $this->assertInstanceOf('Melody\Validation\Exceptions\InvalidFileTypeException', ValidationGroupsFactory::build(new YamlParserStrategy(__DIR__ . '/../../Resources/config/validation.ini')));
+        $this->assertInstanceOf('Melody\Validation\Exceptions\InvalidFileTypeException', ValidationGroupsFactory::build(
+            new YamlParserStrategy(__DIR__ . '/../../Resources/config/validation.ini')
+        ));
     }
 
      /**
      * @expectedException \Melody\Validation\Exceptions\InvalidInputException
      */
-    public function test_should_throw_invalid_input_exception_when_first_argument_not_is_array()
+    public function testShouldThrowInvalidInputExceptionWhenFirstArgumentNotIsArray()
     {
         $validationGroups = ValidationGroupsFactory::build(new ArrayParserStrategy(array()));
         $this->assertInstanceOf('Melody\Validation\ValidationGroups\ValidationGroups', $validationGroups);
 
         $validationGroups->validate("string", "registering");
     }
-
 }

@@ -7,12 +7,12 @@ use DateTime;
 
 class DateTest extends \PHPUnit_Framework_TestCase
 {
-    public function test_valid_date_without_format_should_work()
+    public function testValidDateWithoutFormatShouldWork()
     {
         $this->assertTrue(v::date()->validate("today"));
     }
 
-    public function test_valid_datetime_instance_without_format_should_work()
+    public function testValidDatetimeInstanceWithoutFormatShouldWork()
     {
         $date = new DateTime("today");
         $this->assertTrue(v::date()->validate($date));
@@ -21,7 +21,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider validDateFormatProvider
      */
-    public function test_valid_date_with_custom_format_should_work($format, $date)
+    public function testValidDateWithCustomFormatShouldWork($format, $date)
     {
         $this->assertTrue(v::date($format)->validate($date));
     }
@@ -29,7 +29,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidDateProvider
      */
-    public function test_invalid_date_should_not_work($input)
+    public function testInvalidDateShouldNotWork($input)
     {
         $dateValidator = v::date();
         $this->assertFalse($dateValidator->validate($input));
@@ -39,7 +39,7 @@ class DateTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidDateProvider
      */
-    public function test_invalid_date_with_custom_violation_message_should_not_work($input)
+    public function testInvalidDateWithCustomViolationMessageShouldNotWork($input)
     {
         $customMessage = "Custom date violation message";
         $dateValidator = v::date();
