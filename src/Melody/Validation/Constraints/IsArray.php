@@ -7,7 +7,12 @@ class IsArray extends Constraint
 
     public function validate($input)
     {
-        return (is_array($input) || $input instanceof \Traversable || $input instanceof \ArrayAccess || $input instanceof \ArrayObject);
+        return (
+            is_array($input)
+            || $input instanceof \Traversable
+            || $input instanceof \ArrayAccess
+            || $input instanceof \ArrayObject
+        );
     }
 
     public function getErrorMessageTemplate()

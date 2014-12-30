@@ -7,12 +7,12 @@ use Melody\Validation\Validator as v;
 class LengthTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function test_valid_string_should_pass()
+    public function testValidStringShouldPass()
     {
         $this->assertTrue(v::length(5, 10)->validate('abcdef0123'));
     }
 
-    public function test_invalid_string_should_fail_validation()
+    public function testInvalidStringShouldFailValidation()
     {
         $this->assertFalse(v::length(2, 5)->validate('abcdef0123'));
         $this->assertFalse(v::length(2, 5)->validate(''));
@@ -21,7 +21,7 @@ class LengthTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException Melody\Validation\Exceptions\InvalidParameterException
      */
-    public function test_invalid_min_parameter_should_raise_an_exception()
+    public function testInvalidMinParameterShouldRaiseAnException()
     {
         v::length("invalid argument", 5);
     }
@@ -29,7 +29,7 @@ class LengthTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException Melody\Validation\Exceptions\InvalidParameterException
      */
-    public function test_invalid_max_parameter_should_raise_an_exception()
+    public function testInvalidMaxParameterShouldRaiseAnException()
     {
         v::length(2, "invalid argument");
     }
@@ -37,7 +37,7 @@ class LengthTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException Melody\Validation\Exceptions\InvalidInputException
      */
-    public function test_invalid_input_should_raise_an_exception()
+    public function testInvalidInputShouldRaiseAnException()
     {
         v::length(2, 5)->validate(1);
     }

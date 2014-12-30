@@ -10,7 +10,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider providerForNotEmpty
      */
-    public function test_valid_string_should_pass($input)
+    public function testValidStringShouldPass($input)
     {
         $this->assertTrue(v::notEmpty()->validate($input));
     }
@@ -18,7 +18,7 @@ class NotEmptyTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider providerForEmpty
      */
-    public function test_invalid_string_should_fail_validation($input)
+    public function testInvalidStringShouldFailValidation($input)
     {
         $this->assertFalse(v::notEmpty()->validate($input));
     }

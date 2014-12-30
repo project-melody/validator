@@ -9,7 +9,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider validObjectProvider
      */
-    public function test_valid_object_should_work($input)
+    public function testValidObjectShouldWork($input)
     {
         $this->assertTrue(v::object()->validate($input));
     }
@@ -17,7 +17,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidObjectProvider
      */
-    public function test_invalid_object_should_not_work($input)
+    public function testInvalidObjectShouldNotWork($input)
     {
         $this->assertFalse(v::object()->validate($input));
     }

@@ -38,9 +38,15 @@ class CollectionsTest extends \PHPUnit_Framework_TestCase
     {
         $this->coll->add("one");
         $this->coll->add("two");
-        $exists = $this->coll->exists(function ($k, $e) { return $e == "one"; });
+        $exists = $this->coll->exists(function ($k, $e) {
+            return $e == "one";
+
+        });
         $this->assertTrue($exists);
-        $exists = $this->coll->exists(function ($k, $e) { return $e == "other"; });
+        $exists = $this->coll->exists(function ($k, $e) {
+            return $e == "other";
+
+        });
         $this->assertFalse($exists);
     }
 
@@ -48,7 +54,10 @@ class CollectionsTest extends \PHPUnit_Framework_TestCase
     {
         $this->coll->add(1);
         $this->coll->add(2);
-        $res = $this->coll->map(function ($e) { return $e * 2; });
+        $res = $this->coll->map(function ($e) {
+            return $e * 2;
+
+        });
         $this->assertEquals(array(2, 4), $res->toArray());
     }
 
@@ -57,7 +66,10 @@ class CollectionsTest extends \PHPUnit_Framework_TestCase
         $this->coll->add(1);
         $this->coll->add("foo");
         $this->coll->add(3);
-        $res = $this->coll->filter(function ($e) { return is_numeric($e); });
+        $res = $this->coll->filter(function ($e) {
+            return is_numeric($e);
+
+        });
         $this->assertEquals(array(0 => 1, 2 => 3), $res->toArray());
     }
 
@@ -132,15 +144,24 @@ class CollectionsTest extends \PHPUnit_Framework_TestCase
     {
         $this->coll[] = 'one';
         $this->coll[] = 'two';
-        $this->assertEquals($this->coll->forAll(function ($k, $e) { return is_string($e); }), true);
-        $this->assertEquals($this->coll->forAll(function ($k, $e) { return is_array($e); }), false);
+        $this->assertEquals($this->coll->forAll(function ($k, $e) {
+            return is_string($e);
+
+        }), true);
+        $this->assertEquals($this->coll->forAll(function ($k, $e) {
+            return is_array($e);
+
+        }), false);
     }
 
     public function testPartition()
     {
         $this->coll[] = true;
         $this->coll[] = false;
-        $partition = $this->coll->partition(function ($k, $e) { return $e == true; });
+        $partition = $this->coll->partition(function ($k, $e) {
+            return $e == true;
+
+        });
         $this->assertEquals($partition[0][0], true);
         $this->assertEquals($partition[1][0], false);
     }

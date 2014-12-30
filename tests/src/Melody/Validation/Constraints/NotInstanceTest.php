@@ -9,7 +9,7 @@ class NotInstanceTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider validInstanceProvider
      */
-    public function test_valid_instance_should_work($object, $class)
+    public function testValidInstanceShouldWork($object, $class)
     {
         $this->assertTrue(v::notInstance($class)->validate($object));
     }
@@ -17,7 +17,7 @@ class NotInstanceTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidInstanceProvider
      */
-    public function test_invalid_instance_should_not_work($object, $class)
+    public function testInvalidInstanceShouldNotWork($object, $class)
     {
         $validator = v::notInstance($class);
         $this->assertFalse($validator->validate($object));
@@ -50,7 +50,7 @@ class NotInstanceTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException Melody\Validation\Exceptions\InvalidParameterException
      */
-    public function test_invalid_parameter_should_raise_an_exception()
+    public function testInvalidParameterShouldRaiseAnException()
     {
         v::instance(new \stdClass());
     }

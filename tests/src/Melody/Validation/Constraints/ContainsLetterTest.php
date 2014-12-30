@@ -6,12 +6,12 @@ use Melody\Validation\Validator as v;
 
 class ContainsLetterTest extends \PHPUnit_Framework_TestCase
 {
-    public function test_valid_string_should_pass()
+    public function testValidStringShouldPass()
     {
         $this->assertTrue(v::containsLetter(1)->validate('abcdef0123'));
     }
 
-    public function test_invalid_string_should_fail_validation()
+    public function testInvalidStringShouldFailValidation()
     {
         $this->assertFalse(v::containsLetter(1)->validate('0123'));
     }
@@ -19,7 +19,7 @@ class ContainsLetterTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException Melody\Validation\Exceptions\InvalidParameterException
      */
-    public function test_invalid_parameter_should_raise_an_exception()
+    public function testInvalidParameterShouldRaiseAnException()
     {
         v::containsLetter(new \stdClass());
     }
@@ -27,7 +27,7 @@ class ContainsLetterTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException Melody\Validation\Exceptions\InvalidInputException
      */
-    public function test_invalid_input_should_raise_an_exception()
+    public function testInvalidInputShouldRaiseAnException()
     {
         v::containsLetter(5)->validate(new \stdClass());
     }

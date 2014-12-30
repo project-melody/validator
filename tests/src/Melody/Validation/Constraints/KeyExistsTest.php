@@ -9,7 +9,7 @@ class KeyExistsTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider validArrayProvider
      */
-    public function test_valid_key_exists_should_work($key, $array)
+    public function testValidKeyExistsShouldWork($key, $array)
     {
         $this->assertTrue(v::keyExists($key)->validate($array));
     }
@@ -17,7 +17,7 @@ class KeyExistsTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidArrayProvider
      */
-    public function test_invalid_array_should_not_work($key, $input)
+    public function testInvalidArrayShouldNotWork($key, $input)
     {
         $this->assertFalse(v::keyExists($key)->validate($input));
     }
@@ -44,7 +44,7 @@ class KeyExistsTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException Melody\Validation\Exceptions\InvalidParameterException
      */
-    public function test_invalid_parameter_should_raise_an_exception()
+    public function testInvalidParameterShouldRaiseAnException()
     {
         v::keyExists(new \stdClass());
     }
@@ -52,7 +52,7 @@ class KeyExistsTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException Melody\Validation\Exceptions\InvalidInputException
      */
-    public function test_invalid_input_should_raise_an_exception()
+    public function testInvalidInputShouldRaiseAnException()
     {
         v::keyExists("name")->validate(new \stdClass());
     }

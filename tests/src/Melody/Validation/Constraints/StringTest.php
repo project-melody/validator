@@ -10,7 +10,7 @@ class StringTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider validStringProvider
      */
-    public function test_valid_string_should_work($input)
+    public function testValidStringShouldWork($input)
     {
         $this->assertTrue(v::string()->validate($input));
     }
@@ -18,7 +18,7 @@ class StringTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidStringProvider
      */
-    public function test_invalid_string_should_not_work($input)
+    public function testInvalidStringShouldNotWork($input)
     {
         $this->assertFalse(v::string()->validate($input));
     }

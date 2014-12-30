@@ -9,7 +9,7 @@ class IsArrayTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider validArrayProvider
      */
-    public function test_valid_array_should_work($array)
+    public function testValidArrayShouldWork($array)
     {
         $this->assertTrue(v::isArray()->validate($array));
     }
@@ -17,7 +17,7 @@ class IsArrayTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidArrayProvider
      */
-    public function test_invalid_array_should_not_work($input)
+    public function testInvalidArrayShouldNotWork($input)
     {
         $this->assertFalse(v::isArray()->validate($input));
     }

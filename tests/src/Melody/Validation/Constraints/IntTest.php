@@ -10,7 +10,7 @@ class IntTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider validIntProvider
      */
-    public function test_valid_int_should_work($input)
+    public function testValidIntShouldWork($input)
     {
         $this->assertTrue(v::int()->validate($input));
     }
@@ -18,7 +18,7 @@ class IntTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider invalidIntProvider
      */
-    public function test_invalid_int_should_not_work($input)
+    public function testInvalidIntShouldNotWork($input)
     {
         $this->assertFalse(v::int()->validate($input));
     }

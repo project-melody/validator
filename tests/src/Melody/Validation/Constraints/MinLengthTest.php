@@ -10,7 +10,7 @@ class MinLengthTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider providerForValidStrings
      */
-    public function test_valid_string_should_pass($validString)
+    public function testValidStringShouldPass($validString)
     {
         $this->assertTrue(v::minLength(3)->validate($validString));
     }
@@ -18,7 +18,7 @@ class MinLengthTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider providerForInvalidStrings
      */
-    public function test_invalid_string_should_fail_validation($invalidString)
+    public function testInvalidStringShouldFailValidation($invalidString)
     {
         $this->assertFalse(v::minLength(10)->validate($invalidString));
     }
@@ -44,7 +44,7 @@ class MinLengthTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException Melody\Validation\Exceptions\InvalidParameterException
      */
-    public function test_invalid_parameter_should_raise_an_exception()
+    public function testInvalidParameterShouldRaiseAnException()
     {
         v::minLength(new \stdClass());
     }
@@ -52,9 +52,8 @@ class MinLengthTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException Melody\Validation\Exceptions\InvalidInputException
      */
-    public function test_invalid_input_should_raise_an_exception()
+    public function testInvalidInputShouldRaiseAnException()
     {
         v::minLength(5)->validate(new \stdClass());
     }
-
 }
