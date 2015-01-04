@@ -53,22 +53,65 @@ class ValidationGroupsTest extends \PHPUnit_Framework_TestCase
 
     public function testValidationGroupsFromPhp()
     {
-        $validationGroups = ValidationGroupsFactory::build(new PHPParser(
-            __DIR__ . '/../../Resources/config/validation.php'
+        $rules = '<?php
+            use Melody\Validation\Validator as v;
+
+            $config["registering"] = array(
+                "name" => v::maxLength(50),
+                "email" => v::email()->maxLength(50),
+                "username" => v::length(6, 12)->alnum()->noWhitespace(),
+                "password" => v::length(6, 12)->containsSpecial(1)->containsLetter(3)->containsDigit(2)->noWhitespace()
+            );
+
+            return $config;
+        ';
+
+        $rulesFile = tmpfile();
+        fwrite($rulesFile, $rules);
+        $pathInfo = stream_get_meta_data($rulesFile);
+        $validationGroups = ValidationGroupsFactory::build(new PHPParserStrategy(
+            $pathInfo["uri"]
         ));
+
         $this->assertInstanceOf('Melody\Validation\ValidationGroups\ValidationGroups', $validationGroups);
     }
 
-    public function testValidationGroupsFromYml()
+    public function testValidationGroupsFromYaml()
     {
-        if (!class_exists('Symfony\Component\Yaml\Yaml')) {
-            $this->markTestSkipped();
-        }
+        $rules = 'registering:
+            name: "maxLength:50"
+            email: "email|maxLength:50"
+            username: "length:6:12|alnum|noWhitespace"
+            password : "length:6:12|containsSpecial:1|containsLetter:3|containsDigit:2|noWhitespace"
+        ';
 
-        $validationGroups = ValidationGroupsFactory::build(new YamlParser(
-            __DIR__ . '/../../Resources/config/validation.yml'
+        $rulesFile = tmpfile();
+        fwrite($rulesFile, $rules);
+        $pathInfo = stream_get_meta_data($rulesFile);
+
+        $validationGroups = ValidationGroupsFactory::build(new YamlParserStrategy(
+            $pathInfo["uri"]
         ));
+
         $this->assertInstanceOf('Melody\Validation\ValidationGroups\ValidationGroups', $validationGroups);
+    }
+
+    /**
+     * @expectedException Symfony\Component\Yaml\Exception\ParseException
+     */
+    public function testValidationGroupsFromInvalidYaml()
+    {
+        $rules = '
+            invalid:
+        ';
+
+        $rulesFile = tmpfile();
+        fwrite($rulesFile, $rules);
+        $pathInfo = stream_get_meta_data($rulesFile);
+
+        ValidationGroupsFactory::build(new YamlParserStrategy(
+            $pathInfo["uri"]
+        ));
     }
 
     public function testValidationGroupsImportFileNotFound()
@@ -113,15 +156,7 @@ class ValidationGroupsTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('InvalidArgumentException', $validationGroups->get("registering"));
     }
 
-    public function testValidationGroupsImportNotAcceptedFileFormat()
-    {
-        $this->setExpectedException('Melody\Validation\Exceptions\InvalidFileTypeException');
-        $this->assertInstanceOf('Melody\Validation\Exceptions\InvalidFileTypeException', ValidationGroupsFactory::build(
-            new YamlParser(__DIR__ . '/../../Resources/config/validation.ini')
-        ));
-    }
-
-     /**
+    /**
      * @expectedException \Melody\Validation\Exceptions\InvalidInputException
      */
     public function testShouldThrowInvalidInputExceptionWhenFirstArgumentNotIsArray()

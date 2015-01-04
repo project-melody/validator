@@ -26,10 +26,6 @@ class YamlParser extends AbstractValidationGroupsFileParser
      */
     public function parse()
     {
-        if (strtolower($this->file['extension']) != 'yml') {
-            throw new InvalidFileTypeException("Extension '{$this->file['extension']}' is not allowed");
-        }
-
         $constraints = array();
         $configuration = \Symfony\Component\Yaml\Yaml::parse($this->file['dirname'].'/'.$this->file['basename']);
         $groups = array_keys($configuration);

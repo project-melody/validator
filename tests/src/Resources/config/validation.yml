@@ -1,5 +1,0 @@
-registering:
-    name: "maxLength:50"
-    email: "email|maxLength:50"
-    username: "length:6:12|alnum|noWhitespace"
-    password : "length:6:12|containsSpecial:1|containsLetter:3|containsDigit:2|noWhitespace"
