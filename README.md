@@ -22,7 +22,7 @@ run the `php composer.phar install` command to install it:
 
     {
         "require": {
-            "project-melody/validator": "v1.0.0-beta"
+            "project-melody/validator": "dev-master"
         }
     }
 

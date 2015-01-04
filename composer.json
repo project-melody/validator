@@ -7,7 +7,7 @@
     "require": {
         "php": ">=5.3.3",
         "symfony/yaml": "v2.4.1",
-        "phpunit/phpunit": "3.7.28"
+        "phpunit/phpunit": "@stable"
     },
     "authors": [
         {
