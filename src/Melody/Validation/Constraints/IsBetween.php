@@ -5,19 +5,25 @@ use Melody\Validation\Exceptions\InvalidParameterException;
 use Melody\Validation\Exceptions\InvalidInputException;
 use Melody\Validation\Validator as v;
 
-class IsBefore extends Constraint
+class IsBetween extends Constraint
 {
-    protected $id = 'isBefore';
+    protected $id = 'isBetween';
     private $format;
-    private $date;
+    private $firstDate;
+    private $secondDate;
 
-    public function __construct($date, $format = null)
+    public function __construct($firstDate, $secondDate, $format = null)
     {
-        if (!v::date($format)->validate($date)) {
-            throw new InvalidParameterException("The parameter must be a valid date");
+        if (!v::date($format)->validate($firstDate)) {
+            throw new InvalidParameterException("The first date parameter must be a valid date");
         }
 
-        $this->date = $this->createDate($date, $format);
+        if (!v::date($format)->validate($secondDate)) {
+            throw new InvalidParameterException("The second date parameter must be a valid date");
+        }
+
+        $this->firstDate = $this->createDate($firstDate, $format);
+        $this->secondDate = $this->createDate($secondDate, $format);
         $this->format = $format;
     }
 
@@ -29,12 +35,16 @@ class IsBefore extends Constraint
 
         $input = $this->createDate($input, $this->format);
 
-        return ($this->date > $input);
+        if ($input < $this->firstDate) {
+            return ($input < $this->firstDate && $input > $this->secondDate);
+        }
+
+        return ($input > $this->firstDate && $input < $this->secondDate);
     }
 
     public function getErrorMessageTemplate()
     {
-        return "The input must be before the given date";
+        return "The input must be between the given dates";
     }
 
     protected function createDate($date, $format = null)
