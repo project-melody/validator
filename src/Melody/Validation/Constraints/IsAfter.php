@@ -13,27 +13,21 @@ class IsAfter extends Constraint
 
     public function __construct($date, $format = null)
     {
-        if (!v::date($this->format)->validate($date)) {
+        if (!v::date($format)->validate($date)) {
             throw new InvalidParameterException("The parameter must be a valid date");
         }
 
-        if (!$date instanceof \DateTime) {
-            $date = new \DateTime($date);
-        }
-
+        $this->date = $this->createDate($date, $format);
         $this->format = $format;
-        $this->date = $date;
     }
 
     public function validate($input)
     {
         if (!v::date($this->format)->validate($input)) {
-            throw new InvalidInputException("The input must be a valid date");
+            throw new InvalidInputException("The parameter must be a valid date");
         }
 
-        if (!$input instanceof \DateTime) {
-            $input = new \DateTime($input);
-        }
+        $input = $this->createDate($input, $this->format);
 
         return ($this->date < $input);
     }
@@ -41,5 +35,18 @@ class IsAfter extends Constraint
     public function getErrorMessageTemplate()
     {
         return "The input must be after the given date";
+    }
+
+    protected function createDate($date, $format = null)
+    {
+        if (!$date instanceof \DateTime && !is_null($format)) {
+            $date = \DateTime::createFromFormat($format, $date);
+        }
+
+        if (!$date instanceof \DateTime && is_null($format)) {
+            $date = new \DateTime($date);
+        }
+
+        return $date;
     }
 }

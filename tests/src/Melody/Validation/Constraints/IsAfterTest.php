@@ -170,7 +170,20 @@ class IsAfterTest extends \PHPUnit_Framework_TestCase
                 \DateTime::W3C,
                 "2013-12-15T15:52:01+00:00",
                 "2012-12-15T15:52:01+00:00"
-            )
+            ),
+            array("Ymd", "20141010", "20131010"),
+            array("Y-m-d", "2014-10-10", "2013-10-10"),
+            array("Y/m/d", "2014/10/10", "2013/10/10"),
+            array("Y m d", "2014 10 10", "2013 10 10"),
+            array("d", "10", "05"),
+            array("D", "Mon", "Sun"),
+            array("D y", "Mon 12", "Mon 10"),
+            array("j", "7", "4"),
+            array("l", "Monday", "Sunday"),
+            array("y", "12", "11"),
+            array("Y", "2012", "2011"),
+            array("m", "12", "11"),
+            array("M", "Dec", "Nov")
         );
     }
 }
