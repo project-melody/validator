@@ -2,7 +2,7 @@
 
 namespace Melody\Validation;
 
-use Melody\Validation\ValidationObject\ArrayParserObjectStrategy;
+use Melody\Validation\ValidationObject\ArrayParserObject;
 use Melody\Validation\ValidationGroups\ValidationGroupsFactory;
 use Melody\Validation\Validator as v;
 
@@ -36,7 +36,7 @@ class ValidationObjectTest extends \PHPUnit_Framework_TestCase
             'name' => v::maxLength(50),
         );
 
-        $validationObject = ValidationGroupsFactory::build(new ArrayParserObjectStrategy($config));
+        $validationObject = ValidationGroupsFactory::build(new ArrayParserObject($config));
         $result = $validationObject->validate($mock, "registering");
         $this->assertTrue($result);
     }
@@ -50,7 +50,7 @@ class ValidationObjectTest extends \PHPUnit_Framework_TestCase
             'lastName' => v::maxLength(50),
         );
 
-        $validationObject = ValidationGroupsFactory::build(new ArrayParserObjectStrategy($config));
+        $validationObject = ValidationGroupsFactory::build(new ArrayParserObject($config));
         $result = $validationObject->validate($mock, "registering");
         $this->assertTrue($result);
     }
@@ -65,7 +65,7 @@ class ValidationObjectTest extends \PHPUnit_Framework_TestCase
             'lastName' => v::maxLength(50),
         );
 
-        $validationObject = ValidationGroupsFactory::build(new ArrayParserObjectStrategy($config));
+        $validationObject = ValidationGroupsFactory::build(new ArrayParserObject($config));
         $result = $validationObject->validate($mock, "registering");
         $this->assertTrue($result);
     }
@@ -81,7 +81,7 @@ class ValidationObjectTest extends \PHPUnit_Framework_TestCase
             'creditCard' => v::maxLength(50),
         );
 
-        $validationObject = ValidationGroupsFactory::build(new ArrayParserObjectStrategy($config));
+        $validationObject = ValidationGroupsFactory::build(new ArrayParserObject($config));
         $validationObject->validate($mock, "registering");
     }
 
@@ -94,7 +94,7 @@ class ValidationObjectTest extends \PHPUnit_Framework_TestCase
             'name' => v::maxLength(1),
         );
 
-        $validationObject = ValidationGroupsFactory::build(new ArrayParserObjectStrategy($config));
+        $validationObject = ValidationGroupsFactory::build(new ArrayParserObject($config));
         $result = $validationObject->validate(
             $mock,
             "registering",

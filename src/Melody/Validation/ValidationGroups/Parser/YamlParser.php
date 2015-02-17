@@ -6,8 +6,12 @@ use Melody\Validation\Exceptions\InvalidFileTypeException;
 use Melody\Validation\ValidationGroups\AbstractValidationGroupsFileParser;
 use Melody\Validation\ValidationGroups\ValidationGroups;
 
-class YamlParserStrategy extends AbstractValidationGroupsFileParser
+class YamlParser extends AbstractValidationGroupsFileParser
 {
+    /**
+     * @param $file
+     * @throws \Exception
+     */
     public function __construct($file)
     {
         if (!class_exists('Symfony\Component\Yaml\Yaml')) {
@@ -17,6 +21,9 @@ class YamlParserStrategy extends AbstractValidationGroupsFileParser
         parent::__construct($file);
     }
 
+    /**
+     * @return ValidationGroups
+     */
     public function parse()
     {
         if (strtolower($this->file['extension']) != 'yml') {

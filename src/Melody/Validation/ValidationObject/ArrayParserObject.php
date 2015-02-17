@@ -2,12 +2,14 @@
 
 namespace Melody\Validation\ValidationObject;
 
-use Melody\Validation\ValidationGroups\Parser\ArrayParserStrategy;
+use Melody\Validation\ValidationGroups\Parser\ArrayParser;
 use Melody\Validation\ValidationObject\ValidationObject;
 
-class ArrayParserObjectStrategy extends ArrayParserStrategy
+class ArrayParserObject extends ArrayParser
 {
-
+    /**
+     * @return ValidationObject
+     */
     public function parse()
     {
         $validationObject = new ValidationObject();
