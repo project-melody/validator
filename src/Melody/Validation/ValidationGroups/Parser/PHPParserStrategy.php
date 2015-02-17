@@ -1,6 +1,9 @@
 <?php
 
-namespace Melody\Validation\ValidationGroups;
+namespace Melody\Validation\ValidationGroups\Parser;
+
+use Melody\Validation\ValidationGroups\AbstractValidationGroupsFileParser;
+use Melody\Validation\ValidationGroups\ValidationGroups;
 
 class PHPParserStrategy extends AbstractValidationGroupsFileParser
 {

@@ -2,9 +2,9 @@
 
 namespace Melody\Validation;
 
-use Melody\Validation\ValidationGroups\YamlParserStrategy;
-use Melody\Validation\ValidationGroups\ArrayParserStrategy;
-use Melody\Validation\ValidationGroups\PHPParserStrategy;
+use Melody\Validation\ValidationGroups\Parser\YamlParserStrategy;
+use Melody\Validation\ValidationGroups\Parser\ArrayParserStrategy;
+use Melody\Validation\ValidationGroups\Parser\PHPParserStrategy;
 use Melody\Validation\ValidationGroups\ValidationGroupsFactory;
 use Melody\Validation\ValidationGroups\ValidationGroups;
 use Melody\Validation\Common\Collections\ConstraintsCollection;
@@ -61,6 +61,10 @@ class ValidationGroupsTest extends \PHPUnit_Framework_TestCase
 
     public function testValidationGroupsFromYml()
     {
+        if (!class_exists('Symfony\Component\Yaml\Yaml')) {
+            $this->markTestSkipped();
+        }
+
         $validationGroups = ValidationGroupsFactory::build(new YamlParserStrategy(
             __DIR__ . '/../../Resources/config/validation.yml'
         ));
@@ -69,6 +73,10 @@ class ValidationGroupsTest extends \PHPUnit_Framework_TestCase
 
     public function testValidationGroupsImportFileNotFound()
     {
+        if (!class_exists('Symfony\Component\Yaml\Yaml')) {
+            $this->markTestSkipped();
+        }
+
         $this->setExpectedException('Melody\Validation\Exceptions\InvalidFileException');
         $this->assertInstanceOf('Melody\Validation\Exceptions\InvalidFileException', ValidationGroupsFactory::build(
             new YamlParserStrategy("file/not/found")

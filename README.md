@@ -240,7 +240,7 @@ $input['password'] = "pass@2013";
 
 ### Load from array 
 ```php
-use Melody\Validation\ValidationGroups\ArrayParserStrategy;
+use Melody\Validation\ValidationGroups\Parser\ArrayParserStrategy;
 
 $config['registering'] = array(
         'name' => v::maxLength(50),
@@ -266,7 +266,7 @@ registering:
 
 Validation:
 ```php
-use Melody\Validation\ValidationGroups\YamlParserStrategy;
+use Melody\Validation\ValidationGroups\Parser\YamlParserStrategy;
 
 $validationGroups = ValidationGroupsFactory::build(new YamlParserStrategy("/path/to/validation.yml"));
 $validationGroups->validate($input, "registering"); // true
@@ -290,7 +290,7 @@ return $config;
 
 Validation:
 ```php
-use Melody\Validation\ValidationGroups\PHPParserStrategy;
+use Melody\Validation\ValidationGroups\Parser\PHPParserStrategy;
 
 $validationGroups = ValidationGroupsFactory::build(new PHPParserStrategy("/path/to/validation.php"));
 $validationGroups->validate($input, "registering"); // true

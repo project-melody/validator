@@ -2,7 +2,7 @@
 
 namespace Melody\Validation\ValidationObject;
 
-use Melody\Validation\ValidationGroups\ArrayParserStrategy;
+use Melody\Validation\ValidationGroups\Parser\ArrayParserStrategy;
 use Melody\Validation\ValidationObject\ValidationObject;
 
 class ArrayParserObjectStrategy extends ArrayParserStrategy

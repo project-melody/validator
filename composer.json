@@ -5,9 +5,7 @@
     "license": "BSD Style",
     "homepage": "https://github.com/project-melody/validator",
     "require": {
-        "php": ">=5.3.3",
-        "symfony/yaml": "v2.4.1",
-        "phpunit/phpunit": "@stable"
+        "php": ">=5.3.3"
     },
     "authors": [
         {
@@ -19,5 +17,8 @@
         "psr-0": {
             "Melody\\Validation": "src/"
         }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "@stable"
     }
 }
