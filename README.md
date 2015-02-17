@@ -240,7 +240,7 @@ $input['password'] = "pass@2013";
 
 ### Load from array 
 ```php
-use Melody\Validation\ValidationGroups\ArrayParserStrategy;
+use Melody\Validation\ValidationGroups\Parser\ArrayParser;
 
 $config['registering'] = array(
         'name' => v::maxLength(50),
@@ -249,7 +249,7 @@ $config['registering'] = array(
         'password' => v::length(6, 12)->containsSpecial(1)->containsLetter(3)->containsDigit(2)->noWhitespace()
 );
 
-$validationGroups = ValidationGroupsFactory::build(new ArrayParserStrategy($config));
+$validationGroups = ValidationGroupsFactory::build(new ArrayParser($config));
 $validationGroups->validate($input, "registering"); // true
 ```
 
@@ -266,9 +266,9 @@ registering:
 
 Validation:
 ```php
-use Melody\Validation\ValidationGroups\YamlParserStrategy;
+use Melody\Validation\ValidationGroups\Parser\YamlParser;
 
-$validationGroups = ValidationGroupsFactory::build(new YamlParserStrategy("/path/to/validation.yml"));
+$validationGroups = ValidationGroupsFactory::build(new YamlParser("/path/to/validation.yml"));
 $validationGroups->validate($input, "registering"); // true
 ```
 
@@ -290,9 +290,9 @@ return $config;
 
 Validation:
 ```php
-use Melody\Validation\ValidationGroups\PHPParserStrategy;
+use Melody\Validation\ValidationGroups\Parser\PHPParser;
 
-$validationGroups = ValidationGroupsFactory::build(new PHPParserStrategy("/path/to/validation.php"));
+$validationGroups = ValidationGroupsFactory::build(new PHPParser("/path/to/validation.php"));
 $validationGroups->validate($input, "registering"); // true
 ```
 
@@ -319,7 +319,7 @@ $validationGroups->has("registering"); // false
 ```php
 $config['registering']['email'] = v::email()->maxLength(50);
 
-$validationGroups = ValidationGroupsFactory::build(new ArrayParserStrategy($config));
+$validationGroups = ValidationGroupsFactory::build(new ArrayParser($config));
 $input['email'] = "email @gmail.com";
 
 $validationGroups->validate($input, "registering", array(

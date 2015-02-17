@@ -1,12 +1,29 @@
 <?php
 
-namespace Melody\Validation\ValidationGroups;
+namespace Melody\Validation\ValidationGroups\Parser;
 
 use Melody\Validation\Exceptions\InvalidFileTypeException;
-use Symfony\Component\Yaml\Yaml;
+use Melody\Validation\ValidationGroups\AbstractValidationGroupsFileParser;
+use Melody\Validation\ValidationGroups\ValidationGroups;
 
-class YamlParserStrategy extends AbstractValidationGroupsFileParser
+class YamlParser extends AbstractValidationGroupsFileParser
 {
+    /**
+     * @param $file
+     * @throws \Exception
+     */
+    public function __construct($file)
+    {
+        if (!class_exists('Symfony\Component\Yaml\Yaml')) {
+            throw new \Exception("The Symfony Yaml component is required");
+        }
+
+        parent::__construct($file);
+    }
+
+    /**
+     * @return ValidationGroups
+     */
     public function parse()
     {
         if (strtolower($this->file['extension']) != 'yml') {
@@ -14,7 +31,7 @@ class YamlParserStrategy extends AbstractValidationGroupsFileParser
         }
 
         $constraints = array();
-        $configuration = Yaml::parse($this->file['dirname'].'/'.$this->file['basename']);
+        $configuration = \Symfony\Component\Yaml\Yaml::parse($this->file['dirname'].'/'.$this->file['basename']);
         $groups = array_keys($configuration);
 
         foreach ($groups as $group) {

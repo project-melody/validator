@@ -1,8 +1,11 @@
 <?php
 
-namespace Melody\Validation\ValidationGroups;
+namespace Melody\Validation\ValidationGroups\Parser;
 
-class PHPParserStrategy extends AbstractValidationGroupsFileParser
+use Melody\Validation\ValidationGroups\AbstractValidationGroupsFileParser;
+use Melody\Validation\ValidationGroups\ValidationGroups;
+
+class PHPParser extends AbstractValidationGroupsFileParser
 {
     /**
      * @return \Melody\Validation\ValidationGroups
@@ -16,6 +19,7 @@ class PHPParserStrategy extends AbstractValidationGroupsFileParser
 
     /**
      * @param array $configuration
+     * @return ValidationGroups
      */
     protected function parseCofiguration(array $configuration)
     {
