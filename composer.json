@@ -5,7 +5,8 @@
     "license": "BSD Style",
     "homepage": "https://github.com/project-melody/validator",
     "require": {
-        "php": ">=5.3.3"
+        "php": ">=5.3.3",
+        "symfony/yaml": "v2.6.*"
     },
     "authors": [
         {

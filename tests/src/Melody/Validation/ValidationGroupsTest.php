@@ -69,7 +69,7 @@ class ValidationGroupsTest extends \PHPUnit_Framework_TestCase
         $rulesFile = tmpfile();
         fwrite($rulesFile, $rules);
         $pathInfo = stream_get_meta_data($rulesFile);
-        $validationGroups = ValidationGroupsFactory::build(new PHPParserStrategy(
+        $validationGroups = ValidationGroupsFactory::build(new PHPParser(
             $pathInfo["uri"]
         ));
 
@@ -89,7 +89,7 @@ class ValidationGroupsTest extends \PHPUnit_Framework_TestCase
         fwrite($rulesFile, $rules);
         $pathInfo = stream_get_meta_data($rulesFile);
 
-        $validationGroups = ValidationGroupsFactory::build(new YamlParserStrategy(
+        $validationGroups = ValidationGroupsFactory::build(new YamlParser(
             $pathInfo["uri"]
         ));
 
@@ -97,7 +97,7 @@ class ValidationGroupsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Symfony\Component\Yaml\Exception\ParseException
+     * @expectedException \Symfony\Component\Yaml\Exception\ParseException
      */
     public function testValidationGroupsFromInvalidYaml()
     {
@@ -109,7 +109,7 @@ class ValidationGroupsTest extends \PHPUnit_Framework_TestCase
         fwrite($rulesFile, $rules);
         $pathInfo = stream_get_meta_data($rulesFile);
 
-        ValidationGroupsFactory::build(new YamlParserStrategy(
+        ValidationGroupsFactory::build(new YamlParser(
             $pathInfo["uri"]
         ));
     }
