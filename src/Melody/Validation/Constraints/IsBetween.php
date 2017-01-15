@@ -7,11 +7,18 @@ use Melody\Validation\Validator as v;
 
 class IsBetween extends Constraint
 {
+    use DateCreatorTrait;
+
     protected $id = 'isBetween';
     private $format;
     private $firstDate;
     private $secondDate;
 
+    /**
+     * @param $firstDate
+     * @param $secondDate
+     * @param null $format
+     */
     public function __construct($firstDate, $secondDate, $format = null)
     {
         if (!v::date($format)->validate($firstDate)) {
@@ -27,6 +34,10 @@ class IsBetween extends Constraint
         $this->format = $format;
     }
 
+    /**
+     * @param $input
+     * @return bool
+     */
     public function validate($input)
     {
         if (!v::date($this->format)->validate($input)) {
@@ -35,28 +46,17 @@ class IsBetween extends Constraint
 
         $input = $this->createDate($input, $this->format);
 
-        if ($input < $this->firstDate) {
-            return ($input < $this->firstDate && $input > $this->secondDate);
-        }
-
-        return ($input > $this->firstDate && $input < $this->secondDate);
+        return (
+            (v::isAfter($this->firstDate)->validate($input) && v::isBefore($this->secondDate)->validate($input))
+            || (v::isAfter($this->secondDate)->validate($input) && v::isBefore($this->firstDate)->validate($input))
+        );
     }
 
+    /**
+     * @return string
+     */
     public function getErrorMessageTemplate()
     {
         return "The input must be between the given dates";
-    }
-
-    protected function createDate($date, $format = null)
-    {
-        if (!$date instanceof \DateTime && !is_null($format)) {
-            $date = \DateTime::createFromFormat($format, $date);
-        }
-
-        if (!$date instanceof \DateTime && is_null($format)) {
-            $date = new \DateTime($date);
-        }
-
-        return $date;
     }
 }

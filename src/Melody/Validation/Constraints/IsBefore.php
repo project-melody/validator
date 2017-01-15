@@ -7,6 +7,8 @@ use Melody\Validation\Validator as v;
 
 class IsBefore extends Constraint
 {
+    use DateCreatorTrait;
+
     protected $id = 'isBefore';
     private $format;
     private $date;
@@ -35,18 +37,5 @@ class IsBefore extends Constraint
     public function getErrorMessageTemplate()
     {
         return "The input must be before the given date";
-    }
-
-    protected function createDate($date, $format = null)
-    {
-        if (!$date instanceof \DateTime && !is_null($format)) {
-            $date = \DateTime::createFromFormat($format, $date);
-        }
-
-        if (!$date instanceof \DateTime && is_null($format)) {
-            $date = new \DateTime($date);
-        }
-
-        return $date;
     }
 }
