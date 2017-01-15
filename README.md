@@ -134,6 +134,32 @@ $isArrayValidator->validate(new \ArrayObject()); //true
 $isArrayValidator->validate("not a array"); //false
 ```
 
+### IsBefore
+Validates if the a date is before other date.
+
+```php
+v::isBefore(mixed $date)
+v::isBefore(mixed $date, string $format)
+```
+
+**$date**: A date/time string.
+**$format**: The format that the passed in string should be in.
+
+Valid formats are explained in [Date and Time Formats](http://php.net/manual/en/datetime.formats.php).
+
+Examples:
+
+```php
+v::isBefore("2016-12-25")->validate("2016-12-24"); // true
+v::isBefore("today")->validate("yesterday"); // true
+v::isBefore("today")->validate("tomorrow"); // false
+v::isBefore("10 seconds ago")->validate("2 days ago"); // true
+v::isBefore("2016-12-25")->validate("2016-12-25"); // false
+
+$format = "d/m/Y";
+v::isBefore("10/01/2017", $format)->validate("12/03/2016"); // true
+```
+
 ### KeyExists
 Asserts if the key exists in the array:
 ```php
