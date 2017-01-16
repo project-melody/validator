@@ -101,9 +101,7 @@ class ValidationGroupsTest extends \PHPUnit_Framework_TestCase
      */
     public function testValidationGroupsFromInvalidYaml()
     {
-        $rules = '
-            invalid:
-        ';
+        $rules = utf8_decode('á');
 
         $rulesFile = tmpfile();
         fwrite($rulesFile, $rules);
