@@ -134,6 +134,82 @@ $isArrayValidator->validate(new \ArrayObject()); //true
 $isArrayValidator->validate("not a array"); //false
 ```
 
+### IsAfter
+Validates if the given date is after other date.
+
+```php
+v::isAfter(mixed $date)
+v::isAfter(mixed $date, string $format)
+```
+
+**$date**: A date/time string or DateTime object.  
+**$format**: The format that the passed in string should be in.
+
+Valid formats are explained in [Date and Time Formats](http://php.net/manual/en/datetime.formats.php).
+
+Examples:
+
+```php
+v::isAfter("2016-12-25")->validate("2016-12-24"); // false
+v::isAfter("today")->validate(new \DateTime("yesterday")); // false
+v::isAfter("today")->validate("tomorrow"); // true
+v::isAfter("10 seconds ago")->validate("2 days ago"); // false
+v::isAfter("2016-12-25")->validate("2016-12-25"); // true
+
+$format = "d/m/Y";
+v::isAfter("10/01/2017", $format)->validate("12/03/2016"); // false
+```
+
+### IsBefore
+Validates if the given date is before other date.
+
+```php
+v::isBefore(mixed $date)
+v::isBefore(mixed $date, string $format)
+```
+
+**$date**: A date/time string or DateTime object.  
+**$format**: The format that the passed in string should be in.
+
+Valid formats are explained in [Date and Time Formats](http://php.net/manual/en/datetime.formats.php).
+
+Examples:
+
+```php
+v::isBefore("2016-12-25")->validate("2016-12-24"); // true
+v::isBefore("today")->validate("yesterday"); // true
+v::isBefore("today")->validate("tomorrow"); // false
+v::isBefore("10 seconds ago")->validate(new \DateTime("2 days ago")); // true
+v::isBefore("2016-12-25")->validate("2016-12-25"); // false
+
+$format = "d/m/Y";
+v::isBefore("10/01/2017", $format)->validate("12/03/2016"); // true
+```
+
+### IsBetween
+
+Validates if the given date is between two other dates
+
+```php
+v::isBetween(mixed $firstDate, mixed $secondDate)
+v::isBetween(mixed $firstDate, mixed $secondDate, string $format)
+```
+
+**$date**: A date/time string or DateTime object.  
+**$format**: The format that the passed in string should be in.
+
+Valid formats are explained in [Date and Time Formats](http://php.net/manual/en/datetime.formats.php).
+
+Examples:
+
+```php
+v::isBetween("2016-01-01", "2016-12-31")->validate("2016-06-15"); // true
+v::isBetween("2016-01-01", new \DateTime("2016-12-31"))->validate("2015-06-15"); // false
+
+$format = "d/m/Y";
+v::isBetween("10/01/2017", "20/01/2017", $format)->validate("15/01/2017"); // true
+```
+
 ### KeyExists
 Asserts if the key exists in the array:
 ```php

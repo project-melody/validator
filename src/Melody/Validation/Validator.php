@@ -4,17 +4,26 @@ namespace Melody\Validation;
 use ReflectionClass;
 use Melody\Validation\Common\Collections\ConstraintsCollection;
 
+/**
+ * @method static Validator date($format = null)
+ * @method static Validator isAfter($date, $format = null)
+ * @method static Validator isBefore($date, $format = null)
+ * @method static Validator isBetween($firstDate, $secondDate, $format = null)
+ */
 class Validator
 {
     private $constraints;
-    private $violations = array();
-    private $inputs = array();
+    private $violations = [];
+    private $inputs = [];
 
     public function __construct()
     {
         $this->constraints = new ConstraintsCollection();
     }
 
+    /**
+     * @return object
+     */
     private static function create()
     {
         $ref = new ReflectionClass(__CLASS__);
@@ -22,21 +31,38 @@ class Validator
         return $ref->newInstanceArgs(func_get_args());
     }
 
-    public static function __callStatic($name, $arguments = array())
+    /**
+     * @param $name
+     * @param array $arguments
+     * @return mixed
+     */
+    public static function __callStatic($name, $arguments = [])
     {
         return self::create()->set($name, $arguments);
     }
 
-    public function __call($name, $arguments = array())
+    /**
+     * @param $name
+     * @param array $arguments
+     * @return Validator
+     */
+    public function __call($name, $arguments = [])
     {
         return $this->set($name, $arguments);
     }
 
+    /**
+     * @param $name
+     * @param $arguments
+     * @return $this
+     */
     public function set($name, $arguments)
     {
         if (!$this->constraints->offsetExists($name)) {
             $constraintFqn = "Melody\\Validation\\Constraints\\" . ucfirst($name);
             $constraintClass = new ReflectionClass($constraintFqn);
+
+            /** @var Validatable $constraintInstance */
             $constraintInstance = $constraintClass->newInstanceArgs($arguments);
 
             $this->registerConstraint($constraintInstance);
@@ -45,10 +71,14 @@ class Validator
         return $this;
     }
 
+    /**
+     * @param Validatable $constraint
+     * @return $this
+     */
     public function registerConstraint(Validatable $constraint)
     {
         if ($this->constraints->offsetExists($constraint->getId())) {
-            throw new \InvalidArgumentException("Constraint named {$constraint->getId()} already setted");
+            throw new \InvalidArgumentException("The constraint named {$constraint->getId()} was already setted");
         }
 
         $this->constraints->set($constraint->getId(), $constraint);
@@ -56,20 +86,24 @@ class Validator
         return $this;
     }
 
+    /**
+     * @return ConstraintsCollection
+     */
     public function getConstraints()
     {
         return $this->constraints;
     }
 
     /**
-     * @return multitype:
+     * @param array $customMessages
+     * @return array
      */
-    public function getViolations($customMessages = array())
+    public function getViolations($customMessages = [])
     {
-        if (is_array($customMessages) && $customMessages != array()) {
+        if (is_array($customMessages) && $customMessages != []) {
             foreach ($this->violations as $id => $message) {
                 if (isset($customMessages[$id])) {
-                    $this->violations[$id] = $this->format($customMessages[$id], array('input' => $this->inputs[$id]));
+                    $this->violations[$id] = $this->format($customMessages[$id], ['input' => $this->inputs[$id]]);
                 }
             }
         }
@@ -84,7 +118,7 @@ class Validator
         }
 
         if (!is_null($customMessage)) {
-            return $this->format($customMessage, array('input' => $this->inputs[$id]));
+            return $this->format($customMessage, ['input' => $this->inputs[$id]]);
         }
 
         return $this->violations[$id];
@@ -92,7 +126,6 @@ class Validator
 
     public function add(Validator $validatorBuilder)
     {
-
         $builder = self::create();
         $builder->constraints = clone $this->constraints;
 
@@ -125,16 +158,16 @@ class Validator
 
     public function reportError($id, $input, $template)
     {
-        $this->violations[$id] = $this->format($template, array('input' => $input));
+        $this->violations[$id] = $this->format($template, ['input' => $input]);
         $this->inputs[$id] = $input;
     }
 
     /**
-     * @param  String        $template
-     * @param  array         $vars
-     * @return mixed|unknown
+     * @param string $template
+     * @param array $vars
+     * @return mixed
      */
-    public function format($template, array $vars = array())
+    public function format($template, array $vars = [])
     {
         return preg_replace_callback(
             '/{{(\w+)}}/',

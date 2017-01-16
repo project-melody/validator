@@ -27,4 +27,9 @@ interface Validatable
      * @return string
      */
     public function getErrorMessageTemplate();
+
+    /**
+     * @return string
+     */
+    public function getId();
 }
