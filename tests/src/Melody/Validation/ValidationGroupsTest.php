@@ -76,42 +76,6 @@ class ValidationGroupsTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Melody\Validation\ValidationGroups\ValidationGroups', $validationGroups);
     }
 
-    public function testValidationGroupsFromYaml()
-    {
-        $rules = 'registering:
-            name: "maxLength:50"
-            email: "email|maxLength:50"
-            username: "length:6:12|alnum|noWhitespace"
-            password : "length:6:12|containsSpecial:1|containsLetter:3|containsDigit:2|noWhitespace"
-        ';
-
-        $rulesFile = tmpfile();
-        fwrite($rulesFile, $rules);
-        $pathInfo = stream_get_meta_data($rulesFile);
-
-        $validationGroups = ValidationGroupsFactory::build(new YamlParser(
-            $pathInfo["uri"]
-        ));
-
-        $this->assertInstanceOf('Melody\Validation\ValidationGroups\ValidationGroups', $validationGroups);
-    }
-
-    /**
-     * @expectedException \Symfony\Component\Yaml\Exception\ParseException
-     */
-    public function testValidationGroupsFromInvalidYaml()
-    {
-        $rules = utf8_decode('á');
-
-        $rulesFile = tmpfile();
-        fwrite($rulesFile, $rules);
-        $pathInfo = stream_get_meta_data($rulesFile);
-
-        ValidationGroupsFactory::build(new YamlParser(
-            $pathInfo["uri"]
-        ));
-    }
-
     public function testValidationGroupsImportFileNotFound()
     {
         if (!class_exists('Symfony\Component\Yaml\Yaml')) {
@@ -121,14 +85,6 @@ class ValidationGroupsTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException('Melody\Validation\Exceptions\InvalidFileException');
         $this->assertInstanceOf('Melody\Validation\Exceptions\InvalidFileException', ValidationGroupsFactory::build(
             new YamlParser("file/not/found")
-        ));
-    }
-
-    public function testValidationGroupsImportFileNotReadable()
-    {
-        $this->setExpectedException('Melody\Validation\Exceptions\InvalidFileException');
-        $this->assertInstanceOf('Melody\Validation\Exceptions\InvalidFileException', ValidationGroupsFactory::build(
-            new YamlParser(__DIR__ . '/../../Resources/config/emptyNotReadable')
         ));
     }
 
