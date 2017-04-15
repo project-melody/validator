@@ -331,3 +331,7 @@ var_dump($errors['email']); // string(45) "'email @gmail.com' must be a valid em
 ```
 
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/marcelsud/melody-validation/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
